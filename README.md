@@ -149,22 +149,22 @@ The following instructions are for controlling the app from your IntelliJ IDE.
 
 Find the file:
 ```
-app/index.html
+app/splash.html
 ```
 Right click this file and select:
 ```
-Run 'index.html'
+Run 'splash.html'
 ```
 
 ##### Debug the Application
 
 Find the file:
 ```
-app/index.html
+app/splash.html
 ```
 Right click this file and select:
 ```
-Debug 'index.html'
+Debug 'splash.html'
 ```
 
 In this mode all breakpoints set in IntelliJ will be honored.  You will most likely also receive a warning by your browser that IntelliJ is debugging the page.
