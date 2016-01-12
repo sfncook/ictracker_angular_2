@@ -61,7 +61,11 @@ e2e-tests/            --> end-to-end tests
   scenarios.js          --> end-to-end scenarios to be run by Protractor
 ```
 
-### Run the Application
+### Command Line App Control
+
+The following instructions are for controlling the app from the command line.
+
+##### Run the Application
 
 We have preconfigured the project with a simple development web server.  The simplest way to start
 this server is:
@@ -72,7 +76,7 @@ npm start
 
 Now browse to the app at `http://localhost:8000/app/index.html`.
 
-### Run All Unit Tests
+##### Run All Unit Tests
 
 The angular-seed app comes preconfigured with unit tests. These are written in
 [Jasmine][jasmine], which we run with the [Karma Test Runner][karma]. We provide a Karma
@@ -101,7 +105,7 @@ npm run test-single-run
 ```
 
 
-### End to end testing
+##### Run All End to End Tests
 
 The angular-seed app comes with end-to-end tests, again written in [Jasmine][jasmine]. These tests
 are run with the [Protractor][protractor] End-to-End test runner.  It uses native events and has
@@ -137,8 +141,48 @@ npm run protractor
 This script will execute the end-to-end tests against the application being hosted on the
 development server.
 
+### IntelliJ App Control
 
-## Updating Angular
+The following instructions are for controlling the app from your IntelliJ IDE.
+
+##### Run the Application
+
+Find the file:
+```
+app/index.html
+```
+Right click this file and select:
+```
+Run 'index.html'
+```
+
+##### Debug the Application
+
+Find the file:
+```
+app/index.html
+```
+Right click this file and select:
+```
+Debug 'index.html'
+```
+
+In this mode all breakpoints set in IntelliJ will be honored.  You will most likely also receive a warning by your browser that IntelliJ is debugging the page.
+
+##### Run All Unit Tests
+
+Find the file in the root directory:
+```
+karma.conf.js
+```
+Rich click this file and select:
+```
+Run 'karma.conf.js'
+```
+The tests should not take long to run.  On the "Test Run" tab note the string "Done: # of # (### s)" which
+tells you how many unit tests were run.
+
+### Updating Dependant Libraries
 
 Previously we recommended that you merge in changes to angular-seed into your own fork of the project.
 Now that the angular framework library code and tools are acquired through package managers (npm and
