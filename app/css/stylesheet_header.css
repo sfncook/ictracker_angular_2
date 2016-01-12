@@ -1,0 +1,210 @@
+/*
+ **** HEADER ITEMS ****
+ */
+#ict_header {
+    background: #DDD;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    z-index: 50;
+    padding: 4px;
+}
+#ict_header > .button {
+    background: white;
+}
+
+#title_icon {
+    width: 90px;
+    height: 90px;
+    border: 1px solid #AAA;
+    border-radius: 3px;
+}
+
+#title_icon:hover {
+    /*cursor: pointer;*/
+}
+
+.header_item {
+    margin-bottom: 4px;
+    width:88px;
+    height: 25px;
+    display: block;
+}
+#iap_btn {
+    margin-top: 10px;
+}
+#time {
+    text-align: center;
+    font-family: 'Carrois Gothic SC';
+    font-size: 1.45rem;
+    color: white;
+}
+.time_lg {
+    font-size: 2.3rem !important;
+    height: 50px;
+    margin-right: 4px;
+}
+#safety_btn_label {
+    color: #FFF;
+    width: 100%;
+    border-top: 1px solid #888;
+}
+.safety_btn {
+    width: 90px;
+    height: 25px;
+    z-index: 100;
+}
+.side_dialog_table tr {
+    vertical-align: top;
+}
+.side_dialog {
+    background: #666 ;
+    z-index: 50;
+    padding: 4px;
+}
+.side_dialog > div {
+    margin:0 0 4px 0;
+}
+.side_dialog_arm {
+    background: #666;
+    height: 2rem;
+    width: 100px;
+    z-index: 45;
+}
+#safety_side_dialog {
+    top: 157px;
+}
+#safety_side_dialog_arm {
+    top: 157px;
+}
+#report_btn {
+    z-index: 100;
+    height: 45px;
+    position: fixed;
+    bottom: 10px;
+}
+#sectorreport_btn {
+    z-index: 100;
+    height: 45px;
+}
+.report_icon {
+    width: 20px;
+    height: 20px;
+}
+#dispatched_units_btn {
+    z-index: 100;
+    height: 46px;
+    margin: 5px 0;
+}
+#cmd_term_btn {
+    z-index: 100;
+    font-size: 0.75rem;
+    height: 53px;
+    position: fixed;
+    bottom: 60px;
+}
+#cmd_term_btn > div {
+    height: 12px;
+}
+.terminate_icon {
+    width: 20px;
+    height: 20px;
+}
+#move_unit_btn {
+    padding-left: 2px;
+}
+.move_btn_img {
+    width: 10px;
+    height: 10px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+#upgrade_btn {
+    height: 46px;
+}
+#cmdxfer_units_btn {
+    z-index: 100;
+    height: 46px;
+    margin: 50px 0 5px 0;
+}
+
+#header_row2 {
+    display: table;
+    height: -moz-calc(100% - 350px);
+    height: -webkit-calc(100% - 350px);
+    height: calc(100% - 350px);
+    width: 92px;
+}
+#header_row3 {
+    position: absolute;
+    bottom: 10px;
+    right: 2px;
+    width: 94px;
+    padding: 2px;
+}
+
+.perc_bar_bg {
+    border: 1px solid black;
+    background: black;
+    width: 3px;
+    height: 15px;
+    float: left;
+}
+.perc_bar_fg {
+    background: lightgreen;
+    width: 1px;
+    height: 13px;
+}
+
+.perc_horz_bar_bg {
+    background: black;
+    border: 1px solid black;
+    height: 3px;
+    width: 80px;
+}
+.perc_horz_bar {
+    background: lightgreen;
+    height: 1px;
+    width: 78px;
+}
+#osr_header_btn {
+    height: 30px;
+    margin-top: 50px;
+}
+#objectives_header_btn {
+    height: 30px;
+}
+.strat_btn {
+    display: block;
+    width: 90%;
+    margin: 1em;
+}
+
+#inc_map_btn {
+    float: left;
+    background: #dfd;
+    font-size: 1.2rem;
+    vertical-align: middle;
+}
+img.map_btn_img{
+    width: 22px;
+    height: 22px;
+    margin-right:5px;
+}
+
+#settings_btn {
+    width: 52px;
+    height: 51px;
+}
+img.settings_btn_img {
+    width: 42px;
+    height: 42px;
+    margin-right:5px;
+}
+
+.settings_btn {
+    margin-bottom: 4px;
+    height: 25px;
+    display: block;
+}

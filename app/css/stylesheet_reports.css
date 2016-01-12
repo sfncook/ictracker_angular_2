@@ -1,0 +1,71 @@
+
+#reports_table_container {
+    height:400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.report_toggle_btn {
+    float: left;
+    margin: 10px;
+}
+
+#print_report_btn {
+    float: right;
+    margin: 10px;
+    width: 78px
+}
+
+#print_report_icon {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+}
+
+.reports_header {
+    background-color: #EEE;
+}
+
+.report_dialog_body {
+    height: 500px;
+    overflow: scroll;
+    background: white;
+    padding: 0 15px;
+}
+
+.div_report_title_block {
+    float:right;
+    text-align: right;
+    padding:10px;
+    background: #CCC;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: none;
+
+    border-left: 1px solid #999;
+    border-bottom: 1px solid #999;
+    border-right: 1px solid #999;
+}
+.report_rows_container {
+    float:left;
+    font-size:0.8rem;
+    margin-top: 10px;
+}
+.report_td {
+    padding: 2px 10px;
+}
+.report_date_td {
+    text-align: right;
+}
+
+.report_div_header_span {
+    font-size: 1.05rem;
+    font-weight: bold;
+}
+
+.report_div_header_value_span {
+    font-size: 1.05rem;
+}
