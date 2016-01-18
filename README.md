@@ -213,3 +213,20 @@ This will find the latest versions that match the version ranges specified in th
 [karma]: http://karma-runner.github.io
 [travis]: https://travis-ci.org/
 [http-server]: https://github.com/nodeapps/http-server
+
+### Pushing to Prod Git Repo
+
+```
+git remote add web ssh://whitehel@whitehelmettech.com/home/whitehel/app.git
+git push web +master:refs/heads/master
+```
+Then after that you just have to:
+```
+git push web
+```
+
+### TODO
+1. iap, osr, objectives
+1. socket.io
+1. tour
+1. git repo - nest client in server repo
