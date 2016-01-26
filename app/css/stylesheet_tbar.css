@@ -241,12 +241,6 @@ tbar {
     color: black;
 }
 
-.unit_selected {
-    background: #FFFF88;
-    border-top:1px solid #999;
-    border-bottom:1px solid #999;
-}
-
 .tbar_unit_info_btn {
     border:1px solid #EEE;
     float:left;
