@@ -225,6 +225,7 @@
           <div class="scroll-pane">
             <div ng-repeat="unit in sector.units"
                  class="unit_row"
+                 ng-class="{has_actions:unit.actionsArr.length, no_actions:!unit.actionsArr.length}"
                  ng-click="openUnitInfoDlg(unit)">
               <div class="unit_row_left_column">
                 <div class="unit_tbar_btn unit_btn"

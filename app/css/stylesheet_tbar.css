@@ -74,7 +74,6 @@ tbar {
 
 .unit_row {
     margin: 5px;
-    background: lightgrey;
     padding: 3px;
     cursor: pointer;
 }
@@ -252,7 +251,7 @@ tbar {
     color: black;
     float: left;
     pointer-events: none;
-    background: #f6f6f6;
+    background: white;
     text-align: center;
 }
 
@@ -286,4 +285,11 @@ tbar {
 
 .psi_tbar_btn {
     float:left;
+}
+
+.has_actions {
+    background: #E8E8E8;
+}
+.no_actions {
+    outline: 1px solid lightgrey;
 }
