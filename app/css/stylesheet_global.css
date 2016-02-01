@@ -570,12 +570,6 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     font-size: 1.2rem !important;
 }
 
-.personnel_tbar_btn {
-    float: left;
-    margin: 5px;
-    padding-left: 6px !important;
-}
-
 .psi_dlg_btn {
     margin: 8px;
     padding-top: 10px;
@@ -583,10 +577,6 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     width: 55px !important;
     font-size: 1.0rem !important;
     float: left;
-}
-.psi_tbar_btn {
-    float:left;
-    margin: 4px;
 }
 .personnel_dlg_psi_btn {
     margin-bottom: 0px;
@@ -804,11 +794,6 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     height: 450px;
     float: left;
     overflow: scroll;
-}
-
-.mayday_unit_btn {
-    float: left;
-    margin: 4px;
 }
 
 .unit_people_dialog_row2 {

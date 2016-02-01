@@ -213,15 +213,28 @@
 
         <div class="clear_both"></div>
 
-        <div class="unit_col_left unit_col tbar_col_left_div tbar_col_div">
-          <!--<button class="unit_move_cancel_btn">Cancel</button>-->
-          <div class="left_scroll_pane scroll-pane">
+        <div class="tbar_units_container">
+          <div class="acct_unit_row">
+            <button class="acct_unit_btn"
+                    ng-click="showUnitsDlgForAcct(sector)"
+                    ng-if="sector.sectorType.hasAcctBtn">
+              {{sector.acctUnit | acctUnitName}}
+            </button>
+            <div class="clear_both"></div>
+          </div>
+          <div class="scroll-pane">
             <div ng-repeat="unit in sector.units"
-                 class="tbar_unit_row">
-              <div class="tbar_unit_info_btn"
-                   ng-click="showUnitOptionsDlg(unit)">
+                 class="unit_row"
+                 ng-click="openUnitInfoDlg(unit)">
+              <div class="unit_row_left_column">
+                <div class="unit_tbar_btn unit_btn"
+                        ng-click="selectUnit(sector,unit)"
+                        ng-class="{btn_smtext: unit.type.name.length>5, btn_medtext: unit.type.name.length>4, mayday_choice_animate: dataStore.choosing_unit_for_new_mayday, unit_btn_hasmayday_animate: unit.hasMayday}">
+                  {{unit.type.name}}
+                </div>
+                <div class="clear_float"></div>
                 <div class="personnel_tbar_btn personnel_btn"
-                     ng-class="{bg_gray:unit.par==0, bg_orange:unit.par>0}"
+                     ng-class="{personnel_not_set:unit.par==0, personnel_set:unit.par>0}"
                     >{{unit.par|getUnitPar}}
                 </div>
                 <div class="psi_tbar_btn psi_btn"
@@ -230,50 +243,23 @@
                 </div>
                 <div class="clear_float"></div>
               </div>
-              <button class="unit_tbar_btn unit_btn"
-                      ng-click="selectUnit(sector,unit)"
-                      ng-class="{btn_smtext: unit.type.name.length>5, btn_medtext: unit.type.name.length>4, mayday_choice_animate: dataStore.choosing_unit_for_new_mayday, unit_btn_hasmayday_animate: unit.hasMayday}">
-                {{unit.type.name}}
-              </button>
-            </div>
-            <button class="unit_add_btn"
-                    ng-click="showUnitsDlg(sector)"
-                    ng-show="sector.units.length<6">+Unit
-            </button>
-          </div>
-          <button class="unit_add_btn"
-                  ng-click="showUnitsDlg(sector)"
-                  ng-show="sector.units.length>=6">+Unit
-          </button>
-        </div>
+              <div class="unit_row_right_column">
+                <div class="add_actions_label" ng-hide="unit.actionsArr.length">
+                  +Add actions
+                </div>
 
-        <div class="action_col_right tbar_col_right_div tbar_col_div">
-          <!--<button class="acct_unit_btn"-->
-          <!--ng-click="showUnitsDlgForAcct(sector)"-->
-          <!--ng-if="sector.sectorType.hasAcctBtn">-->
-          <!--{{sector.acctUnit | acctUnitName}}-->
-          <!--</button>-->
-          <div class="right_scroll_pane scroll-pane"
-               ng-if="sector.units.length>0">
-            <div ng-repeat="action in sector.selectedUnit.actionsArr">
-              <button class="action_btn"
-                      ng-class="{font_red:action.is_warning}">
-                {{action.name}}
-              </button>
+                <div
+                    ng-repeat="action in unit.actionsArr"
+                    class="action_btn"
+                    ng-class="{font_red:action.is_warning}">
+                  {{action.name}}
+                </div>
+
+              </div>
+              <div class="clear_both"></div>
             </div>
-            <button class="action_btn action_add_btn"
-                    ng-click="showActionsDlg(sector)"
-                    ng-if="sector.units.length>0 && sector.sectorType.hasActions"
-                    ng-show="sector.selectedUnit.actionsArr.length<6">+Action
-            </button>
           </div>
-          <button class="action_btn action_add_btn"
-                  ng-click="showActionsDlg(sector)"
-                  ng-if="sector.units.length>0 && sector.sectorType.hasActions"
-                  ng-show="sector.selectedUnit.actionsArr.length>=6">+Action
-          </button>
         </div>
-        <div class="clear_both"></div>
       </div>
     </tbar>
   </div>

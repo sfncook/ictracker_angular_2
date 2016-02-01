@@ -148,6 +148,10 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
             sector.selectedUnit = unit;
         }
 
+      $scope.openUnitInfoDlg = function(unit) {
+          console.log("openUnitInfoDlg");
+      }
+
         $scope.doesSectorHavePar = DoesSectorHavePar;
 
         $scope.getBnchColor = function(sector, bnchIndex) {
