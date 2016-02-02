@@ -78,12 +78,18 @@ tbar {
     cursor: pointer;
 }
 .unit_row_left_column {
-    float:left;
+    float: left;
+    border-right: none;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
 }
 .unit_row_right_column {
-    float:left;
-    margin-left: 5px;
-    width: 198px;
+    float: left;
+    width: 194px;
+    min-height: 54px;
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 .unit_btn {
     width: 57px;
@@ -123,7 +129,6 @@ tbar {
     text-align: center;
     color: rgba(0, 0, 255, 0.39);
     font-weight: bold;
-    margin-top: 12px;
 }
 .action_add_btn {
     /*width:57px;*/
@@ -239,16 +244,26 @@ tbar {
 
 
 .action_btn {
-    width: 97px;
-    height: 13px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin: 1px;
     box-shadow: none;
-    font-size: 0.6rem !important;
     padding-bottom: 2px;
     color: black;
+}
+.action_dlg_btn {
+    width: 126px;
+    height: 26px;
+    margin: 4px;
+    font-size: 0.65rem !important;
+    font-weight: bold;
+
+}
+.action_tbar_btn {
+    width: 90px;
+    height: 13px;
+    margin: 1px;
+    font-size: 0.6rem;
     float: left;
     pointer-events: none;
     background: white;
@@ -300,5 +315,6 @@ tbar {
     background: #E8E8E8;
 }
 .no_actions {
-    outline: 1px solid lightgrey;
+    background: white;
+
 }

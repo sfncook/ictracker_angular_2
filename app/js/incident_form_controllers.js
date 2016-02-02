@@ -148,10 +148,6 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
       sector.selectedUnit = unit;
     }
 
-    $scope.openUnitInfoDlg = function (unit) {
-      console.log("openUnitInfoDlg par:", unit.par, " manyPar:", unit.manyPar);
-    }
-
     $scope.sectorParIsSet = function (sector) {
       var sectorPar = $filter('sectorPar')(sector);
       return sectorPar != 'P';

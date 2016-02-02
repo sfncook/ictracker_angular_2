@@ -225,12 +225,10 @@
           </div>
           <div class="scroll-pane">
             <div ng-repeat="unit in sector.units"
-                 class="unit_row"
-                 ng-class="{has_actions:unit.actionsArr.length, no_actions:!unit.actionsArr.length}"
-                 ng-click="openUnitInfoDlg(unit)">
-              <div class="unit_row_left_column">
+                 class="unit_row">
+              <button class="unit_row_left_column"
+                      ng-click="showUnitOptionsDlg(unit)">
                 <div class="unit_tbar_btn unit_btn"
-                        ng-click="selectUnit(sector,unit)"
                         ng-class="{btn_smtext: unit.type.name.length>5, btn_medtext: unit.type.name.length>4, mayday_choice_animate: dataStore.choosing_unit_for_new_mayday, unit_btn_hasmayday_animate: unit.hasMayday}">
                   {{unit.type.name}}
                 </div>
@@ -244,20 +242,22 @@
                      ng-if="sector.sectorType.hasPsiBtn">{{unit.psi}}
                 </div>
                 <div class="clear_float"></div>
-              </div>
-              <div class="unit_row_right_column">
+              </button>
+              <button class="unit_row_right_column"
+                      ng-class="{has_actions:unit.actionsArr.length, no_actions:!unit.actionsArr.length}"
+                      ng-click="showActionsDlg(sector)">
                 <div class="add_actions_label" ng-hide="unit.actionsArr.length">
                   +Add actions
                 </div>
 
                 <div
                     ng-repeat="action in unit.actionsArr"
-                    class="action_btn"
+                    class="action_tbar_btn action_btn"
                     ng-class="{font_red:action.is_warning}">
                   {{action.name}}
                 </div>
 
-              </div>
+              </button>
               <div class="clear_both"></div>
             </div>
           </div>
@@ -403,7 +403,7 @@
        ng-repeat="catalog_action_type in getActionTypeCategories()">
     <div class="action_type_label">{{catalog_action_type}}</div>
     <div class="grid_item_1_6" ng-repeat="actionType in actionTypes | filter:{ category:catalog_action_type }">
-      <button class="btn_xsmtext action_btn"
+      <button class="btn_xsmtext action_dlg_btn action_btn"
               ng-click="selectAction(actionType)"
               ng-class="{glowlightgreen: unitContainsActionType(selectedSector.selectedUnit, actionType), font_red:actionType.isWarning}">
         {{actionType.name}}
