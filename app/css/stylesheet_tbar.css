@@ -90,6 +90,7 @@ tbar {
     border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    background: white;
 }
 .unit_btn {
     width: 57px;
@@ -268,7 +269,7 @@ tbar {
     margin: 1px;
     font-size: 0.6rem;
     float: left;
-    background: white;
+    background: #DDD;
     text-align: center;
 }
 
@@ -295,12 +296,13 @@ tbar {
 }
 .personnel_tbar_btn {
     float: left;
-    padding-left: 6px !important;
     margin-left: 2px;
 }
 .personnel_not_set {
-    background: rgba(255, 173, 44, 0.25);
+    background: white;
     border: 1px solid darkgray;
+    color: rgba(0, 0, 255, 0.39);
+    font-weight: bold;
 }
 .personnel_set {
     background: #FFAD2C;
@@ -314,9 +316,6 @@ tbar {
 }
 
 .has_actions {
-    background: #DDD;
 }
 .no_actions {
-    background: white;
-
 }
