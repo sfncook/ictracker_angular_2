@@ -58,13 +58,6 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
     $scope.showStrategyDlg = function () {
       DataStore.showStrategyDlg();
     }
-    $scope.showSettingsDlg = function () {
-      DataStore.showSettingsDlg();
-    }
-
-    $scope.openMap = function () {
-      window.open('https://maps.google.com/?daddr=' + encodeURI($scope.dataStore.incident.inc_address), '_blank');
-    }
   })
 
   .controller('HeaderContainer', function ($scope, $interval, DataStore, UserLogout) {
@@ -88,6 +81,10 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
       DataStore.showReportsDlg();
     }
 
+    $scope.showSettingsDlg = function () {
+      DataStore.showSettingsDlg();
+    }
+
     DataStore.setOsrPerc = function (perc) {
       $scope.osrPerc = perc;
     }
@@ -100,6 +97,10 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
       UserLogout();
       var urlLink = "login.html";
       window.location.href = urlLink;
+    }
+
+    $scope.openMap = function () {
+      window.open('https://maps.google.com/?daddr=' + encodeURI($scope.dataStore.incident.inc_address), '_blank');
     }
   })
 

@@ -104,19 +104,29 @@
     </button>
   </div>
 
+  <button id="inc_map_btn" class="header_item" ng-click="openMap()">
+    <img class="map_btn_img" src="img/map_icon.png"/>Map
+  </button>
+
   <button id="cmd_term_btn" class="disabled header_item">
     <img class="terminate_icon" src="img/terminate.png"/>
-
     <div>Command</div>
     <div>Terminated</div>
   </button>
+
   <button id="report_btn"
           class="disabled header_item"
           ng-click="showReportsDlg()">
     <img class="report_icon" src="img/report.png"/>
-
     <div>Reports</div>
   </button>
+
+  <button id="settings_btn" class="header_item"
+          ng-click="showSettingsDlg()">
+    <img class="settings_btn_img" src="img/settings.png"/>
+    <div>Settings</div>
+  </button>
+
 </div>
 <!-- ict_header-->
 
@@ -138,9 +148,6 @@
           <div id="inc_add">{{dataStore.incident.inc_address}}</div>
         </button>
         <img id="inc_type_icon" ng-src="{{dataStore.incident.incidentType.icon}}"/>
-        <button id="inc_map_btn" class="button_top" ng-click="openMap()">
-          <img class="map_btn_img" src="img/map_icon.png"/>Map
-        </button>
         <div class="clear_both"></div>
       </td>
       <td style="width:33%; height:25px; text-align: center">
@@ -153,10 +160,6 @@
           dataStore.incident.strategy}}
         </button>
         <div id="db_status_msg" class="button_top db_status" ng-show="dataStore.waitingToLoad">Loading Incident</div>
-        <button id="settings_btn" class="button_top db_status"
-                ng-click="showSettingsDlg()">
-          <img class="settings_btn_img" src="img/settings.png"/>
-        </button>
         <div id="db_status_msg_success"
              class="button_top db_status"
              ng-show="!dataStore.waitingToLoad && dataStore.loadSuccess"
