@@ -182,11 +182,6 @@
 }
 
 #inc_map_btn {
-    float: left;
-    background: #dfd;
-    font-size: 1.2rem;
-    vertical-align: middle;
-    height: 53px;
     position: fixed;
     bottom: 168px;
 }
