@@ -270,6 +270,12 @@ tbar {
     cursor: pointer;
 }
 
+.personnel_title_btn {
+    float: left;
+    padding-left: 6px;
+    margin: 4px;
+    cursor: pointer;
+}
 .personnel_tbar_btn {
     float: left;
     padding-left: 6px !important;

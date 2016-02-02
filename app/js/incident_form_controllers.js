@@ -103,7 +103,7 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
         }
     })
 
-    .controller('TbarContainer', function($scope, DataStore, GridsterOpts, DoesSectorHavePar, AddNewMayday){
+    .controller('TbarContainer', function($scope, $filter, DataStore, GridsterOpts, DoesSectorHavePar, AddNewMayday){
 
         $scope.openMaydayDlg = function () {
             $("#mayday_dlg").dialog("open");
@@ -150,6 +150,11 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
 
       $scope.openUnitInfoDlg = function(unit) {
           console.log("openUnitInfoDlg");
+      }
+
+      $scope.sectorParIsSet = function(sector) {
+          var sectorPar = $filter('sectorPar')(sector);
+          return sectorPar!='P';
       }
 
         $scope.doesSectorHavePar = DoesSectorHavePar;
@@ -203,6 +208,20 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
     })
 
 
+  .filter('sectorPar', function() {
+      return function(sector) {
+          var sectorPar = 0;
+          for(var i=0; i<sector.units.length; i++) {
+              var unit = sector.units[i];
+              sectorPar += unit.par;
+          }
+          if(sectorPar==0) {
+              return "P";
+          } else {
+              return sectorPar;
+          }
+      };
+  })
     .filter('unitPar', function() {
         return function(input, unitPar) {
             if(unitPar!='P') {
