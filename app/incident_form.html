@@ -192,13 +192,10 @@
             {{sector | sectorPar}}
           </div>
           <button class="sector_name_btn sector_toprow_btn" ng-click="showSectorNameDlg(sector)">
-            <table>
-              <tr>
-                <td class="tbar_title_dir_td">{{sector.direction}}</td>
-                <td class="tbar_title_td">{{sector.sectorType.name}}</td>
-                <td class="tbar_title_num_td">{{sector.number}}</td>
-              </tr>
-            </table>
+            <div class="tbar_title_dir tbar_title_component">{{sector.direction}}</div>
+            <div class="tbar_title tbar_title_component">{{sector.sectorType.name}}</div>
+            <div class="tbar_title_num tbar_title_component">{{sector.number}}</div>
+            <div class="clear_both"></div>
           </button>
           <button ng-show="sector.sectorType.manyBenchmarkBars>0" class="bnch-btn sector_toprow_btn" ng-click="showBnchDlg(sector)">
             <span class="benchmarks_icon">
@@ -210,19 +207,19 @@
             BNCH
           </button>
           <div class="clear_both"></div>
+          <button class="acct_unit_btn"
+                  ng-class="{has_acct_unit:sector.acctUnit}"
+                  ng-click="showUnitsDlgForAcct(sector)"
+                  ng-show="sector.sectorType.hasAcctBtn">
+            <span ng-show="sector.acctUnit">Acct Unit: {{sector.acctUnit.name}}</span>
+            <span ng-hide="sector.acctUnit" class="add_acct_unit_label">+Add acct unit</span>
+          </button>
+          <div class="clear_both"></div>
         </div>
 
         <div class="clear_both"></div>
 
         <div class="tbar_units_container">
-          <div class="acct_unit_row">
-            <button class="acct_unit_btn"
-                    ng-click="showUnitsDlgForAcct(sector)"
-                    ng-if="sector.sectorType.hasAcctBtn">
-              {{sector.acctUnit | acctUnitName}}
-            </button>
-            <div class="clear_both"></div>
-          </div>
           <div class="scroll-pane">
             <div ng-repeat="unit in sector.units"
                  class="unit_row">
@@ -245,7 +242,7 @@
               </button>
               <button class="unit_row_right_column"
                       ng-class="{has_actions:unit.actionsArr.length, no_actions:!unit.actionsArr.length}"
-                      ng-click="showActionsDlg(sector)">
+                      ng-click="showActionsDlg(unit)">
                 <div class="add_actions_label" ng-hide="unit.actionsArr.length">
                   +Add actions
                 </div>
@@ -405,7 +402,7 @@
     <div class="grid_item_1_6" ng-repeat="actionType in actionTypes | filter:{ category:catalog_action_type }">
       <button class="btn_xsmtext action_dlg_btn action_btn"
               ng-click="selectAction(actionType)"
-              ng-class="{glowlightgreen: unitContainsActionType(selectedSector.selectedUnit, actionType), font_red:actionType.isWarning}">
+              ng-class="{glowlightgreen: unitContainsActionType(selectedUnit, actionType), font_red:actionType.isWarning}">
         {{actionType.name}}
       </button>
     </div>

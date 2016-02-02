@@ -132,8 +132,8 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
       DataStore.showUnitsDlgForAcct(sector);
     }
 
-    $scope.showActionsDlg = function (sector) {
-      DataStore.showActionsDlg(sector);
+    $scope.showActionsDlg = function (unit) {
+      DataStore.showActionsDlg(unit);
     }
 
     $scope.showUnitOptionsDlg = function (unit) {
@@ -544,14 +544,14 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
   })
 
   .controller('ActionsDlg', function ($scope, DataStore, LoadActionTypes, ActionTypes, ToggleActionTypeForUnit, ReportFunctions) {
-    $scope.selectedSector = {};
+    $scope.selectedUnit = {};
     LoadActionTypes();
     $scope.actionTypes = ActionTypes;
 
     $scope.selectAction = function (actionType) {
-      ToggleActionTypeForUnit($scope.selectedSector.selectedUnit, actionType);
-      ReportFunctions.addEvent_action_to_unit($scope.selectedSector, $scope.selectedSector.selectedUnit, actionType);
-//            if(actionType.name=="Take a Line") {DataStore.estSupply();}
+      ToggleActionTypeForUnit($scope.selectedUnit, actionType);
+      // ReportFunctions.addEvent_action_to_unit([needs sector], $scope.selectedUnit, actionType);
+      // if(actionType.name=="Take a Line") {DataStore.estSupply();}
     };
 
     $scope.getActionTypeCategories = function () {
@@ -563,8 +563,8 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
       return Object.keys(categoriesMap);
     };
 
-    DataStore.showActionsDlg = function (sector) {
-      $scope.selectedSector = sector;
+    DataStore.showActionsDlg = function (unit) {
+      $scope.selectedUnit = unit;
       $("#actions_dlg").dialog("open");
     }
 

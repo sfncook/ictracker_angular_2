@@ -73,11 +73,11 @@ tbar {
 }
 
 .unit_row {
-    margin: 5px;
     padding: 3px;
-    cursor: pointer;
 }
 .unit_row_left_column {
+    min-height: 54px;
+    background: #DDD;
     float: left;
     border-right: none;
     border-bottom-right-radius: 0;
@@ -85,7 +85,7 @@ tbar {
 }
 .unit_row_right_column {
     float: left;
-    width: 194px;
+    width: 204px;
     min-height: 54px;
     border-left: none;
     border-top-left-radius: 0;
@@ -112,18 +112,22 @@ tbar {
     padding:2px 0;
 }
 
-.acct_unit_row {
-    width: 100%;
+.acct_unit_label {
+    float:left;
 }
 .acct_unit_btn {
-    width:57px;
-    height:27px;
-    margin: 2px 5px;
-    background: yellow;
-    border: 2px #AAC7D1 solid;
-    padding:2px 0;
-    float:left;
-    border-radius: 10px;
+    height: 23px;
+    width: 110px;
+    margin: 3px 0 3px 80px;
+    padding: 0 5px;
+    float: left;
+}
+.has_acct_unit {
+    background: rgba(255, 255, 0, 0.47);
+}
+.add_acct_unit_label {
+    color: rgba(0, 0, 255, 0.39);
+    font-weight: bold;
 }
 .add_actions_label {
     text-align: center;
@@ -148,7 +152,6 @@ tbar {
     font-size: 0.6rem;
 }
 .sector_name_btn {
-    width:178px;
     height: 24px;
     padding: 0 0 0 2px;
     font-size: 1.0rem;
@@ -157,8 +160,10 @@ tbar {
 }
 .bnch-btn {
     width:57px;
-    padding:4px;
+    height: 23px;
     font-size: 0.6rem;
+    float:right;
+    margin-right: 4px;
 }
 
 .personnel_btn {
@@ -219,10 +224,11 @@ tbar {
 
 
 .tbar_title_container {
-    background: #DDD;
-    height: 29px;
 }
-.tbar_title_dir_td {
+.tbar_title_component {
+    float: left;
+}
+.tbar_title_dir {
     width:30px;
     font-size:0.7rem;
     padding-top:4px;
@@ -230,15 +236,12 @@ tbar {
 .tbar_title_dir_wide_td {
     width: 33px;
 }
-.tbar_title_num_td {
+.tbar_title_num {
     width:10px;
     padding-right:5px;
 }
-.tbar_title_td {
-    width: 130px;
-}
-.tbar_title_td div {
-    width: 100%;
+.tbar_title {
+    width: 139px;
     text-align:center;
 }
 
@@ -260,12 +263,11 @@ tbar {
 
 }
 .action_tbar_btn {
-    width: 90px;
+    width: 95px;
     height: 13px;
     margin: 1px;
     font-size: 0.6rem;
     float: left;
-    pointer-events: none;
     background: white;
     text-align: center;
 }
@@ -312,7 +314,7 @@ tbar {
 }
 
 .has_actions {
-    background: #E8E8E8;
+    background: #DDD;
 }
 .no_actions {
     background: white;
