@@ -236,7 +236,7 @@
                 </div>
                 <div class="clear_float"></div>
                 <div class="personnel_tbar_btn personnel_btn"
-                     ng-class="{personnel_not_set:unit.par==0, personnel_set:unit.par>0}">
+                     ng-class="{has_par:unit.par==unit.manyPar&&unit.par!=0, personnel_not_set:unit.par==0, personnel_set:unit.par>0}">
                   {{unit.par|getUnitPar}}
                 </div>
                 <div class="psi_tbar_btn psi_btn"
