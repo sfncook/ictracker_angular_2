@@ -288,6 +288,9 @@ tbar {
 .personnel_set {
     background: #FFAD2C;
 }
+.has_par {
+    background: #00ff04;
+}
 
 .psi_tbar_btn {
     float:left;

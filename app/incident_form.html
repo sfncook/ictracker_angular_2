@@ -187,7 +187,7 @@
         <div class="tbar_title_container">
           <div ng-disabled="sector.units.length==0"
                class="personnel_title_btn personnel_btn"
-               ng-class="{personnel_not_set:!sectorParIsSet(sector), personnel_set:sectorParIsSet(sector)}"
+               ng-class="{has_par:doesSectorHavePar(sector), personnel_not_set:!sectorParIsSet(sector), personnel_set:sectorParIsSet(sector)}"
                ng-click="showParDlg(sector)">
             {{sector | sectorPar}}
           </div>
