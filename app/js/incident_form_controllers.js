@@ -805,7 +805,7 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
     }
   })
 
-  .controller('UnitOptionsDlg', function ($scope, DataStore, DefaultErrorLogger) {
+  .controller('UnitOptionsDlg', function ($scope, DataStore, DefaultErrorLogger, UpdateUnitTimer) {
     $scope.pars = [1, 2, 3, 4, 5];
     $scope.psis = [];
     $scope.selected_unit = {};
@@ -837,6 +837,7 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
 
     $scope.resetClock = function () {
       $scope.selected_unit.timer_start = new Date();
+      UpdateUnitTimer($scope.selected_unit);
       $scope.selected_unit.save(null, DefaultErrorLogger);
       $("#unit_options_dlg").dialog("close");
     }
