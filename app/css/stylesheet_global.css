@@ -600,12 +600,12 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
 }
 
 .reset_clock_btn {
-    float:right;
-    width:120px;
-    height:20px;
-    height:22px;
-    margin:4px 10px;
+    float: right;
+    width: 140px;
+    height: 30px;
     padding: 0 4px;
+    margin-top: 4px;
+    margin-right: 4px;
 }
 
 .par_dlg_row {

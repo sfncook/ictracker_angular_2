@@ -76,7 +76,7 @@ tbar {
     padding: 3px;
 }
 .unit_row_left_column {
-    min-height: 54px;
+    min-height: 63px;
     background: #DDD;
     float: left;
     border-right: none;
@@ -86,7 +86,7 @@ tbar {
 .unit_row_right_column {
     float: left;
     width: 204px;
-    min-height: 54px;
+    min-height: 63px;
     border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -317,4 +317,15 @@ tbar {
 .has_actions {
 }
 .no_actions {
+}
+
+.unit_timer_bar_border {
+    border: 1px solid;
+    height: 5px;
+    width: 57px;
+    margin-top: 4px;
+}
+.unit_timer_bar_fill {
+    background: red;
+    height: 3px;
 }
