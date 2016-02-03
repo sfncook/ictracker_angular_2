@@ -227,9 +227,10 @@
             <div ng-repeat="unit in sector.units"
                  class="unit_row">
               <button class="unit_row_left_column"
-                      ng-click="showUnitOptionsDlg(unit)">
+                      ng-class="{mayday_choice_animate: dataStore.choosing_unit_for_new_mayday, unit_btn_hasmayday_animate: unit.hasMayday}"
+                      ng-click="clickTbarUnit(sector, unit)">
                 <div class="unit_tbar_btn unit_btn"
-                        ng-class="{btn_smtext: unit.type.name.length>5, btn_medtext: unit.type.name.length>4, mayday_choice_animate: dataStore.choosing_unit_for_new_mayday, unit_btn_hasmayday_animate: unit.hasMayday}">
+                        ng-class="{btn_smtext: unit.type.name.length>5, btn_medtext: unit.type.name.length>4}">
                   {{unit.type.name}}
                 </div>
                 <div class="clear_float"></div>

@@ -477,9 +477,9 @@
 }
 
 @keyframes unit_btn_hasmayday_keyframes {
-    0%      { background: white;    border: 1px solid red;     box-shadow: none;}
-    20%     { background: red;      border: 1px solid white;   box-shadow: 0px 0px 10px 5px red;}
-    100%    { background: white;    border: 1px solid red;     box-shadow: none;}
+    0%      { background: white;    box-shadow: none;}
+    20%     { background: red;      box-shadow: 0px 0px 10px 5px red;}
+    100%    { background: white;    box-shadow: none;}
 }
 .unit_btn_hasmayday_animate {
     animation-name: unit_btn_hasmayday_keyframes;

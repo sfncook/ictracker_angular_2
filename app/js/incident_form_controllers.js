@@ -141,12 +141,13 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
       DataStore.showUnitOptionsDlg(unit);
     }
 
-    $scope.selectUnit = function (sector, unit) {
+    $scope.clickTbarUnit = function (sector, unit) {
       if ($scope.dataStore.choosing_unit_for_new_mayday) {
         AddNewMayday(sector, unit);
         $scope.dataStore.choosing_unit_for_new_mayday = false;
+      } else {
+        DataStore.showUnitOptionsDlg(unit);
       }
-      sector.selectedUnit = unit;
     }
 
     $scope.sectorParIsSet = function (sector) {
