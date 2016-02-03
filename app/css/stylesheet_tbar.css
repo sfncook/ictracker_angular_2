@@ -326,6 +326,18 @@ tbar {
     margin-top: 4px;
 }
 .unit_timer_bar_fill {
-    background: red;
+    /*background: red;*/
     height: 3px;
+}
+.unit_timer_good {
+    background: #00ff00;
+}
+.unit_timer_warn {
+    background: yellow;
+}
+.unit_timer_crit {
+    background: red;
+}
+.unit_timer_done {
+    background: red;
 }

@@ -244,8 +244,12 @@
                 </div>
                 <div class="clear_float"></div>
 
-                <div class="unit_timer_bar_border">
-                  <div class="unit_timer_bar_fill"></div>
+                <div class="unit_timer_bar_border"
+                    ng-show="sector.sectorType.hasClock">
+                  <div class="unit_timer_bar_fill"
+                       ng-style="{'width':unit.timer_perc+'%'}"
+                       ng-class="{unit_timer_good:unit.timer_perc>=66, unit_timer_warn:unit.timer_perc>=33 && unit.timer_perc<66, unit_timer_crit:unit.timer_perc>=10 && unit.timer_perc<33}"
+                      ></div>
                 </div>
                 <div class="clear_float"></div>
               </button>

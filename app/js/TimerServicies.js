@@ -43,33 +43,60 @@ angular.module('TimerServices', ['DataServices', 'IncidentServices'])
     return function () {
       function updateIncidentData() {
         UpdateIncidentAsNeeded();
-        //if(DataStore.incident) {
-        //    var prevTxId = DataStore.incident.txid;
-        //    DataStore.incident.fetch({
-        //        success:function(incident){
-        //            if(incident.get('txid')!=prevTxId) {
-        //                UpdateSectorsAsNeeded($scope);
-        //                //UpdateMaydays($scope);
-        //            }
-        //        },
-        //        error: function(obj, error) {
-        //            console.log('Failed to create new object, with error code: ' + error.message);
-        //        }
-        //    });
-        //}
       }
 
       $interval(updateIncidentData, 3000);
     }
   })
 
-;
-//
-//angular.module('ictApp')
-//
-//    .controller('TimerServices', function($scope, $interval, DataStore){
-//
-//
-//    })
+  .factory('StartUnitTimerTimer',
+  function ($interval, DataStore) {
+    var perc = 100;
+    return function () {
+      function updateAllUnitTimers() {
+        if(DataStore.incident.sectors) {
+          DataStore.incident.sectors.forEach(function(sector) {
+            if(sector.sectorType.hasClock) {
+              sector.units.forEach(function(unit) {
+                unit.timer_perc = perc;
+              });
+            }
+            // timer_start
+
+
+            // 15 minutes total
+            // 15 - 10 minutes - green
+            // 10 - 5  minutes - yellow
+            // 5  - 1  minutes - red
+            // 1  - 0  minutes - blink_red
+
+            //el.stop(true);
+            //el.css("width", "48px").css("background", "lightgreen");
+            //el.parent().removeClass("blink_unit_timer");
+            //
+            //el
+            //  .animate({width: "32px"}, 5 * 60 * 1000, "linear", function () {
+            //    el.css("background", "yellow")
+            //  })
+            //  .animate({width: "16px"}, 5 * 60 * 1000, "linear", function () {
+            //    el.css("background", "red")
+            //  })
+            //  .animate({width: "5px"}, 4 * 60 * 1000, "linear", function () {
+            //    el.parent().addClass("blink_unit_timer")
+            //  })
+            //  .animate({width: "0px"}, 1 * 60 * 1000, "linear");
+
+
+          });
+          console.log(perc);
+          perc -= 10;
+          if(perc<0) {
+            perc = 100;
+          }
+        }
+      }
+      $interval(updateAllUnitTimers, 2500);
+    }
+  })
 
 ;

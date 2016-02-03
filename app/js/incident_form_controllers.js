@@ -2,7 +2,7 @@
 
 angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionServices', 'UnitServices', 'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices', 'UserServices', 'TimerServices', 'MaydayServices'])
 
-  .run(function ($q, IsLoggedIn, InitDatabase, DataStore, LoadIncident, StartIncidentTimer, StartIncidentUpdateTimer, UpdateObjectivesPercent) {
+  .run(function ($q, IsLoggedIn, InitDatabase, DataStore, LoadIncident, StartIncidentTimer, StartIncidentUpdateTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
     if (!InitDatabase()) {
       var urlLink = "login.html";
       window.location.href = urlLink;
@@ -27,6 +27,7 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
       }).then(function () {
         StartIncidentTimer();
         StartIncidentUpdateTimer();
+        StartUnitTimerTimer();
       });
     } else {
       console.log("Missing incidentObjectId");
