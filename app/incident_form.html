@@ -210,6 +210,8 @@
             BNCH
           </button>
           <div class="clear_both"></div>
+
+          <img class="clock_icon_tbar" ng-show="sector.sectorType.hasClock" src="img/clock.png"/>
           <button class="acct_unit_btn"
                   ng-class="{has_acct_unit:sector.acctUnit}"
                   ng-click="showUnitsDlgForAcct(sector)"

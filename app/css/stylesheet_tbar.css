@@ -118,7 +118,7 @@ tbar {
 }
 .acct_unit_btn {
     height: 23px;
-    margin: 3px 0 3px 80px;
+    margin: 3px 0 3px 60px;
     padding: 0 5px;
     float: left;
 }
@@ -348,4 +348,12 @@ tbar {
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+}
+
+.clock_icon_tbar {
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin-top: 8px;
+    margin-left: 4px;
 }
