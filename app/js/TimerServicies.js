@@ -50,7 +50,7 @@ angular.module('TimerServices', ['DataServices', 'IncidentServices'])
   })
 
   .factory('StartUnitTimerTimer',
-  function ($interval, DataStore) {
+  function ($interval, DataStore, DefaultErrorLogger) {
     return function () {
       function updateAllUnitTimers() {
         if(DataStore.incident.sectors) {
@@ -59,6 +59,7 @@ angular.module('TimerServices', ['DataServices', 'IncidentServices'])
               sector.units.forEach(function(unit) {
                 if(!unit.timer_start) {
                   unit.timer_start = new Date();
+                  unit.save(null, DefaultErrorLogger);
                 }
                 var t0 = (unit.timer_start).getTime();
                 var t1 = (new Date()).getTime();
@@ -75,7 +76,8 @@ angular.module('TimerServices', ['DataServices', 'IncidentServices'])
           });
         }
       }
-      $interval(updateAllUnitTimers, 2500);
+      updateAllUnitTimers();
+      $interval(updateAllUnitTimers, 30000);
     }
   })
 
