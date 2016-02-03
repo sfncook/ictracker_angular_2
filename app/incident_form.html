@@ -791,7 +791,8 @@
             ng-click="selectPar(par)"
             ng-class="{glow_orange: selected_unit.par==par}">{{par}}
     </button>
-    <button class='reset_clock_btn'>
+    <button class='reset_clock_btn'
+        ng-click="resetClock()">
       <img class='clock_icon' src='img/clock.png'/>Reset Clock
     </button>
     <div class="clear_both"></div>

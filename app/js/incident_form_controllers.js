@@ -835,6 +835,12 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
       $("#unit_options_dlg").dialog("close");
     }
 
+    $scope.resetClock = function () {
+      $scope.selected_unit.timer_start = new Date();
+      $scope.selected_unit.save(null, DefaultErrorLogger);
+      $("#unit_options_dlg").dialog("close");
+    }
+
   })
 
   .controller('PsiDlg', function ($scope, DataStore) {
