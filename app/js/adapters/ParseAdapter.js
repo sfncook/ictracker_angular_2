@@ -212,7 +212,7 @@ angular.module('ParseAdapter', ['ParseServices','ObjectivesServices', 'OSRServic
         }
     })
     .factory('LoadUnitsForSector_Parse',
-    function ($q, ConvertParseObject, FetchTypeForUnit_Parse, FetchActionsForUnit_Parse) {
+    function ($q, ConvertParseObject, FetchTypeForUnit_Parse, FetchActionsForUnit_Parse, UpdateUnitTimer) {
         return function (sector) {
             sector.units = new Array();
             var queryUnits = new Parse.Query(Parse.Object.extend('Unit'));
@@ -223,6 +223,7 @@ angular.module('ParseAdapter', ['ParseServices','ObjectivesServices', 'OSRServic
                     var unit = units[i];
                     ConvertParseObject(unit, UNIT_DEF);
                     sector.units.push(unit);
+                    UpdateUnitTimer(unit);
                     promises.push(FetchTypeForUnit_Parse(unit));
                     promises.push(FetchActionsForUnit_Parse(unit));
                 }
