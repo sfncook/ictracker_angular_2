@@ -24,6 +24,7 @@ angular.module('UnitServices', ['DataServices', 'AdapterServices'])
             newUnit.psi = 4000;
             newUnit.type = unitType;
             newUnit.sector = sector;
+            newUnit.timer_start = new Date();
             newUnit.save(null, DefaultErrorLogger);
             return newUnit;
         }

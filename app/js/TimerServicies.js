@@ -51,48 +51,28 @@ angular.module('TimerServices', ['DataServices', 'IncidentServices'])
 
   .factory('StartUnitTimerTimer',
   function ($interval, DataStore) {
-    var perc = 100;
     return function () {
       function updateAllUnitTimers() {
         if(DataStore.incident.sectors) {
           DataStore.incident.sectors.forEach(function(sector) {
             if(sector.sectorType.hasClock) {
               sector.units.forEach(function(unit) {
-                unit.timer_perc = perc;
+                if(!unit.timer_start) {
+                  unit.timer_start = new Date();
+                }
+                var t0 = (unit.timer_start).getTime();
+                var t1 = (new Date()).getTime();
+                var elapsed = parseInt(t1 - t0);
+                var elapsedMin = parseInt((elapsed / (1000 * 60)) % 60);
+                unit.timer_perc = 100 - parseInt(elapsedMin/15 * 100);
               });
             }
-            // timer_start
-
-
             // 15 minutes total
             // 15 - 10 minutes - green
             // 10 - 5  minutes - yellow
             // 5  - 1  minutes - red
             // 1  - 0  minutes - blink_red
-
-            //el.stop(true);
-            //el.css("width", "48px").css("background", "lightgreen");
-            //el.parent().removeClass("blink_unit_timer");
-            //
-            //el
-            //  .animate({width: "32px"}, 5 * 60 * 1000, "linear", function () {
-            //    el.css("background", "yellow")
-            //  })
-            //  .animate({width: "16px"}, 5 * 60 * 1000, "linear", function () {
-            //    el.css("background", "red")
-            //  })
-            //  .animate({width: "5px"}, 4 * 60 * 1000, "linear", function () {
-            //    el.parent().addClass("blink_unit_timer")
-            //  })
-            //  .animate({width: "0px"}, 1 * 60 * 1000, "linear");
-
-
           });
-          console.log(perc);
-          perc -= 10;
-          if(perc<0) {
-            perc = 100;
-          }
         }
       }
       $interval(updateAllUnitTimers, 2500);
