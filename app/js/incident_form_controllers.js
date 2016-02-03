@@ -105,7 +105,7 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
     }
   })
 
-  .controller('TbarContainer', function ($scope, $filter, DataStore, GridsterOpts, DoesSectorHavePar, AddNewMayday) {
+  .controller('TbarContainer', function ($scope, $filter, DataStore, GridsterOpts, DoesSectorHavePar, DoesSectorHaveCriticalUnitTimer, AddNewMayday) {
 
     $scope.openMaydayDlg = function () {
       $("#mayday_dlg").dialog("open");
@@ -157,6 +157,8 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
     }
 
     $scope.doesSectorHavePar = DoesSectorHavePar;
+
+    $scope.doesSectorHaveCriticalUnitTimer = DoesSectorHaveCriticalUnitTimer;
 
     $scope.getBnchColor = function (sector, bnchIndex) {
       if (sector.sectorType.hasClassicBnch) {
