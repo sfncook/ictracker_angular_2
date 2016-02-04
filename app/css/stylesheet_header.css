@@ -28,8 +28,13 @@
 .header_item {
     margin-bottom: 4px;
     width:88px;
-    height: 25px;
     display: block;
+}
+.single_row_header_item {
+    height: 25px;
+}
+.double_row_header_item {
+    height: 45px;
 }
 #iap_btn {
     margin-top: 10px;
@@ -206,4 +211,14 @@ img.settings_btn_img {
     margin-bottom: 4px;
     height: 25px;
     display: block;
+}
+
+.has_space_above {
+    margin-top: 100px;
+}
+
+@media (max-height: 570px) {
+    .has_space_above {
+        margin-top: 0;
+    }
 }
