@@ -2,7 +2,7 @@
  **** HEADER ITEMS ****
  */
 #ict_header {
-    background: #DDD;
+    background: rgb(100, 139, 172);
     position: fixed;
     right: 0;
     top: 0;
@@ -29,6 +29,7 @@
     margin-bottom: 4px;
     width:88px;
     display: block;
+    text-align: center;
 }
 .single_row_header_item {
     height: 25px;
@@ -217,7 +218,7 @@ img.settings_btn_img {
     margin-top: 100px;
 }
 
-@media (max-height: 570px) {
+@media (max-height: 590px) {
     .has_space_above {
         margin-top: 0;
     }

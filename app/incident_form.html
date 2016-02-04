@@ -56,7 +56,7 @@
   <div class="header_item" ng-class="{time_lg:!dataStore.hourRollOverDone}">
     {{dataStore.timer_text}}
   </div>
-  <button class="disabled single_row_header_item header_item">
+  <button class="disabled double_row_header_item header_item">
     <img class="move_btn_img" src="img/move_cross.png"/>Move Unit
   </button>
 
@@ -93,7 +93,6 @@
   <button class="single_row_header_item header_item" ng-click="openMap()">Map</button>
 
   <button class="disabled has_space_above double_row_header_item header_item">
-    <img class="terminate_icon" src="img/terminate.png"/>
     <div>Command</div>
     <div>Terminated</div>
   </button>
@@ -192,18 +191,12 @@
           </button>
           <div class="clear_both"></div>
 
+          <!--
           <img class="clock_icon_tbar"
-               ng-show="sector.sectorType.hasClock"
-               ng-class="{unit_timer_done:doesSectorHaveCriticalUnitTimer(sector)}"
+               ng-class="{unit_timer_done:doesSectorHaveCriticalUnitTimer(sector), hidden_div:!sector.sectorType.hasClock}"
                src="img/clock.png"/>
-          <button class="acct_unit_btn"
-                  ng-class="{has_acct_unit:sector.acctUnit}"
-                  ng-click="showUnitsDlgForAcct(sector)"
-                  ng-show="sector.sectorType.hasAcctBtn">
-            <span ng-show="sector.acctUnit">Acct Unit: {{sector.acctUnit.name}}</span>
-            <span ng-hide="sector.acctUnit" class="add_acct_unit_label">+Add acct unit</span>
-          </button>
           <div class="clear_both"></div>
+          -->
         </div>
 
         <div class="clear_both"></div>
@@ -256,6 +249,17 @@
               </button>
               <div class="clear_both"></div>
             </div>
+          </div>
+          <div class="tbar_footer_container">
+            <button class="add_unit_btn" ng-click="showUnitsDlg(sector)">+Add unit</button>
+            <button class="acct_unit_btn"
+                    ng-class="{has_acct_unit:sector.acctUnit}"
+                    ng-click="showUnitsDlgForAcct(sector)"
+                    ng-show="sector.sectorType.hasAcctBtn">
+              <span ng-show="sector.acctUnit">Acct Unit: {{sector.acctUnit.name}}</span>
+              <span ng-hide="sector.acctUnit" class="add_acct_unit_label">+Add acct unit</span>
+            </button>
+            <div class="clear_both"></div>
           </div>
         </div>
       </div>

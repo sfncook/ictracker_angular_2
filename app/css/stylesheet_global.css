@@ -17,6 +17,7 @@ html {
 body {
     overflow-x: hidden;
     overflow-y: hidden;
+    background: #9ad1ff;
 }
 
 :focus {

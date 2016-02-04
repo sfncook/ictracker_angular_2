@@ -6,6 +6,7 @@ tbar {
     padding: 0;
     border-radius: 3px;
     z-index:0;
+    background: white;
 }
 .tbar_uninitialized {
     border:1px solid rgba(173, 216, 230, 0.34);
@@ -61,7 +62,7 @@ tbar {
 }
 
 .scroll-pane {
-    height: 228px;
+    height: 232px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -118,9 +119,9 @@ tbar {
 }
 .acct_unit_btn {
     height: 23px;
-    margin: 3px 0 3px 60px;
+    margin: 3px;
     padding: 0 5px;
-    float: left;
+    float: right;
 }
 .has_acct_unit {
     background: rgba(255, 255, 0, 0.47);
@@ -244,6 +245,9 @@ tbar {
     width: 139px;
     text-align:center;
 }
+.tbar_footer_container {
+
+}
 
 
 .action_btn {
@@ -356,4 +360,16 @@ tbar {
     float: left;
     margin-top: 8px;
     margin-left: 4px;
+}
+
+.add_unit_btn {
+    width: 90px;
+    height: 24px;
+    float:left;
+    background: white;
+    text-align: center;
+    color: rgba(0, 0, 255, 0.39);
+    font-weight: bold;
+    margin: 2px 4px;
+    padding: 0;
 }
