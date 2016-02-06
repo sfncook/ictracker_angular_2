@@ -56,8 +56,8 @@
   <div class="header_item" ng-class="{time_lg:!dataStore.hourRollOverDone}">
     {{dataStore.timer_text}}
   </div>
-  <button class="disabled double_row_header_item header_item">
-    <img class="move_btn_img" src="img/move_cross.png"/>Move Unit
+  <button class="single_row_header_item header_item" ng-click="clickMoveUnit()">
+    Move Unit
   </button>
 
   <button class="disabled single_row_header_item header_item" ng-controller="UpgradeDlg" ng-click="showUpgradeDlg()">
@@ -186,13 +186,6 @@
             BNCH
           </button>
           <div class="clear_both"></div>
-
-          <!--
-          <img class="clock_icon_tbar"
-               ng-class="{unit_timer_done:doesSectorHaveCriticalUnitTimer(sector), hidden_div:!sector.sectorType.hasClock}"
-               src="img/clock.png"/>
-          <div class="clear_both"></div>
-          -->
         </div>
 
         <div class="clear_both"></div>
