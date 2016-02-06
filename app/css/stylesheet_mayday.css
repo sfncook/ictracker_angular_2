@@ -391,6 +391,7 @@
     font-size: medium;
     padding: 0px 10px;
     margin-left: auto;
+    margin-right: auto;
     background: #FF9696;
     color: black;
     border-top-left-radius: 0;
@@ -486,4 +487,9 @@
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+}
+
+.mayday_header_btn_container {
+    width: 100%;
+    text-align: center;
 }

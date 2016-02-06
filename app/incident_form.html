@@ -118,7 +118,40 @@
 </div>
 
 <div class="top_header_container" ng-controller="HeaderContainer2">
-  <table style="width:100%">
+  <div>
+    <button id="inc_info_btn"
+            class="button_top"
+            ng-click="showIncInfoDlg()">
+      <div id="inc_num">{{dataStore.incident.inc_number}}</div>
+      <div id="inc_add">{{dataStore.incident.inc_address}}</div>
+    </button>
+    <img id="inc_type_icon" ng-src="{{dataStore.incident.incidentType.icon}}"/>
+
+    <button id="mode_btn" class="button_top"
+            ng-class="{'glowgreen':(dataStore.incident.strategy=='OFFENSE'), 'glowred':(dataStore.incident.strategy=='DEFENSE')}"
+            ng-click="showStrategyDlg()">{{(dataStore.incident.strategy==undefined || dataStore.incident.strategy=='') ? 'Strategy' :
+      dataStore.incident.strategy}}
+    </button>
+    <div class="db_status_msg button_top db_status" ng-show="dataStore.waitingToLoad">Loading Incident</div>
+    <div id="db_status_msg_success"
+         class="button_top db_status"
+         ng-show="!dataStore.waitingToLoad && dataStore.loadSuccess"
+         ng-class="{fadeout:!dataStore.waitingToLoad && dataStore.loadSuccess}">Load Succeeded
+    </div>
+    <div id="db_status_msg_failed" class="button_top db_status" ng-show="!dataStore.waitingToLoad && !dataStore.loadSuccess">Load
+      Failed
+    </div>
+
+    <div class="mayday_header_btn_container">
+      <button class="new_mayday_btn button_top button" ng-click="click_new_mayday()" ng-controller="MaydayDlg">+ NEW MAYDAY</button>
+    </div>
+
+    <div class="clear_both"></div>
+  </div>
+
+
+
+  <!--<table style="width:100%">
     <tr>
       <td style="width:33%; height:25px">
         <button id="inc_info_btn"
@@ -151,7 +184,7 @@
         <div class="clear_both"></div>
       </td>
     </tr>
-  </table>
+  </table>-->
 </div>
 
 
@@ -334,7 +367,7 @@
 
           <!--Disabled place-holder buttons-->
           <button class='button_disabled par_person_btn par_dialog_btn'
-                  style="width:"
+                  style="width:10"
                   ng-disabled="true"
                   ng-repeat="i in [] | unitPar:(5-unit.par)"> &nbsp
           </button>
