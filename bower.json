@@ -15,6 +15,7 @@
     "jquery": "~2.2.0",
     "jquery-ui": "~1.11.4",
     "bootstrap": "~3.3.6",
-    "angular-gridster": "~0.13.5"
+    "angular-gridster": "~0.13.5",
+    "ngDraggable":"0.1.8"
   }
 }
