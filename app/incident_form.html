@@ -205,7 +205,8 @@
                       ng-class="{mayday_choice_animate: dataStore.choosing_unit_for_new_mayday, unit_btn_hasmayday_animate: unit.hasMayday}"
                       ng-click="clickTbarUnit(sector, unit)">
                 <div class="unit_tbar_btn unit_btn"
-                        ng-class="{btn_smtext: unit.type.name.length>5, btn_medtext: unit.type.name.length>4}">
+                     ng-class="{btn_smtext: unit.type.name.length>5, btn_medtext: unit.type.name.length>4}"
+                     ng-show="!dataStore.choseMoveUnit">
                   {{unit.type.name}}
                 </div>
                 <div class="clear_float"></div>
@@ -231,21 +232,22 @@
                   <div class="clear_float"></div>
                 </div>
 
-                <div ng-show="dataStore.choseMoveUnit" ng-drag-handle>
-                  MOVE
+                <div class="unit_drag_handle" ng-show="dataStore.choseMoveUnit" ng-drag-handle>
+                  <div class="unit_drag_handle_label">{{unit.type.name}}</div>
                 </div>
               </button>
+
               <button class="unit_row_right_column"
                       ng-class="{has_actions:unit.actionsArr.length, no_actions:!unit.actionsArr.length}"
                       ng-click="showActionsDlg(unit)">
-                <div class="add_actions_label" ng-hide="unit.actionsArr.length">
+                <div class="add_actions_label" ng-hide="unit.actionsArr.length" ng-class="{actions_while_moving:dataStore.choseMoveUnit}">
                   +Add actions
                 </div>
 
                 <div
                     ng-repeat="action in unit.actionsArr"
                     class="action_tbar_btn action_btn"
-                    ng-class="{font_red:action.is_warning}">
+                    ng-class="{font_red:action.is_warning, actions_while_moving:dataStore.choseMoveUnit}">
                   {{action.name}}
                 </div>
 
@@ -271,7 +273,7 @@
 </div>
 
 <button class="unit_row_drag_clone" ng-drag-clone="">
-  {{clonedData.type.name}}
+  {{clonedData.unit.type.name}}
 </button>
 
 

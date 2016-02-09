@@ -206,8 +206,10 @@ angular.module("ictApp", ['gridster', 'ngDraggable', 'DataServices', 'TbarServic
       console.log("Drop drag_data:", drag_data, " dest_sector:", dest_sector);
       var unit = drag_data.unit;
       var src_sector = drag_data.src_sector;
-      dest_sector.units.push(unit);
-      src_sector.units.remByVal(unit);
+      if(dest_sector != src_sector) {
+        dest_sector.units.push(unit);
+        src_sector.units.remByVal(unit);
+      }
       //TODO: Need to save the unit move
     }
 

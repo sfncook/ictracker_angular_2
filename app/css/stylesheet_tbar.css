@@ -78,6 +78,7 @@ tbar {
 }
 .unit_row_left_column {
     min-height: 63px;
+    width:66px;
     background: #DDD;
     float: left;
     border-right: none;
@@ -388,4 +389,20 @@ tbar {
 
 .drag-over {
     opacity: 0;
+}
+
+.actions_while_moving {
+    opacity: 0.1;
+}
+
+.unit_drag_handle {
+    width:50px;
+    height:50px;
+    /*background: red;*/
+    background-image: url("../img/drag_handle.png");
+}
+
+.unit_drag_handle_label {
+    background: #DDD;
+    font-weight: bold;
 }
