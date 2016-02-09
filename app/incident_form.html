@@ -53,60 +53,69 @@
 </head>
 <body>
 
-<div id="ict_header" ng-controller="HeaderContainer">
-  <div class="header_item" ng-class="{time_lg:!dataStore.hourRollOverDone}">
-    {{dataStore.timer_text}}
-  </div>
-  <button class="single_row_header_item header_item" ng-click="clickMoveUnit()">
-    Move Unit
-  </button>
-
-  <button class="disabled single_row_header_item header_item" ng-controller="UpgradeDlg" ng-click="showUpgradeDlg()">
-    <div>Upgrade</div>
-    <div id="upgrade_btn_sub_label">{{displayUpgradeLabel}}</div>
-  </button>
-
-  <button class="disabled single_row_header_item header_item" ng-click="showBranchDlg()">Branch</button>
-
-  <div ng-controller="OsrDlg">
-    <button class="has_space_above single_row_header_item header_item" ng-click="showOSRDlg()">
-      <div class="perc_horz_bar_bg">
-        <div id="osr_perc_bar" class="perc_horz_bar"></div>
+<div class="ict_header" ng-controller="HeaderContainer">
+  <div style="display: table; height:100%">
+    <div style="display: table-row;">
+      <div class="ict_header_top">
+        <div class="header_item" ng-class="{time_lg:!dataStore.hourRollOverDone}">
+          {{dataStore.timer_text}}
+        </div>
+        <button class="single_row_header_item header_item" ng-click="clickMoveUnit()">
+          Move Unit
+        </button>
+        <button class="disabled single_row_header_item header_item" ng-controller="UpgradeDlg" ng-click="showUpgradeDlg()">
+          <div>Upgrade</div>
+          <div id="upgrade_btn_sub_label">{{displayUpgradeLabel}}</div>
+        </button>
+        <button class="disabled single_row_header_item header_item" ng-click="showBranchDlg()">Branch</button>
       </div>
-      <div>OSR</div>
-    </button>
-  </div>
+    </div>
 
-  <div ng-controller="ObjDlg">
-    <button class="single_row_header_item header_item" ng-click="showObjectivesDlg()">
-      <div class="perc_horz_bar_bg">
-        <div id="objectives_perc_bar" class="perc_horz_bar"></div>
+
+    <div style="display: table-row;">
+      <div class="ict_header_middle">
+        <div ng-controller="OsrDlg">
+          <button class="single_row_header_item header_item" ng-click="showOSRDlg()">
+            <div class="perc_horz_bar_bg">
+              <div id="osr_perc_bar" class="perc_horz_bar"></div>
+            </div>
+            <div>OSR</div>
+          </button>
+        </div>
+        <div ng-controller="ObjDlg">
+          <button class="single_row_header_item header_item" ng-click="showObjectivesDlg()">
+            <div class="perc_horz_bar_bg">
+              <div id="objectives_perc_bar" class="perc_horz_bar"></div>
+            </div>
+            <div style="margin-top:-1px">Objectives</div>
+          </button>
+        </div>
+        <div ng-controller="IapDlg">
+          <button id="iap_btn" class="single_row_header_item header_item" ng-click="showIapDlg()">IAP
+          </button>
+        </div>
+        <button class="single_row_header_item header_item" ng-click="openMap()">Map</button>
       </div>
-      <div style="margin-top:-1px">Objectives</div>
-    </button>
+    </div>
+
+
+    <div style="display: table-row;">
+      <div class="ict_header_bottom">
+        <button class="disabled double_row_header_item header_item">
+          <div>Command</div>
+          <div>Terminated</div>
+        </button>
+        <button class="disabled double_row_header_item header_item" ng-click="showReportsDlg()">
+          <img class="report_icon" src="img/report.png"/>
+          <div>Reports</div>
+        </button>
+        <button class="double_row_header_item header_item" ng-click="showSettingsDlg()">
+          <img class="settings_btn_img" src="img/settings.png"/>
+          <div>Settings</div>
+        </button>
+      </div>
+    </div>
   </div>
-
-  <div ng-controller="IapDlg">
-    <button id="iap_btn" class="single_row_header_item header_item" ng-click="showIapDlg()">IAP
-    </button>
-  </div>
-
-  <button class="single_row_header_item header_item" ng-click="openMap()">Map</button>
-
-  <button class="disabled has_space_above double_row_header_item header_item">
-    <div>Command</div>
-    <div>Terminated</div>
-  </button>
-
-  <button class="disabled double_row_header_item header_item" ng-click="showReportsDlg()">
-    <img class="report_icon" src="img/report.png"/>
-    <div>Reports</div>
-  </button>
-
-  <button class="double_row_header_item header_item" ng-click="showSettingsDlg()">
-    <img class="settings_btn_img" src="img/settings.png"/>
-    <div>Settings</div>
-  </button>
 
 </div>
 <!-- ict_header-->

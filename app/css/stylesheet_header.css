@@ -1,7 +1,7 @@
 /*
  **** HEADER ITEMS ****
  */
-#ict_header {
+.ict_header {
     background: rgb(100, 139, 172);
     position: fixed;
     right: 0;
@@ -10,8 +10,20 @@
     z-index: 50;
     padding: 4px;
 }
-#ict_header > .button {
+.ict_header > .button {
     background: white;
+}
+.ict_header_top {
+    display: table-cell;
+    vertical-align: top;
+}
+.ict_header_middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+.ict_header_bottom {
+    display: table-cell;
+    vertical-align: bottom;
 }
 
 #title_icon {
@@ -218,8 +230,8 @@ img.settings_btn_img {
     margin-top: 100px;
 }
 
-@media (max-height: 590px) {
+/*@media (max-height: 590px) {
     .has_space_above {
         margin-top: 0;
     }
-}
+}*/
