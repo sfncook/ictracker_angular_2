@@ -385,3 +385,7 @@ tbar {
 .unit_row_drag_clone {
     background:white;
 }
+
+.drag-over {
+    opacity: 0;
+}

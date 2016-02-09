@@ -202,6 +202,7 @@ angular.module("ictApp", ['gridster', 'ngDraggable', 'DataServices', 'TbarServic
     }
 
     $scope.onDropComplete1=function(data,evt){
+      DataStore.choseMoveUnit=false
       console.log("Drop data:", data, " evt:", evt);
     }
 
