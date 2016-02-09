@@ -373,3 +373,15 @@ tbar {
     margin: 2px 4px;
     padding: 0;
 }
+
+.unit_options_row_container {
+
+}
+
+[ng-drop].drag-enter{
+    background: rgba(95, 95, 95, 0.27);
+}
+
+.unit_row_drag_clone {
+    background:white;
+}

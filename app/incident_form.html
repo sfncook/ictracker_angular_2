@@ -24,6 +24,7 @@
   <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-gridster/dist/angular-gridster.min.js"></script>
+  <script src="bower_components/ngDraggable/ngDraggable.js"></script>
   <script src="js/config.js"></script>
   <script src="js/init.js"></script>
   <script src="js/adapters/ParseServices.js"></script>
@@ -150,12 +151,17 @@
   </div>
 </div>
 
+<div ng-drag-clone="" style="background:red; width:50px; height: 50px;">
+  This is a Clone
+  {{clonedData.name}}
+</div>
 
 <div id="tbar_container" ng-controller="TbarContainer">
   <div gridster="gridsterOpts">
     <tbar gridster-item="sector"
           ng-repeat="sector in dataStore.incident.sectors"
-          ng-class="{tbar_uninitialized:!sector.initialized}">
+          ng-class="{tbar_uninitialized:!sector.initialized}"
+          ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
       <div style="text-align:center; width: 100%; height:100%; cursor:pointer; padding-top: 30px;"
            ng-show="!sector.initialized"
            ng-click="showSectorNameDlg(sector)">
@@ -193,7 +199,8 @@
         <div class="tbar_units_container">
           <div class="scroll-pane">
             <div ng-repeat="unit in sector.units"
-                 class="unit_row">
+                 class="unit_row"
+                 ng-drag="true" ng-drag-data="unit">
               <button class="unit_row_left_column"
                       ng-class="{mayday_choice_animate: dataStore.choosing_unit_for_new_mayday, unit_btn_hasmayday_animate: unit.hasMayday}"
                       ng-click="clickTbarUnit(sector, unit)">
@@ -202,24 +209,31 @@
                   {{unit.type.name}}
                 </div>
                 <div class="clear_float"></div>
-                <div class="personnel_tbar_btn personnel_btn"
-                     ng-class="{has_par:unit.par==unit.manyPar&&unit.par!=0, personnel_not_set:unit.par==0, personnel_set:unit.par>0}">
-                  {{unit.par|getUnitPar}}
-                </div>
-                <div class="psi_tbar_btn psi_btn"
-                     ng-class="{psi_red:unit.psi<1500, psi_yellow:unit.psi<3000&&unit.psi>=1500, psi_green:unit.psi>=3000}"
-                     ng-if="sector.sectorType.hasPsiBtn">{{unit.psi}}
-                </div>
-                <div class="clear_float"></div>
 
-                <div class="unit_timer_bar_border"
-                    ng-show="sector.sectorType.hasClock">
-                  <div class="unit_timer_bar_fill"
-                       ng-style="{'width':unit.timer_perc+'%'}"
-                       ng-class="{unit_timer_good:unit.timer_perc>=66, unit_timer_warn:unit.timer_perc>=33 && unit.timer_perc<66, unit_timer_crit:unit.timer_perc>=10 && unit.timer_perc<33, unit_timer_done:unit.timer_perc<10}"
-                      ></div>
+                <div class="unit_options_row_container" ng-show="!dataStore.choseMoveUnit">
+                  <div class="personnel_tbar_btn personnel_btn"
+                       ng-class="{has_par:unit.par==unit.manyPar&&unit.par!=0, personnel_not_set:unit.par==0, personnel_set:unit.par>0}">
+                    {{unit.par|getUnitPar}}
+                  </div>
+                  <div class="psi_tbar_btn psi_btn"
+                       ng-class="{psi_red:unit.psi<1500, psi_yellow:unit.psi<3000&&unit.psi>=1500, psi_green:unit.psi>=3000}"
+                       ng-if="sector.sectorType.hasPsiBtn">{{unit.psi}}
+                  </div>
+                  <div class="clear_float"></div>
+
+                  <div class="unit_timer_bar_border"
+                       ng-show="sector.sectorType.hasClock">
+                    <div class="unit_timer_bar_fill"
+                         ng-style="{'width':unit.timer_perc+'%'}"
+                         ng-class="{unit_timer_good:unit.timer_perc>=66, unit_timer_warn:unit.timer_perc>=33 && unit.timer_perc<66, unit_timer_crit:unit.timer_perc>=10 && unit.timer_perc<33, unit_timer_done:unit.timer_perc<10}"
+                        ></div>
+                  </div>
+                  <div class="clear_float"></div>
                 </div>
-                <div class="clear_float"></div>
+
+                <div ng-show="dataStore.choseMoveUnit" ng-drag-handle>
+                  MOVE
+                </div>
               </button>
               <button class="unit_row_right_column"
                       ng-class="{has_actions:unit.actionsArr.length, no_actions:!unit.actionsArr.length}"
@@ -255,6 +269,10 @@
     </tbar>
   </div>
 </div>
+
+<button class="unit_row_drag_clone" ng-drag-clone="">
+  {{clonedData.type.name}}
+</button>
 
 
 <div id="sector_name_dlg" title="Sectors" ng-controller="SectorNamesDlg" class="dialog">

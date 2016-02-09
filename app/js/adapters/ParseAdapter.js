@@ -222,6 +222,7 @@ angular.module('ParseAdapter', ['ParseServices','ObjectivesServices', 'OSRServic
                 for(var i=0; i<units.length; i++) {
                     var unit = units[i];
                     ConvertParseObject(unit, UNIT_DEF);
+                    unit.allowClone = true;
                     sector.units.push(unit);
                     UpdateUnitTimer(unit);
                     promises.push(FetchTypeForUnit_Parse(unit));

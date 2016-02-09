@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="drag_test_app">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/ngDraggable/ngDraggable.js"></script>
+  <script src="js/drag_test.js"></script>
+</head>
+<body>
+
+<div
+    id="parent"
+    style="width:140px;height:100px; background:red; text-align: center; padding-top:20px" ng-drag="true">
+  A
+  <div
+      id="child"
+      style="width:40px; background:blue" ng-drag-handle>XXX<br>XXX<br>XXX</div>
+</div>
+
+</body>
+</html>

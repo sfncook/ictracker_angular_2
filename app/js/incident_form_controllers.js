@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionServices', 'UnitServices', 'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices', 'UserServices', 'TimerServices', 'MaydayServices'])
+angular.module("ictApp", ['gridster', 'ngDraggable', 'DataServices', 'TbarServices', 'ActionServices', 'UnitServices', 'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices', 'UserServices', 'TimerServices', 'MaydayServices'])
 
   .run(function ($q, IsLoggedIn, InitDatabase, DataStore, LoadIncident, StartIncidentTimer, StartIncidentUpdateTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
     if (!InitDatabase()) {
@@ -103,6 +103,10 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
     $scope.openMap = function () {
       window.open('https://maps.google.com/?daddr=' + encodeURI($scope.dataStore.incident.inc_address), '_blank');
     }
+
+    $scope.clickMoveUnit = function () {
+      DataStore.choseMoveUnit = true;
+    }
   })
 
   .controller('TbarContainer', function ($scope, $filter, DataStore, GridsterOpts, DoesSectorHavePar, DoesSectorHaveCriticalUnitTimer, AddNewMayday) {
@@ -195,6 +199,10 @@ angular.module("ictApp", ['gridster', 'DataServices', 'TbarServices', 'ActionSer
         return "benchmark_green";
       }
       return "benchmark_black";
+    }
+
+    $scope.onDropComplete1=function(data,evt){
+      console.log("Drop data:", data, " evt:", evt);
     }
 
   })
