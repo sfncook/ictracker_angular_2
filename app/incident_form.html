@@ -161,7 +161,7 @@
     <tbar gridster-item="sector"
           ng-repeat="sector in dataStore.incident.sectors"
           ng-class="{tbar_uninitialized:!sector.initialized}"
-          ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
+          ng-drop="true" ng-drop-success="onDropUnitOnSector($data, sector)">
       <div style="text-align:center; width: 100%; height:100%; cursor:pointer; padding-top: 30px;"
            ng-show="!sector.initialized"
            ng-click="showSectorNameDlg(sector)">
@@ -200,7 +200,7 @@
           <div class="scroll-pane">
             <div ng-repeat="unit in sector.units"
                  class="unit_row"
-                 ng-drag="true" ng-drag-data="unit">
+                 ng-drag="true" ng-drag-data="{'unit':unit, 'src_sector':sector}">
               <button class="unit_row_left_column"
                       ng-class="{mayday_choice_animate: dataStore.choosing_unit_for_new_mayday, unit_btn_hasmayday_animate: unit.hasMayday}"
                       ng-click="clickTbarUnit(sector, unit)">

@@ -92,7 +92,7 @@
     <div ng-drag="true" class="drag-object" ng-drag-data="draggableObjects[3]">{{draggableObjects[3].name}}</div>
   </div>-->
   <hr>
-  <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
+  <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event)" ng-drag-start="onDragStart($data,$event)">
     <span class="title">Drop area #1</span>
 
     <div ng-repeat="obj in droppedObjects1" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccess1($data,$event)">
@@ -140,6 +140,9 @@
           if (index == -1) {
             $scope.droppedObjects2.push(data);
           }
+        }
+        $scope.onDragStart=function(data,evt){
+          console.log("onDragStart data:", data," evt:", evt);
         }
         var inArray = function(array, obj) {
           var index = array.indexOf(obj);

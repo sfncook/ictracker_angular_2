@@ -109,7 +109,7 @@ angular.module("ictApp", ['gridster', 'ngDraggable', 'DataServices', 'TbarServic
     }
   })
 
-  .controller('TbarContainer', function ($scope, $filter, DataStore, GridsterOpts, DoesSectorHavePar, DoesSectorHaveCriticalUnitTimer, AddNewMayday) {
+  .controller('TbarContainer', function ($scope, $filter, DataStore, GridsterOpts, DoesSectorHavePar, DoesSectorHaveCriticalUnitTimer, AddNewMayday, DefaultErrorLogger) {
 
     $scope.openMaydayDlg = function () {
       $("#mayday_dlg").dialog("open");
@@ -201,9 +201,14 @@ angular.module("ictApp", ['gridster', 'ngDraggable', 'DataServices', 'TbarServic
       return "benchmark_black";
     }
 
-    $scope.onDropComplete1=function(data,evt){
+    $scope.onDropUnitOnSector=function(drag_data, dest_sector){
       DataStore.choseMoveUnit=false
-      console.log("Drop data:", data, " evt:", evt);
+      console.log("Drop drag_data:", drag_data, " dest_sector:", dest_sector);
+      var unit = drag_data.unit;
+      var src_sector = drag_data.src_sector;
+      dest_sector.units.push(unit);
+      src_sector.units.remByVal(unit);
+      //TODO: Need to save the unit move
     }
 
   })
