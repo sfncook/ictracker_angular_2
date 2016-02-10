@@ -265,13 +265,13 @@
             </div>
           </div>
           <div class="tbar_footer_container">
-            <button class="add_unit_btn" ng-click="showUnitsDlg(sector)">+Add unit</button>
+            <button class="add_unit_btn" ng-click="showUnitsDlg(sector)">+Unit</button>
             <button class="acct_unit_btn"
-                    ng-class="{has_acct_unit:sector.acctUnit}"
+                    ng-class="{has_acct_unit:sector.acctUnit, btn_smtext:sector.acctUnit.name.length>5, btn_medtext: sector.acctUnit.name.length==5}"
                     ng-click="showUnitsDlgForAcct(sector)"
                     ng-show="sector.sectorType.hasAcctBtn">
-              <span ng-show="sector.acctUnit">Acct Unit: {{sector.acctUnit.name}}</span>
-              <span ng-hide="sector.acctUnit" class="add_acct_unit_label">+Add acct unit</span>
+              <span ng-show="sector.acctUnit">{{sector.acctUnit.name}}</span>
+              <span ng-hide="sector.acctUnit" class="add_acct_unit_label">+Acct</span>
             </button>
             <div class="clear_both"></div>
           </div>

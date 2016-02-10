@@ -120,6 +120,7 @@ tbar {
 }
 .acct_unit_btn {
     height: 23px;
+    width: 60px;
     margin: 3px;
     padding: 0 5px;
     float: right;
@@ -364,7 +365,7 @@ tbar {
 }
 
 .add_unit_btn {
-    width: 90px;
+    width: 52px;
     height: 24px;
     float:left;
     background: white;
