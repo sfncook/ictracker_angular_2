@@ -123,7 +123,6 @@ tbar {
     width: 60px;
     margin: 3px;
     padding: 0 5px;
-    float: right;
 }
 .has_acct_unit {
     background: rgba(255, 255, 0, 0.47);
@@ -367,7 +366,6 @@ tbar {
 .add_unit_btn {
     width: 52px;
     height: 24px;
-    float:left;
     background: white;
     text-align: center;
     color: rgba(0, 0, 255, 0.39);
