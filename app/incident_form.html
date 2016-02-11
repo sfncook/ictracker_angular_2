@@ -272,7 +272,7 @@
               <div style="display: table-cell; text-align: center;">
                 <button class="add_channel_btn" ng-click="openChannelDlg(sector)">
                   <img class="add_channel_icon" src="img/radio.jpg"/>
-                  <span ng-show="sector.channel_letter && sector.channel_number">{{sector.channel_letter}} {{sector.channel_number}}</span>
+                  <span>{{sector.channel_letter}} {{sector.channel_number}}</span>
                 </button>
               </div>
               <div style="display: table-cell; text-align: right;">
@@ -331,13 +331,23 @@
     <div style="display:table-row">
       <div class="channel_letter_col">
         <div class="channel_letter_col_label">Channel Letter</div>
-        <button class="channel_letter_btn" ng-repeat="channel_letter in channel_letters" ng-click="selectedSector.channel_letter=channel_letter">
+        <button
+            class="channel_letter_btn"
+            ng-repeat="channel_letter in channel_letters"
+            ng-click="setChannelLetter(channel_letter)"
+            ng-class="{channel_selected:selectedSector.channel_letter==channel_letter}"
+            >
           {{channel_letter}}
         </button>
       </div>
       <div class="channel_number_col">
         <div class="channel_letter_col_number">Channel Number</div>
-        <button class="channel_number_btn" ng-repeat="channel_number in channel_numbers" ng-click="selectedSector.channel_number=channel_number">
+        <button
+            class="channel_number_btn"
+            ng-repeat="channel_number in channel_numbers"
+            ng-click="setChannelNumber(channel_number)"
+            ng-class="{channel_selected:selectedSector.channel_number==channel_number}"
+            >
           {{channel_number}}
         </button>
       </div>

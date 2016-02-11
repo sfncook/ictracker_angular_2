@@ -263,10 +263,20 @@ angular.module("ictApp", ['gridster', 'ngDraggable', 'DataServices', 'TbarServic
     $scope.channel_numbers=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
 
     DataStore.openChannelDlg = function (sector) {
-      console.log("openChannelDlg");
       $scope.selectedSector = sector;
       $("#channel-dlg").dialog("open");
     }
+
+    $scope.setChannelLetter = function (channel_letter) {
+      $scope.selectedSector.channel_letter = channel_letter;
+      $scope.selectedSector.save(null, DefaultErrorLogger);
+    }
+
+    $scope.setChannelNumber = function (channel_number) {
+      $scope.selectedSector.channel_number = channel_number;
+      $scope.selectedSector.save(null, DefaultErrorLogger);
+    }
+
   })
 
   .controller('ParDlg', function ($scope, DataStore, DoesSectorHavePar, ReportFunctions, DefaultErrorLogger) {

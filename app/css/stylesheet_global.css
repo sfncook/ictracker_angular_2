@@ -884,3 +884,6 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     display:table;
     margin:4px;
 }
+.channel_selected {
+    background: yellow;
+}
