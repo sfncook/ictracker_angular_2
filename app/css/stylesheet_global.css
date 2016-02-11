@@ -860,3 +860,27 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     margin:5px;
 }
 
+.channel_letter_btn {
+    width:50px;
+    margin:4px;
+}
+.channel_number_btn {
+    width:50px;
+    margin:4px;
+}
+.channel_letter_col {
+    display:table-cell;
+    width:140px;
+    text-align: center;
+    padding: 10px;
+}
+.channel_number_col {
+    display:table-cell;
+    width:200px;
+    text-align: center;
+    padding: 10px;
+}
+.channel_dlg_table {
+    display:table;
+    margin:4px;
+}

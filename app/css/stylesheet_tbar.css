@@ -405,3 +405,14 @@ tbar {
     background: #DDD;
     font-weight: bold;
 }
+
+.add_channel_btn {
+    height: 23px;
+    width: 60px;
+    margin: 3px;
+    padding: 0 5px;
+}
+.add_channel_label {
+    color: rgba(0, 0, 255, 0.39);
+    font-weight: bold;
+}

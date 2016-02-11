@@ -269,6 +269,12 @@
               <div style="display: table-cell; text-align: left;">
                 <button class="add_unit_btn" ng-click="showUnitsDlg(sector)">+Unit</button>
               </div>
+              <div style="display: table-cell; text-align: center;">
+                <button class="add_channel_btn" ng-click="openChannelDlg(sector)">
+                  <span ng-show="sector.channel_letter && sector.channel_number">{{sector.channel_letter}} {{sector.channel_number}}</span>
+                  <span ng-hide="sector.channel_letter && sector.channel_number" class="add_channel_label">+Chan</span>
+                </button>
+              </div>
               <div style="display: table-cell; text-align: right;">
                 <button class="acct_unit_btn"
                         ng-class="{has_acct_unit:sector.acctUnit, btn_smtext:sector.acctUnit.name.length>5, btn_medtext: sector.acctUnit.name.length==5}"
@@ -316,6 +322,25 @@
              ng-if="sectorType.hasClock"
              src="img/clock.png"/>
       </button>
+    </div>
+  </div>
+</div>
+
+<div id="channel-dlg" title="Radio Channel" ng-controller="ChannelDlg" class="dialog">
+  <div class="channel_dlg_table">
+    <div style="display:table-row">
+      <div class="channel_letter_col">
+        <div class="channel_letter_col_label">Channel Letter</div>
+        <button class="channel_letter_btn" ng-repeat="channel_letter in channel_letters">
+          {{channel_letter}}
+        </button>
+      </div>
+      <div class="channel_number_col">
+        <div class="channel_letter_col_number">Channel Number</div>
+        <button class="channel_number_btn" ng-repeat="channel_number in channel_numbers">
+          {{channel_number}}
+        </button>
+      </div>
     </div>
   </div>
 </div>
