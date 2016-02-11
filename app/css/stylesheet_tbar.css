@@ -412,7 +412,7 @@ tbar {
     margin: 3px;
     padding: 0 5px;
 }
-.add_channel_label {
-    color: rgba(0, 0, 255, 0.39);
-    font-weight: bold;
+.add_channel_icon {
+    width: 15px;
+    height: 15px;
 }
