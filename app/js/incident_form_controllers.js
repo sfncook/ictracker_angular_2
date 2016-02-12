@@ -934,42 +934,114 @@ angular.module("ictApp", ['gridster', 'ngDraggable', 'DataServices', 'TbarServic
 
 ;
 
+
 function initDialogs() {
   $(".dialog").dialog({
     autoOpen: false,
     modal: true
   });
-  $("#sector_name_dlg").dialog({resizable: false, modal: true, width: 940});
-  $("#channel-dlg").dialog({resizable: false, modal: true, width: 350});
-  $("#par-dlg").dialog({resizable: false, modal: true, width: 839});
-  $("#bnch_dlg").dialog({resizable: false, width: 343, modal: true});
-  $("#bnch_vent_dlg").dialog({resizable: false, width: 250, modal: true});
-  $("#bnch_iric_dlg").dialog({resizable: false, width: 250, modal: true});
-  $("#bnch_safety_dlg").dialog({resizable: false, width: 250, modal: true});
-  $("#bnch_treatment_dlg").dialog({resizable: false, width: 250, modal: true});
-  $("#bnch_triage_dlg").dialog({resizable: false, width: 250, modal: true});
-  $("#units_dlg").dialog({resizable: false, modal: true, width: 855});
-  $("#actions_dlg").dialog({resizable: false, modal: true, width: 810});
-  $("#cmdxfer_dialog").dialog({resizable: false, modal: true, width: 350});
-  $("#upgrade_dlg").dialog({resizable: false, modal: true, width: 485});
+  $("#sector_name_dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 940,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#sector_name_dlg').dialog('close');})}
+  });
+  $("#channel-dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 350,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#channel-dlg').dialog('close');})}
+  });
+  $("#par-dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 839,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#par-dlg').dialog('close');})}
+  });
+  $("#bnch_dlg").dialog({
+    resizable: false,
+    width: 343,
+    modal: true,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#bnch_dlg').dialog('close');})}
+  });
+  $("#bnch_vent_dlg").dialog({
+    resizable: false,
+    width: 250,
+    modal: true,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#bnch_vent_dlg').dialog('close');})}
+  });
+  $("#bnch_iric_dlg").dialog({
+    resizable: false,
+    width: 250,
+    modal: true,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#bnch_iric_dlg').dialog('close');})}
+  });
+  $("#bnch_safety_dlg").dialog({
+    resizable: false,
+    width: 250,
+    modal: true,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#bnch_safety_dlg').dialog('close');})}
+  });
+  $("#bnch_treatment_dlg").dialog({
+    resizable: false,
+    width: 250,
+    modal: true,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#bnch_treatment_dlg').dialog('close');})}
+  });
+  $("#bnch_triage_dlg").dialog({
+    resizable: false,
+    width: 250,
+    modal: true,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#bnch_triage_dlg').dialog('close');})}
+  });
+  $("#units_dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 855,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#units_dlg').dialog('close');})}
+  });
+  $("#actions_dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 810,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#actions_dlg').dialog('close');})}
+  });
+  $("#cmdxfer_dialog").dialog({
+    resizable: false,
+    modal: true,
+    width: 350,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#cmdxfer_dialog').dialog('close');})}
+  });
+  $("#upgrade_dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 485,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#upgrade_dlg').dialog('close');})}
+  });
   $("#osr_dlg").dialog({
     resizable: false,
     modal: true,
     width: 460,
     close: function (event, ui) {
       angular.element('#osr_dlg').scope().dataStore.incident.osr.save();
-    }
+    },
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#osr_dlg').dialog('close');})}
 
   });
-  $("#dispatch_address_dlg").dialog({resizable: false, modal: true, width: 450});
+  $("#dispatch_address_dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 450,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#dispatch_address_dlg').dialog('close');})}
+  });
   $("#objectives_dlg").dialog({
     resizable: false,
     modal: true,
     width: 230,
     close: function (event, ui) {
       angular.element('#objectives_dlg').scope().dataStore.incident.objectives.save();
-    }
-
+    },
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#objectives_dlg').dialog('close');})}
   });
   $("#iap_dlg").dialog({
     resizable: false,
@@ -977,24 +1049,71 @@ function initDialogs() {
     width: 616,
     close: function (event, ui) {
       angular.element('#iap_dlg').scope().dataStore.incident.iap.save();
-    }
+    },
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#iap_dlg').dialog('close');})}
   });
-  $("#unit_options_dlg").dialog({resizable: false, modal: true, width: 575});
-  $("#psi_dlg").dialog({resizable: false, modal: true, width: 423});
-  $("#address_dialog").dialog({resizable: false, modal: true, width: 450});
-  $("#reports_dlg").dialog({resizable: false, modal: true, width: 820});
-  $("#clear_mayday_dlg").dialog({resizable: false, modal: true, width: 348});
-  $("#incident_info_dlg").dialog({resizable: false, modal: true, width: 450});
-  $("#branch_dlg").dialog({resizable: false, modal: true, width: 550});
-  $("#strategy_dlg").dialog({resizable: false, modal: true, width: 258});
-  $("#settings_dlg").dialog({resizable: false, modal: true, width: 258});
+  $("#unit_options_dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 575,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#unit_options_dlg').dialog('close');})}
+  });
+  $("#psi_dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 423,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#psi_dlg').dialog('close');})}
+  });
+  $("#address_dialog").dialog({
+    resizable: false,
+    modal: true,
+    width: 450,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#address_dialog').dialog('close');})}
+  });
+  $("#reports_dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 820,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#reports_dlg').dialog('close');})}
+  });
+  $("#clear_mayday_dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 348,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#clear_mayday_dlg').dialog('close');})}
+  });
+  $("#incident_info_dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 450,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#incident_info_dlg').dialog('close');})}
+  });
+  $("#branch_dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 550,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#branch_dlg').dialog('close');})}
+  });
+  $("#strategy_dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 258,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#strategy_dlg').dialog('close');})}
+  });
+  $("#settings_dlg").dialog({
+    resizable: false,
+    modal: true,
+    width: 258,
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#settings_dlg').dialog('close');})}
+  });
   $("#osr_dlg").dialog({
     resizable: false,
     modal: true,
     width: 460,
     close: function (event, ui) {
       angular.element('#osr_dlg').scope().dataStore.incident.osr.save();
-    }
+    },
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#osr_dlg').dialog('close');})}
   });
   $("#mayday_dlg").dialog({
     resizable: false,
@@ -1003,7 +1122,8 @@ function initDialogs() {
     close: function (event, ui) {
       var dataStore = angular.element('#osr_dlg').scope().dataStore;
       dataStore.saveSelectedMayday();
-    }
+    },
+    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#mayday_dlg').dialog('close');})}
   });
 
   $(".ui-dialog .ui-dialog-titlebar-close").html("Close");
