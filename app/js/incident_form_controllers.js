@@ -105,7 +105,7 @@ angular.module("ictApp", ['gridster', 'ngDraggable', 'DataServices', 'TbarServic
     }
 
     $scope.clickMoveUnit = function () {
-      DataStore.choseMoveUnit = true;
+      DataStore.choseMoveUnit = !DataStore.choseMoveUnit;
     }
   })
 
@@ -931,6 +931,7 @@ angular.module("ictApp", ['gridster', 'ngDraggable', 'DataServices', 'TbarServic
       beforeDialogCloseFunc = 0;
     }
   }])
+
 
 ;
 

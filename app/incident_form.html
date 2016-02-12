@@ -22,7 +22,7 @@
   <script src="bower_components/parse-sdk/lib/parse.min.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
-  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-gridster/dist/angular-gridster.min.js"></script>
   <script src="bower_components/ngDraggable/ngDraggable.js"></script>
   <script src="js/config.js"></script>
@@ -60,8 +60,12 @@
         <div class="header_item" ng-class="{time_lg:!dataStore.hourRollOverDone}">
           {{dataStore.timer_text}}
         </div>
-        <button class="single_row_header_item header_item" ng-click="clickMoveUnit()">
-          Move Unit
+        <button
+            class="single_row_header_item header_item"
+            ng-class="{move_unit_btn_is_moving:dataStore.choseMoveUnit}"
+            ng-click="clickMoveUnit()">
+          <span ng-hide="dataStore.choseMoveUnit">Move Unit</span>
+          <span ng-show="dataStore.choseMoveUnit">Cancel</span>
         </button>
         <button class="disabled single_row_header_item header_item" ng-controller="UpgradeDlg" ng-click="showUpgradeDlg()">
           <div>Upgrade</div>

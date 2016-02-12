@@ -230,8 +230,6 @@ img.settings_btn_img {
     margin-top: 100px;
 }
 
-/*@media (max-height: 590px) {
-    .has_space_above {
-        margin-top: 0;
-    }
-}*/
+.move_unit_btn_is_moving {
+    background: #6db4e6;
+}
