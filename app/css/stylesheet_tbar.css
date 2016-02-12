@@ -120,9 +120,21 @@ tbar {
 }
 .acct_unit_btn {
     height: 23px;
-    width: 60px;
+    width: 70px;
     margin: 3px;
     padding: 0 5px;
+}
+.units_dlg_acct_options_label {
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    border: 1px solid;
+    padding: 0;
+    margin: 0;
+    float: left;
+}
+.acct_unit_btn_wide {
+    width: 90px;
 }
 .has_acct_unit {
     background: rgba(255, 255, 0, 0.47);

@@ -275,13 +275,15 @@
                   <span>{{sector.channel_letter}} {{sector.channel_number}}</span>
                 </button>
               </div>
-              <div style="display: table-cell; text-align: right;">
+              <div style="display: table-cell; text-align: right; min-width:100px">
                 <button class="acct_unit_btn"
-                        ng-class="{has_acct_unit:sector.acctUnit, btn_smtext:sector.acctUnit.name.length>5, btn_medtext: sector.acctUnit.name.length==5}"
+                        ng-class="{acct_unit_btn_wide:sector.acctUnit.name.length>5, has_acct_unit:sector.acctUnit, btn_smtext:sector.acctUnit.name.length>5, btn_medtext: sector.acctUnit.name.length==5}"
                         ng-click="showUnitsDlgForAcct(sector)"
                         ng-show="sector.sectorType.hasAcctBtn">
+                  <div class="units_dlg_acct_options_label" ng-show="sector.acctUnitOpt">{{sector.acctUnitOpt}}</div>
                   <span ng-show="sector.acctUnit">{{sector.acctUnit.name}}</span>
                   <span ng-hide="sector.acctUnit" class="add_acct_unit_label">+Acct</span>
+                  <div class="clear_both"></div>
                 </button>
               </div>
             </div>
@@ -406,6 +408,16 @@
 <div id="unit-info-dlg" title="Unit" class="dialog"></div>
 
 <div id="units_dlg" title="Units" ng-controller="UnitsDlg" class="dialog">
+  <div class="units_dlg_acct_options_container" ng-show="forAcct">
+    <button
+        class="units_dlg_acct_options_btn"
+        ng-repeat="acct_opt in acct_opts"
+        ng-class="{units_dlg_acct_options_selected:selectedSector.acctUnitOpt==acct_opt}"
+        ng-click="selectAcctUnitOpt(acct_opt)">
+      {{acct_opt}}
+    </button>
+    <div class="clear_both"></div>
+  </div>
   <div id="dispatched_units_div">
     <div id="title_dispatched_units_div">Dispatched Units</div>
     <div id="units_dispatched_units_div">

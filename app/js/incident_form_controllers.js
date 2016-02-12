@@ -424,6 +424,8 @@ angular.module("ictApp", ['gridster', 'ngDraggable', 'DataServices', 'TbarServic
     $scope.dataStore = DataStore;
     $scope.forAcct = false;
 
+    $scope.acct_opts = ['N','E','S','W','A','B','C','D'];
+
     $scope.cities = new Array();
     $scope.type_names = new Array();
 
@@ -463,6 +465,12 @@ angular.module("ictApp", ['gridster', 'ngDraggable', 'DataServices', 'TbarServic
         $scope.selected_type_name = type.name;
       } else {
         $scope.selected_type_name = '';
+      }
+    };
+
+    $scope.selectAcctUnitOpt = function (acctUnitOpt) {
+      if ($scope.forAcct) {
+        $scope.selectedSector.acctUnitOpt = acctUnitOpt;
       }
     };
 
