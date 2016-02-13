@@ -494,7 +494,7 @@
     text-align: center;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 710px) {
     .new_mayday_btn {
         position: fixed;
         top: 0px;

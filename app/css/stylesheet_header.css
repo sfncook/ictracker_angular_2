@@ -237,7 +237,7 @@ img.settings_btn_img {
     background: #6db4e6;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 710px) {
     .inc_type_icon {
         display: none;
     }
@@ -247,9 +247,6 @@ img.settings_btn_img {
     .db_status_container {
         display: none;
     }
-}
-
-@media (max-width: 710px) {
     .main_menu_container_width {
         display: none;
     }

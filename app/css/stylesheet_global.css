@@ -922,7 +922,7 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     background:yellow;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 710px) {
     .inc_info_btn {
         display: none;
     }
