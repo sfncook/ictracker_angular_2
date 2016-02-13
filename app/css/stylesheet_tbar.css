@@ -3,7 +3,8 @@ tbar {
     margin: 10px;
     height: 290px;
     width: 280px;
-    float: left;
+    /*float: left;*/
+    display: inline-block;
     padding: 0;
     border-radius: 3px;
     z-index: 0;
@@ -11,6 +12,20 @@ tbar {
 }
 .tbar_uninitialized {
     border:1px solid rgba(173, 216, 230, 0.34);
+}
+.tbar_guts_uninitialized {
+    text-align:center;
+    width: 100%;
+    height:100%;
+    cursor:pointer;
+    padding-top: 30px;
+}
+.tbar_guts_initialized {
+
+}
+
+.tbar_container {
+
 }
 
 .benchmarks_icon {
@@ -260,7 +275,8 @@ tbar {
     text-align:center;
 }
 .tbar_footer_container {
-
+    display: table;
+    width:100%;
 }
 
 

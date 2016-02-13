@@ -14,7 +14,6 @@ angular.module('TbarServices', ['DataServices', 'SectorServices', 'AdapterServic
         var init_row_count = Math.floor(window_height / tbar_height);
         init_row_count = Math.max(init_row_count, 3);
         var left_margin = Math.floor((window_width - (col_count * tbar_width) - header_width ) / 2);
-        $("#tbar_container").css("padding-left", left_margin);
 
         return {
             rows: init_row_count,

@@ -51,255 +51,257 @@
 </head>
 <body>
 
-<div class="ict_header" ng-controller="HeaderContainer">
-  <div style="display: table; height:100%">
-    <div style="display: table-row;">
-      <div class="ict_header_top">
-        <div class="header_item" ng-class="{time_lg:!dataStore.hourRollOverDone}">
-          {{dataStore.timer_text}}
-        </div>
-        <button
-            class="single_row_header_item header_item"
-            ng-class="{move_unit_btn_is_moving:dataStore.choseMoveUnit}"
-            ng-click="clickMoveUnit()">
-          <span ng-hide="dataStore.choseMoveUnit">Move Unit</span>
-          <span ng-show="dataStore.choseMoveUnit">Cancel</span>
-        </button>
-        <button class="disabled single_row_header_item header_item" ng-controller="UpgradeDlg" ng-click="showUpgradeDlg()">
-          <div>Upgrade</div>
-          <div id="upgrade_btn_sub_label">{{displayUpgradeLabel}}</div>
-        </button>
-        <button class="disabled single_row_header_item header_item" ng-click="showBranchDlg()">Branch</button>
-      </div>
-    </div>
+<div class="base_table">
+  <div class="base_table_row">
+    <div class="base_table_lf_col">
 
-
-    <div style="display: table-row;">
-      <div class="ict_header_middle">
-        <div ng-controller="OsrDlg">
-          <button class="single_row_header_item header_item" ng-click="showOSRDlg()">
-            <div class="perc_horz_bar_bg">
-              <div id="osr_perc_bar" class="perc_horz_bar"></div>
-            </div>
-            <div>OSR</div>
-          </button>
-        </div>
-        <div ng-controller="ObjDlg">
-          <button class="single_row_header_item header_item" ng-click="showObjectivesDlg()">
-            <div class="perc_horz_bar_bg">
-              <div id="objectives_perc_bar" class="perc_horz_bar"></div>
-            </div>
-            <div style="margin-top:-1px">Objectives</div>
-          </button>
-        </div>
-        <div ng-controller="IapDlg">
-          <button id="iap_btn" class="single_row_header_item header_item" ng-click="showIapDlg()">IAP
-          </button>
-        </div>
-        <button class="single_row_header_item header_item" ng-click="openMap()">Map</button>
-      </div>
-    </div>
-
-
-    <div style="display: table-row;">
-      <div class="ict_header_bottom">
-        <button class="disabled double_row_header_item header_item">
-          <div>Command</div>
-          <div>Terminated</div>
-        </button>
-        <button class="disabled double_row_header_item header_item" ng-click="showReportsDlg()">
-          <img class="report_icon" src="img/report.png"/>
-          <div>Reports</div>
-        </button>
-        <button class="double_row_header_item header_item" ng-click="showSettingsDlg()">
-          <img class="settings_btn_img" src="img/settings.png"/>
-          <div>Settings</div>
+      <div class="top_mayday_header_container" ng-controller="MaydayDlg" ng-show="dataStore.maydays.length>0">
+        <button class="mayday_btn_animate mayday_btn button_top button" ng-repeat="mayday in dataStore.maydays"
+                ng-click="openMaydayDlgForMayday(mayday)">
+          Mayday - {{mayday.nameFFighter}} - {{mayday.sector.sectorType.name}} - {{mayday.unit.type.name}} - {{mayday.timerText}}
         </button>
       </div>
-    </div>
-  </div>
 
-</div>
-<!-- ict_header-->
+      <div class="top_header_container" ng-controller="HeaderContainer2">
+        <button id="inc_info_btn"
+                class="button_top"
+                ng-click="showIncInfoDlg()">
+          <div id="inc_num">{{dataStore.incident.inc_number}}</div>
+          <div id="inc_add">{{dataStore.incident.inc_address}}</div>
+        </button>
+        <img id="inc_type_icon" ng-src="{{dataStore.incident.incidentType.icon}}"/>
 
-<div class="top_mayday_header_container" ng-controller="MaydayDlg" ng-show="dataStore.maydays.length>0">
-  <button class="mayday_btn_animate mayday_btn button_top button" ng-repeat="mayday in dataStore.maydays"
-          ng-click="openMaydayDlgForMayday(mayday)">
-    Mayday - {{mayday.nameFFighter}} - {{mayday.sector.sectorType.name}} - {{mayday.unit.type.name}} - {{mayday.timerText}}
-  </button>
-</div>
+        <button id="mode_btn" class="button_top"
+                ng-class="{'glowgreen':(dataStore.incident.strategy=='OFFENSE'), 'glowred':(dataStore.incident.strategy=='DEFENSE')}"
+                ng-click="showStrategyDlg()">{{(dataStore.incident.strategy==undefined || dataStore.incident.strategy=='') ? 'Strategy' :
+          dataStore.incident.strategy}}
+        </button>
+        <div class="db_status_msg button_top db_status" ng-show="dataStore.waitingToLoad">Loading Incident</div>
+        <div id="db_status_msg_success"
+             class="button_top db_status"
+             ng-show="!dataStore.waitingToLoad && dataStore.loadSuccess"
+             ng-class="{fadeout:!dataStore.waitingToLoad && dataStore.loadSuccess}">Load Succeeded
+        </div>
+        <div id="db_status_msg_failed" class="button_top db_status" ng-show="!dataStore.waitingToLoad && !dataStore.loadSuccess">Load
+          Failed
+        </div>
 
-<div class="top_header_container" ng-controller="HeaderContainer2">
-  <div>
-    <button id="inc_info_btn"
-            class="button_top"
-            ng-click="showIncInfoDlg()">
-      <div id="inc_num">{{dataStore.incident.inc_number}}</div>
-      <div id="inc_add">{{dataStore.incident.inc_address}}</div>
-    </button>
-    <img id="inc_type_icon" ng-src="{{dataStore.incident.incidentType.icon}}"/>
+        <div class="mayday_header_btn_container">
+          <button class="new_mayday_btn button_top button" ng-click="click_new_mayday()" ng-controller="MaydayDlg">+ NEW MAYDAY</button>
+        </div>
 
-    <button id="mode_btn" class="button_top"
-            ng-class="{'glowgreen':(dataStore.incident.strategy=='OFFENSE'), 'glowred':(dataStore.incident.strategy=='DEFENSE')}"
-            ng-click="showStrategyDlg()">{{(dataStore.incident.strategy==undefined || dataStore.incident.strategy=='') ? 'Strategy' :
-      dataStore.incident.strategy}}
-    </button>
-    <div class="db_status_msg button_top db_status" ng-show="dataStore.waitingToLoad">Loading Incident</div>
-    <div id="db_status_msg_success"
-         class="button_top db_status"
-         ng-show="!dataStore.waitingToLoad && dataStore.loadSuccess"
-         ng-class="{fadeout:!dataStore.waitingToLoad && dataStore.loadSuccess}">Load Succeeded
-    </div>
-    <div id="db_status_msg_failed" class="button_top db_status" ng-show="!dataStore.waitingToLoad && !dataStore.loadSuccess">Load
-      Failed
-    </div>
-
-    <div class="mayday_header_btn_container">
-      <button class="new_mayday_btn button_top button" ng-click="click_new_mayday()" ng-controller="MaydayDlg">+ NEW MAYDAY</button>
-    </div>
-
-    <div class="clear_both"></div>
-  </div>
-</div>
-
-<div ng-drag-clone="" style="background:red; width:50px; height: 50px;">
-  This is a Clone
-  {{clonedData.name}}
-</div>
-
-<div id="tbar_container" ng-controller="TbarContainer">
-    <tbar
-          ng-repeat="sector in dataStore.incident.sectors | orderBy:'orderIndex'"
-          ng-class="{tbar_uninitialized:!sector.initialized}"
-          ng-drop="true" ng-drop-success="onDropUnitOnSector($data, sector)">
-      <div style="text-align:center; width: 100%; height:100%; cursor:pointer; padding-top: 30px;"
-           ng-show="!sector.initialized"
-           ng-click="showSectorNameDlg(sector)">
-        {{sector.orderIndex}}
-        <span style="color: rgba(0, 0, 255, 0.14); font-size:2.5rem;">Click to<br>add sector</span>
-        <img src="img/add_sector_icon.png" style="background: rgba(0, 0, 255, 0.14); width:30%"/>
+        <div class="clear_both"></div>
       </div>
-      <div ng-show="sector.initialized">
-        <div class="tbar_title_container">
-          <div ng-disabled="sector.units.length==0"
-               class="personnel_title_btn personnel_btn"
-               ng-class="{has_par:doesSectorHavePar(sector), personnel_not_set:!sectorParIsSet(sector), personnel_set:sectorParIsSet(sector)}"
-               ng-click="showParDlg(sector)">
-            {{sector | sectorPar}}
+
+      <div class="tbar_container" ng-controller="TbarContainer">
+        <tbar
+            ng-repeat="sector in dataStore.incident.sectors | orderBy:'orderIndex'"
+            ng-class="{tbar_uninitialized:!sector.initialized}"
+            ng-drop="true" ng-drop-success="onDropUnitOnSector($data, sector)">
+          <div class="tbar_guts_uninitialized"
+               ng-show="!sector.initialized"
+               ng-click="showSectorNameDlg(sector)">
+            {{sector.orderIndex}}
+            <span style="color: rgba(0, 0, 255, 0.14); font-size:2.5rem;">Click to<br>add sector</span>
+            <img src="img/add_sector_icon.png" style="background: rgba(0, 0, 255, 0.14); width:30%"/>
           </div>
-          <button class="sector_name_btn sector_toprow_btn" ng-click="showSectorNameDlg(sector)">
-            <div class="tbar_title_dir tbar_title_component">{{sector.direction}}</div>
-            <div class="tbar_title tbar_title_component">.{{sector.orderIndex}}.{{sector.sectorType.name}}</div>
-            <div class="tbar_title_num tbar_title_component">{{sector.number}}</div>
-            <div class="clear_both"></div>
-          </button>
-          <button ng-show="sector.sectorType.manyBenchmarkBars>0" class="bnch-btn sector_toprow_btn" ng-click="showBnchDlg(sector)">
+          <div class="tbar_guts_initialized"
+               ng-show="sector.initialized">
+            <div class="tbar_title_container">
+              <div ng-disabled="sector.units.length==0"
+                   class="personnel_title_btn personnel_btn"
+                   ng-class="{has_par:doesSectorHavePar(sector), personnel_not_set:!sectorParIsSet(sector), personnel_set:sectorParIsSet(sector)}"
+                   ng-click="showParDlg(sector)">
+                {{sector | sectorPar}}
+              </div>
+              <button class="sector_name_btn sector_toprow_btn" ng-click="showSectorNameDlg(sector)">
+                <div class="tbar_title_dir tbar_title_component">{{sector.direction}}</div>
+                <div class="tbar_title tbar_title_component">.{{sector.orderIndex}}.{{sector.sectorType.name}}</div>
+                <div class="tbar_title_num tbar_title_component">{{sector.number}}</div>
+                <div class="clear_both"></div>
+              </button>
+              <button ng-show="sector.sectorType.manyBenchmarkBars>0" class="bnch-btn sector_toprow_btn" ng-click="showBnchDlg(sector)">
             <span class="benchmarks_icon">
                 <div ng-repeat="n in [] | range:sector.sectorType.manyBenchmarkBars"
                      class="benchmark_bar_div"
                      ng-class="getBnchColor(sector, $index+1)">&nbsp;
                 </div>
             </span>
-            BNCH
-          </button>
-          <div class="clear_both"></div>
-        </div>
-
-        <div class="clear_both"></div>
-
-        <div class="tbar_units_container">
-          <div class="scroll-pane">
-            <div ng-repeat="unit in sector.units"
-                 class="unit_row"
-                 ng-drag="true" ng-drag-data="{'unit':unit, 'src_sector':sector}">
-              <button class="unit_row_left_column"
-                      ng-class="{mayday_choice_animate: dataStore.choosing_unit_for_new_mayday, unit_btn_hasmayday_animate: unit.hasMayday}"
-                      ng-click="clickTbarUnit(sector, unit)">
-                <div class="unit_tbar_btn unit_btn"
-                     ng-class="{btn_smtext: unit.type.name.length>5, btn_medtext: unit.type.name.length>4}"
-                     ng-show="!dataStore.choseMoveUnit">
-                  {{unit.type.name}}
-                </div>
-                <div class="clear_float"></div>
-
-                <div class="unit_options_row_container" ng-show="!dataStore.choseMoveUnit">
-                  <div class="personnel_tbar_btn personnel_btn"
-                       ng-class="{has_par:unit.par==unit.manyPar&&unit.par!=0, personnel_not_set:unit.par==0, personnel_set:unit.par>0}">
-                    {{unit.par|getUnitPar}}
-                  </div>
-                  <div class="psi_tbar_btn psi_btn"
-                       ng-class="{psi_red:unit.psi<1500, psi_yellow:unit.psi<3000&&unit.psi>=1500, psi_green:unit.psi>=3000}"
-                       ng-if="sector.sectorType.hasPsiBtn">{{unit.psi}}
-                  </div>
-                  <div class="clear_float"></div>
-
-                  <div class="unit_timer_bar_border"
-                       ng-show="sector.sectorType.hasClock">
-                    <div class="unit_timer_bar_fill"
-                         ng-style="{'width':unit.timer_perc+'%'}"
-                         ng-class="{unit_timer_good:unit.timer_perc>=66, unit_timer_warn:unit.timer_perc>=33 && unit.timer_perc<66, unit_timer_crit:unit.timer_perc>=10 && unit.timer_perc<33, unit_timer_done:unit.timer_perc<10}"
-                        ></div>
-                  </div>
-                  <div class="clear_float"></div>
-                </div>
-
-                <div class="unit_drag_handle" ng-show="dataStore.choseMoveUnit" ng-drag-handle>
-                  <div class="unit_drag_handle_label">{{unit.type.name}}</div>
-                </div>
-              </button>
-
-              <button class="unit_row_right_column"
-                      ng-class="{has_actions:unit.actionsArr.length, no_actions:!unit.actionsArr.length}"
-                      ng-click="showActionsDlg(unit)">
-                <div class="add_actions_label" ng-hide="unit.actionsArr.length" ng-class="{actions_while_moving:dataStore.choseMoveUnit}">
-                  +Add actions
-                </div>
-
-                <div
-                    ng-repeat="action in unit.actionsArr"
-                    class="action_tbar_btn action_btn"
-                    ng-class="{font_red:action.is_warning, actions_while_moving:dataStore.choseMoveUnit}">
-                  {{action.name}}
-                </div>
-
+                BNCH
               </button>
               <div class="clear_both"></div>
             </div>
-          </div>
-          <div class="tbar_footer_container" style="display: table; width:100%;">
-            <div style="display: table-row;width:100%">
-              <div style="display: table-cell; text-align: left;">
-                <button class="add_unit_btn" ng-click="showUnitsDlg(sector)">+Unit</button>
-              </div>
-              <div style="display: table-cell; text-align: center;">
-                <button class="add_channel_btn" ng-click="openChannelDlg(sector)">
-                  <img class="add_channel_icon" src="img/radio.jpg"/>
-                  <span>{{sector.channel_letter}} {{sector.channel_number}}</span>
-                </button>
-              </div>
-              <div style="display: table-cell; text-align: right; min-width:100px">
-                <button class="acct_unit_btn"
-                        ng-class="{acct_unit_btn_wide:sector.acctUnit.name.length>5, has_acct_unit:sector.acctUnit, btn_smtext:sector.acctUnit.name.length>5, btn_medtext: sector.acctUnit.name.length==5}"
-                        ng-click="showUnitsDlgForAcct(sector)"
-                        ng-show="sector.sectorType.hasAcctBtn">
-                  <div class="units_dlg_acct_options_label" ng-show="sector.acctUnitOpt">{{sector.acctUnitOpt}}</div>
-                  <span ng-show="sector.acctUnit">{{sector.acctUnit.name}}</span>
-                  <span ng-hide="sector.acctUnit" class="add_acct_unit_label">+Acct</span>
+
+            <div class="clear_both"></div>
+
+            <div class="tbar_units_container">
+              <div class="scroll-pane">
+                <div ng-repeat="unit in sector.units"
+                     class="unit_row"
+                     ng-drag="true" ng-drag-data="{'unit':unit, 'src_sector':sector}">
+                  <button class="unit_row_left_column"
+                          ng-class="{mayday_choice_animate: dataStore.choosing_unit_for_new_mayday, unit_btn_hasmayday_animate: unit.hasMayday}"
+                          ng-click="clickTbarUnit(sector, unit)">
+                    <div class="unit_tbar_btn unit_btn"
+                         ng-class="{btn_smtext: unit.type.name.length>5, btn_medtext: unit.type.name.length>4}"
+                         ng-show="!dataStore.choseMoveUnit">
+                      {{unit.type.name}}
+                    </div>
+                    <div class="clear_float"></div>
+
+                    <div class="unit_options_row_container" ng-show="!dataStore.choseMoveUnit">
+                      <div class="personnel_tbar_btn personnel_btn"
+                           ng-class="{has_par:unit.par==unit.manyPar&&unit.par!=0, personnel_not_set:unit.par==0, personnel_set:unit.par>0}">
+                        {{unit.par|getUnitPar}}
+                      </div>
+                      <div class="psi_tbar_btn psi_btn"
+                           ng-class="{psi_red:unit.psi<1500, psi_yellow:unit.psi<3000&&unit.psi>=1500, psi_green:unit.psi>=3000}"
+                           ng-if="sector.sectorType.hasPsiBtn">{{unit.psi}}
+                      </div>
+                      <div class="clear_float"></div>
+
+                      <div class="unit_timer_bar_border"
+                           ng-show="sector.sectorType.hasClock">
+                        <div class="unit_timer_bar_fill"
+                             ng-style="{'width':unit.timer_perc+'%'}"
+                             ng-class="{unit_timer_good:unit.timer_perc>=66, unit_timer_warn:unit.timer_perc>=33 && unit.timer_perc<66, unit_timer_crit:unit.timer_perc>=10 && unit.timer_perc<33, unit_timer_done:unit.timer_perc<10}"
+                            ></div>
+                      </div>
+                      <div class="clear_float"></div>
+                    </div>
+
+                    <div class="unit_drag_handle" ng-show="dataStore.choseMoveUnit" ng-drag-handle>
+                      <div class="unit_drag_handle_label">{{unit.type.name}}</div>
+                    </div>
+                  </button>
+
+                  <button class="unit_row_right_column"
+                          ng-class="{has_actions:unit.actionsArr.length, no_actions:!unit.actionsArr.length}"
+                          ng-click="showActionsDlg(unit)">
+                    <div class="add_actions_label" ng-hide="unit.actionsArr.length" ng-class="{actions_while_moving:dataStore.choseMoveUnit}">
+                      +Add actions
+                    </div>
+
+                    <div
+                        ng-repeat="action in unit.actionsArr"
+                        class="action_tbar_btn action_btn"
+                        ng-class="{font_red:action.is_warning, actions_while_moving:dataStore.choseMoveUnit}">
+                      {{action.name}}
+                    </div>
+
+                  </button>
                   <div class="clear_both"></div>
-                </button>
+                </div>
+              </div>
+              <div class="tbar_footer_container">
+                <div style="display: table-row;width:100%">
+                  <div style="display: table-cell; text-align: left;">
+                    <button class="add_unit_btn" ng-click="showUnitsDlg(sector)">+Unit</button>
+                  </div>
+                  <div style="display: table-cell; text-align: center;">
+                    <button class="add_channel_btn" ng-click="openChannelDlg(sector)">
+                      <img class="add_channel_icon" src="img/radio.jpg"/>
+                      <span>{{sector.channel_letter}} {{sector.channel_number}}</span>
+                    </button>
+                  </div>
+                  <div style="display: table-cell; text-align: right; min-width:100px">
+                    <button class="acct_unit_btn"
+                            ng-class="{acct_unit_btn_wide:sector.acctUnit.name.length>5, has_acct_unit:sector.acctUnit, btn_smtext:sector.acctUnit.name.length>5, btn_medtext: sector.acctUnit.name.length==5}"
+                            ng-click="showUnitsDlgForAcct(sector)"
+                            ng-show="sector.sectorType.hasAcctBtn">
+                      <div class="units_dlg_acct_options_label" ng-show="sector.acctUnitOpt">{{sector.acctUnitOpt}}</div>
+                      <span ng-show="sector.acctUnit">{{sector.acctUnit.name}}</span>
+                      <span ng-hide="sector.acctUnit" class="add_acct_unit_label">+Acct</span>
+                      <div class="clear_both"></div>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </tbar>
+        <!--<div class="clear_both"></div>-->
       </div>
-    </tbar>
-  <div class="clear_both"></div>
+
+      <button class="unit_row_drag_clone" ng-drag-clone="">
+        {{clonedData.unit.type.name}}
+      </button>
+    </div>
+
+    <div class="main_menu_container_width base_table_rt_col">
+      <div class="main_menu_container_width main_menu_container" ng-controller="HeaderContainer">
+        <div style="display: table; height:100%">
+          <div style="display: table-row;">
+            <div class="ict_header_top">
+              <div class="header_item" ng-class="{time_lg:!dataStore.hourRollOverDone}">
+                {{dataStore.timer_text}}
+              </div>
+              <button
+                  class="single_row_header_item header_item"
+                  ng-class="{move_unit_btn_is_moving:dataStore.choseMoveUnit}"
+                  ng-click="clickMoveUnit()">
+                <span ng-hide="dataStore.choseMoveUnit">Move Unit</span>
+                <span ng-show="dataStore.choseMoveUnit">Cancel</span>
+              </button>
+              <button class="disabled single_row_header_item header_item" ng-controller="UpgradeDlg" ng-click="showUpgradeDlg()">
+                <div>Upgrade</div>
+                <div id="upgrade_btn_sub_label">{{displayUpgradeLabel}}</div>
+              </button>
+              <button class="disabled single_row_header_item header_item" ng-click="showBranchDlg()">Branch</button>
+            </div>
+          </div>
+
+
+          <div style="display: table-row;">
+            <div class="ict_header_middle">
+              <div ng-controller="OsrDlg">
+                <button class="single_row_header_item header_item" ng-click="showOSRDlg()">
+                  <div class="perc_horz_bar_bg">
+                    <div id="osr_perc_bar" class="perc_horz_bar"></div>
+                  </div>
+                  <div>OSR</div>
+                </button>
+              </div>
+              <div ng-controller="ObjDlg">
+                <button class="single_row_header_item header_item" ng-click="showObjectivesDlg()">
+                  <div class="perc_horz_bar_bg">
+                    <div id="objectives_perc_bar" class="perc_horz_bar"></div>
+                  </div>
+                  <div style="margin-top:-1px">Objectives</div>
+                </button>
+              </div>
+              <div ng-controller="IapDlg">
+                <button id="iap_btn" class="single_row_header_item header_item" ng-click="showIapDlg()">IAP
+                </button>
+              </div>
+              <button class="single_row_header_item header_item" ng-click="openMap()">Map</button>
+            </div>
+          </div>
+
+
+          <div style="display: table-row;">
+            <div class="ict_header_bottom">
+              <button class="disabled double_row_header_item header_item">
+                <div>Command</div>
+                <div>Terminated</div>
+              </button>
+              <button class="disabled double_row_header_item header_item" ng-click="showReportsDlg()">
+                <img class="report_icon" src="img/report.png"/>
+                <div>Reports</div>
+              </button>
+              <button class="double_row_header_item header_item" ng-click="showSettingsDlg()">
+                <img class="settings_btn_img" src="img/settings.png"/>
+                <div>Settings</div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- main_menu_container-->
+    </div>
+  </div>
 </div>
-
-<button class="unit_row_drag_clone" ng-drag-clone="">
-  {{clonedData.unit.type.name}}
-</button>
-
 
 <div id="sector_name_dlg" title="Sectors" ng-controller="SectorNamesDlg" class="dialog">
   <button
