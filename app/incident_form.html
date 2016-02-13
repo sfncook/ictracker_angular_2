@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>ICT</title>
   <link href="img/logo/ict_logo_29x29.png" rel="icon"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!--CSS-->
   <link rel="stylesheet" href="components/jquery-ui-1.11.0.custom/jquery-ui.css"/>
@@ -63,27 +64,29 @@
       </div>
 
       <div class="top_header_container" ng-controller="HeaderContainer2">
-        <button id="inc_info_btn"
-                class="button_top"
+        <button class="inc_info_btn button_top"
                 ng-click="showIncInfoDlg()">
-          <div id="inc_num">{{dataStore.incident.inc_number}}</div>
-          <div id="inc_add">{{dataStore.incident.inc_address}}</div>
+          <div class="inc_num">{{dataStore.incident.inc_number}}</div>
+          <div class="inc_add">{{dataStore.incident.inc_address}}</div>
         </button>
-        <img id="inc_type_icon" ng-src="{{dataStore.incident.incidentType.icon}}"/>
+        <img class="inc_type_icon" ng-src="{{dataStore.incident.incidentType.icon}}"/>
 
-        <button id="mode_btn" class="button_top"
+        <button class="mode_btn button_top"
                 ng-class="{'glowgreen':(dataStore.incident.strategy=='OFFENSE'), 'glowred':(dataStore.incident.strategy=='DEFENSE')}"
                 ng-click="showStrategyDlg()">{{(dataStore.incident.strategy==undefined || dataStore.incident.strategy=='') ? 'Strategy' :
           dataStore.incident.strategy}}
         </button>
-        <div class="db_status_msg button_top db_status" ng-show="dataStore.waitingToLoad">Loading Incident</div>
-        <div id="db_status_msg_success"
-             class="button_top db_status"
-             ng-show="!dataStore.waitingToLoad && dataStore.loadSuccess"
-             ng-class="{fadeout:!dataStore.waitingToLoad && dataStore.loadSuccess}">Load Succeeded
-        </div>
-        <div id="db_status_msg_failed" class="button_top db_status" ng-show="!dataStore.waitingToLoad && !dataStore.loadSuccess">Load
-          Failed
+
+        <div class="db_status_container">
+          <div class="db_status_msg button_top db_status" ng-show="dataStore.waitingToLoad">Loading Incident</div>
+          <div id="db_status_msg_success"
+               class="button_top db_status"
+               ng-show="!dataStore.waitingToLoad && dataStore.loadSuccess"
+               ng-class="{fadeout:!dataStore.waitingToLoad && dataStore.loadSuccess}">Load Succeeded
+          </div>
+          <div id="db_status_msg_failed" class="button_top db_status" ng-show="!dataStore.waitingToLoad && !dataStore.loadSuccess">Load
+            Failed
+          </div>
         </div>
 
         <div class="mayday_header_btn_container">

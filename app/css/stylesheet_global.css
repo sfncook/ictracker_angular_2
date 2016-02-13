@@ -295,7 +295,7 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     pointer-events: none;
 }
 
-#inc_type_icon {
+.inc_type_icon {
     width: 52px;
     height: 51px;
     float:left;
@@ -304,7 +304,7 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
 }
 
 
-#mode_btn {
+.mode_btn {
     float: right;
     margin-right: 10px;
     pointer-events: auto;
@@ -702,14 +702,25 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     margin-left: 10px;
     background: white;
 }
-#inc_info_btn {
+.inc_info_btn {
     font-size: 0.9rem;
     float:left;
     margin-right:5px;
     padding-top: 5px;
+    max-width: 30%;
 }
 #inc_number_custom_input, #inc_address_custom_input{
 	width: 380px;
+}
+.inc_add {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.inc_num {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 #address_dialog {
     width: 450px;
@@ -909,4 +920,10 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
 }
 .units_dlg_acct_options_selected {
     background:yellow;
+}
+
+@media (max-width: 450px) {
+    .inc_info_btn {
+        display: none;
+    }
 }

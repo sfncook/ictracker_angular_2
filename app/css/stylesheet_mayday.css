@@ -493,3 +493,11 @@
     width: 100%;
     text-align: center;
 }
+
+@media (max-width: 450px) {
+    .new_mayday_btn {
+        position: fixed;
+        top: 0px;
+        left: 5px;
+    }
+}

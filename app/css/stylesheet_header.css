@@ -236,3 +236,21 @@ img.settings_btn_img {
 .move_unit_btn_is_moving {
     background: #6db4e6;
 }
+
+@media (max-width: 450px) {
+    .inc_type_icon {
+        display: none;
+    }
+    .mode_btn {
+        display: none;
+    }
+    .db_status_container {
+        display: none;
+    }
+}
+
+@media (max-width: 710px) {
+    .main_menu_container_width {
+        display: none;
+    }
+}

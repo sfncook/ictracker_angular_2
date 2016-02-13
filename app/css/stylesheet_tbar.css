@@ -445,3 +445,10 @@ tbar {
     width: 15px;
     height: 15px;
 }
+
+@media (max-width: 710px) {
+    .tbar_container {
+        margin-top: 40px;
+    }
+}
+
