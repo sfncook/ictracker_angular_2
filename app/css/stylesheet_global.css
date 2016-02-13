@@ -308,8 +308,8 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     float: right;
     margin-right: 10px;
     pointer-events: auto;
-    background: #e4b32d;
-    color: white;
+    background: white;
+    color: rgba(0, 0, 255, 0.14);
     font-size: 1.2rem;
 }
 .offensive_btn {

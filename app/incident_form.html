@@ -73,7 +73,7 @@
 
         <button class="mode_btn button_top"
                 ng-class="{'glowgreen':(dataStore.incident.strategy=='OFFENSE'), 'glowred':(dataStore.incident.strategy=='DEFENSE')}"
-                ng-click="showStrategyDlg()">{{(dataStore.incident.strategy==undefined || dataStore.incident.strategy=='') ? 'Strategy' :
+                ng-click="showStrategyDlg()">{{(dataStore.incident.strategy==undefined || dataStore.incident.strategy=='') ? '+Strategy' :
           dataStore.incident.strategy}}
         </button>
 
@@ -118,7 +118,7 @@
               </div>
               <button class="sector_name_btn sector_toprow_btn" ng-click="showSectorNameDlg(sector)">
                 <div class="tbar_title_dir tbar_title_component">{{sector.direction}}</div>
-                <div class="tbar_title tbar_title_component">.{{sector.orderIndex}}.{{sector.sectorType.name}}</div>
+                <div class="tbar_title tbar_title_component">{{sector.sectorType.name}}</div>
                 <div class="tbar_title_num tbar_title_component">{{sector.number}}</div>
                 <div class="clear_both"></div>
               </button>
@@ -202,7 +202,8 @@
                   </div>
                   <div style="display: table-cell; text-align: center;">
                     <button class="add_channel_btn" ng-click="openChannelDlg(sector)">
-                      <img class="add_channel_icon" src="img/radio.jpg"/>
+                      <img ng-show="sector.channel_letter || sector.channel_number" class="add_channel_icon" src="img/radio.jpg"/>
+                      <img ng-hide="sector.channel_letter || sector.channel_number" class="add_channel_icon" src="img/radio_blue.jpg"/>
                       <span>{{sector.channel_letter}} {{sector.channel_number}}</span>
                     </button>
                   </div>
