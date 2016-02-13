@@ -3,8 +3,8 @@ tbar {
     margin: 10px;
     height: 290px;
     width: 280px;
-    /*float: left;*/
     display: inline-block;
+    vertical-align: top;
     padding: 0;
     border-radius: 3px;
     z-index: 0;
