@@ -31,50 +31,30 @@ angular.module('TbarServices', ['DataServices', 'SectorServices', 'AdapterServic
 
     .factory('LoadDefaultTbars', function (AdapterStore, GridsterOpts, SectorTypes) {
         return function (incident) {
-
-            var rescuSector = AdapterStore.adapter.CreateNewSector();
-            var rehabSector = AdapterStore.adapter.CreateNewSector();
-            var safetSector = AdapterStore.adapter.CreateNewSector();
-
-            rescuSector.sectorType = SectorTypes.RESCUE;
-            rehabSector.sectorType = SectorTypes.REHAB;
-            safetSector.sectorType = SectorTypes.SAFETY;
-
-            rescuSector.col = GridsterOpts.columns - 1;
-            rescuSector.row = 0;
-            rehabSector.col = GridsterOpts.columns - 1;
-            rehabSector.row = 1;
-            safetSector.col = GridsterOpts.columns - 1;
-            safetSector.row = 2;
-
-            rescuSector.incident = incident;
-            rehabSector.incident = incident;
-            safetSector.incident = incident;
-
-            rescuSector.initialized = true;
-            rehabSector.initialized = true;
-            safetSector.initialized = true;
-
             incident.sectors = new Array();
-            incident.sectors.push(rescuSector);
-            incident.sectors.push(rehabSector);
-            incident.sectors.push(safetSector);
 
-            for(var col=0; col<GridsterOpts.columns; col++) {
-                for(var row=0; row<GridsterOpts.rows; row++) {
-                    if(
-                        (row==rescuSector.row && col==rescuSector.col) ||
-                            (row==rehabSector.row && col==rehabSector.col) ||
-                            (row==safetSector.row && col==safetSector.col)
-                        ) {
+            var orderIndex = 0;
+            for(var row=0; row<GridsterOpts.rows; row++) {
+                for(var col=0; col<GridsterOpts.columns; col++) {
+                    var sector = AdapterStore.adapter.CreateNewSector();
+                    if( col == (GridsterOpts.columns - 1) && row == 0 ) {
+                        sector.sectorType = SectorTypes.RESCUE;
+                        sector.initialized = true;
+                    } else if( col == (GridsterOpts.columns - 1) && row == 1 ) {
+                        sector.sectorType = SectorTypes.REHAB;
+                        sector.initialized = true;
+                    } else if( col == (GridsterOpts.columns - 1) && row == 2 ) {
+                        sector.sectorType = SectorTypes.SAFETY;
+                        sector.initialized = true;
                     } else {
-                        var blankSector = AdapterStore.adapter.CreateNewSector();
-                        blankSector.sectorType = SectorTypes.DEFAULT_SECTOR_TYPE;
-                        blankSector.row = row;
-                        blankSector.col = col;
-                        blankSector.incident = incident;
-                        incident.sectors.push(blankSector);
+                        sector.sectorType = SectorTypes.DEFAULT_SECTOR_TYPE;
+                        sector.initialized = false;
                     }
+                    sector.row = row;
+                    sector.col = col;
+                    sector.orderIndex = orderIndex++;
+                    sector.incident = incident;
+                    incident.sectors.push(sector);
                 }
             }//for
         }
