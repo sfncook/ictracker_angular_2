@@ -36,13 +36,13 @@ angular.module('TbarServices', ['DataServices', 'SectorServices', 'AdapterServic
             for(var row=0; row<GridsterOpts.rows; row++) {
                 for(var col=0; col<GridsterOpts.columns; col++) {
                     var sector = AdapterStore.adapter.CreateNewSector();
-                    if( col == (GridsterOpts.columns - 1) && row == 0 ) {
+                    if( orderIndex == 0 ) {
                         sector.sectorType = SectorTypes.RESCUE;
                         sector.initialized = true;
-                    } else if( col == (GridsterOpts.columns - 1) && row == 1 ) {
+                    } else if( orderIndex == 1 ) {
                         sector.sectorType = SectorTypes.REHAB;
                         sector.initialized = true;
-                    } else if( col == (GridsterOpts.columns - 1) && row == 2 ) {
+                    } else if( orderIndex == 2 ) {
                         sector.sectorType = SectorTypes.SAFETY;
                         sector.initialized = true;
                     } else {
