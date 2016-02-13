@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("ictApp", ['gridster', 'ngDraggable', 'DataServices', 'TbarServices', 'ActionServices', 'UnitServices', 'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices', 'UserServices', 'TimerServices', 'MaydayServices'])
+angular.module("ictApp", ['ngDraggable', 'DataServices', 'TbarServices', 'ActionServices', 'UnitServices', 'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices', 'UserServices', 'TimerServices', 'MaydayServices'])
 
   .run(function ($q, IsLoggedIn, InitDatabase, DataStore, LoadIncident, StartIncidentTimer, StartIncidentUpdateTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
     if (!InitDatabase()) {
@@ -109,13 +109,12 @@ angular.module("ictApp", ['gridster', 'ngDraggable', 'DataServices', 'TbarServic
     }
   })
 
-  .controller('TbarContainer', function ($scope, $filter, DataStore, GridsterOpts, DoesSectorHavePar, DoesSectorHaveCriticalUnitTimer, AddNewMayday, DefaultErrorLogger) {
+  .controller('TbarContainer', function ($scope, $filter, DataStore, DoesSectorHavePar, DoesSectorHaveCriticalUnitTimer, AddNewMayday, DefaultErrorLogger) {
 
     $scope.openMaydayDlg = function () {
       $("#mayday_dlg").dialog("open");
     }
 
-    $scope.gridsterOpts = GridsterOpts;
     $scope.dataStore = DataStore;
 
     $scope.openChannelDlg = function (sector) {

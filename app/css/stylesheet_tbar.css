@@ -1,11 +1,12 @@
 tbar {
-    border:1px solid gray;
-    margin:10px;
-    height: 279px;
-    float:left;
+    border: 1px solid gray;
+    margin: 10px;
+    height: 290px;
+    width: 280px;
+    float: left;
     padding: 0;
     border-radius: 3px;
-    z-index:0;
+    z-index: 0;
     background: white;
 }
 .tbar_uninitialized {

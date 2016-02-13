@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" href="bower_components/angular-gridster/dist/angular-gridster.min.css">
   <link rel="stylesheet" href="css/stylesheet_global.css">
   <link rel="stylesheet" href="css/stylesheet_tbar.css">
   <link rel="stylesheet" href="css/stylesheet_header.css">
@@ -23,7 +22,6 @@
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-gridster/dist/angular-gridster.min.js"></script>
   <script src="bower_components/ngDraggable/ngDraggable.js"></script>
   <script src="js/config.js"></script>
   <script src="js/init.js"></script>
@@ -170,9 +168,8 @@
 </div>
 
 <div id="tbar_container" ng-controller="TbarContainer">
-  <div gridster="gridsterOpts">
-    <tbar gridster-item="sector"
-          ng-repeat="sector in dataStore.incident.sectors"
+    <tbar
+          ng-repeat="sector in dataStore.incident.sectors | orderBy:'orderIndex'"
           ng-class="{tbar_uninitialized:!sector.initialized}"
           ng-drop="true" ng-drop-success="onDropUnitOnSector($data, sector)">
       <div style="text-align:center; width: 100%; height:100%; cursor:pointer; padding-top: 30px;"
@@ -296,7 +293,7 @@
         </div>
       </div>
     </tbar>
-  </div>
+  <div class="clear_both"></div>
 </div>
 
 <button class="unit_row_drag_clone" ng-drag-clone="">
