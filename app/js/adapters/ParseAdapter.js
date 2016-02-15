@@ -440,6 +440,9 @@ angular.module('ParseAdapter', ['ParseServices', 'ObjectivesServices', 'OSRServi
       var IncidentParseObj = Parse.Object.extend('Incident');
       var incidentObject = new IncidentParseObj();
       ConvertParseObject(incidentObject, INCIDENT_DEF);
+      incidentObject.inc_number = "";
+      incidentObject.inc_address = "";
+      incidentObject.strategy = "";
       return incidentObject;
     }
   })
@@ -638,7 +641,7 @@ angular.module('ParseAdapter', ['ParseServices', 'ObjectivesServices', 'OSRServi
       return sector.save(null, DefaultErrorLogger);
     }
   })
-  .factory('CreateNewSector_Parse', function (ConvertParseObject, DataStore) {
+  .factory('CreateNewSector_Parse', function (ConvertParseObject) {
     return function (incident) {
       var SectorParseObj = Parse.Object.extend('Sector');
       var sectorObject = new SectorParseObj();
@@ -736,12 +739,12 @@ angular.module('ParseAdapter', ['ParseServices', 'ObjectivesServices', 'OSRServi
       return mayday.save(null, DefaultErrorLogger);
     }
   })
-  .factory('CreateNewMayday_Parse', function (ConvertParseObject, DataStore) {
-    return function () {
+  .factory('CreateNewMayday_Parse', function (ConvertParseObject) {
+    return function (incident) {
       var MaydayParseObj = Parse.Object.extend('Mayday');
       var newMayday = new MaydayParseObj();
       ConvertParseObject(newMayday, MAYDAY_DEF);
-      newMayday.incident = DataStore.incident;
+      newMayday.incident = incident;
       return newMayday;
     }
   })

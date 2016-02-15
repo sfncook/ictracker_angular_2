@@ -93,7 +93,7 @@ angular.module('MaydayServices', ['DataServices', 'AdapterServices'])
     .factory('AddNewMayday', function (AdapterStore, DataStore, OpenMaydayDlgForMayday, GetNextMaydayId) {
         return function (sector, unit) {
             unit.hasMayday = true;
-            var mayday = AdapterStore.adapter.CreateNewMayday();
+            var mayday = AdapterStore.adapter.CreateNewMayday(DataStore.incident);
             mayday.number               = GetNextMaydayId();
             mayday.sector               = sector;
             mayday.unit                 = unit;

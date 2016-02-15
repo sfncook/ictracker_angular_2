@@ -43,9 +43,6 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserSer
     LoadSectorTypes();
 
     $scope.incidentObj = AdapterStore.adapter.CreateNewIncident();
-    $scope.incidentObj.inc_number = "";
-    $scope.incidentObj.inc_address = "";
-    $scope.incidentObj.strategy = "";
 
     $scope.userLogout = function () {
       //UserLogout();

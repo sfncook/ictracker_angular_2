@@ -2,7 +2,9 @@ angular.module('StaticAdapter', [])
 
   .factory('StaticAdapter', function (LoadIncidentTypes_Static, LoadAllIncidents_Static, LoadIncident_Static, isLoggedIn_Static,
                                       LoadActionTypes_Static, LoadSectorTypes_Static, LoadUnitTypes_Static,
-                                      SaveIncident_Static, SaveSector_Static, SaveReportAction_Static) {
+                                      SaveIncident_Static, SaveSector_Static, SaveReportAction_Static,
+                                      CreateNewIncident_Static, CreateNewSectorType_Static, CreateNewSector_Static,
+                                      CreateNewMayday_Static, SaveMayday_Static, DeleteMayday_Static) {
     return {
       adapter_id_str: 'static',
       init: function () {
@@ -11,22 +13,22 @@ angular.module('StaticAdapter', [])
       LoadIncidentTypes: LoadIncidentTypes_Static,
       LoadAllIncidents: LoadAllIncidents_Static,
       LoadIncident: LoadIncident_Static,
-      CreateNewIncident: CreateNewIncident_Parse,
+      CreateNewIncident: CreateNewIncident_Static,
       UpdateIncidentAsNeeded: function () {
         console.log("StaticAdapter UpdateIncidentAsNeeded");
       },
       isLoggedIn: isLoggedIn_Static,
       LoadActionTypes: LoadActionTypes_Static,
       LoadSectorTypes: LoadSectorTypes_Static,
-      CreateNewSectorType: CreateNewSectorType_Parse,
+      CreateNewSectorType: CreateNewSectorType_Static,
       LoadUnitTypes: LoadUnitTypes_Static,
       SaveIncident: SaveIncident_Static,
       SaveSector: SaveSector_Static,
-      CreateNewSector: CreateNewSector_Parse,
+      CreateNewSector: CreateNewSector_Static,
       SaveReportAction: SaveReportAction_Static,
-      CreateNewMayday: CreateNewMayday_Parse,
-      SaveMayday: SaveMayday_Parse,
-      DeleteMayday: DeleteMayday_Parse
+      CreateNewMayday: CreateNewMayday_Static,
+      SaveMayday: SaveMayday_Static,
+      DeleteMayday: DeleteMayday_Static
     };
   })
 
@@ -110,12 +112,92 @@ angular.module('StaticAdapter', [])
     }
   })
 
-  .factory('CreateNewIncident_Parse', function (ConvertParseObject) {
+  .factory('CreateNewIncident_Static', function () {
     return function () {
-      var IncidentParseObj = Parse.Object.extend('Incident');
-      var incidentObject = new IncidentParseObj();
-      ConvertParseObject(incidentObject, INCIDENT_DEF);
+      var incidentObject = {};
+      incidentObject.inc_number = "";
+      incidentObject.inc_address = "";
+      incidentObject.strategy = "";
       return incidentObject;
+    }
+  })
+
+  .factory('CreateNewSectorType_Static', function () {
+    return function () {
+      var sectorTypeObject = {};
+      sectorTypeObject.name = "";
+      sectorTypeObject.manyBenchmarkBars = 0;
+      sectorTypeObject.hasAcctBtn = false;
+      sectorTypeObject.hasActions = false;
+      sectorTypeObject.hasClock = false;
+      sectorTypeObject.hasPsiBtn = false;
+      sectorTypeObject.isVisible = false;
+      sectorTypeObject.hasClassicBnch = false;
+      sectorTypeObject.hasVentBnch = false;
+      sectorTypeObject.hasIricBnch = false;
+      sectorTypeObject.hasSafetyBnch = false;
+      sectorTypeObject.hasTreatmentBnch = false;
+      sectorTypeObject.hasLzBnch = false;
+      sectorTypeObject.hasTriageBnch = false;
+      return sectorTypeObject;
+    }
+  })
+
+  .factory('CreateNewSector_Static', function () {
+    return function (incident) {
+      var sectorObject = {};
+      sectorObject.direction = "";
+      sectorObject.number = "";
+      sectorObject.row = 0;
+      sectorObject.col = 0;
+      sectorObject.incident = incident;
+      sectorObject.bnchClsUnablePrim = false;
+      sectorObject.bnchClsUnableSec = false;
+      sectorObject.bnchCls1 = false;
+      sectorObject.bnchCls2 = false;
+      sectorObject.bnchCls3 = false;
+      sectorObject.bnchCls4 = false;
+      sectorObject.bnchVnt1 = false;
+      sectorObject.bnchVnt2 = false;
+      sectorObject.bnchVnt3 = false;
+      sectorObject.bnchIrc1 = false;
+      sectorObject.bnchIrc2 = false;
+      sectorObject.bnchIrc3 = false;
+      sectorObject.bnchIrc4 = false;
+      sectorObject.bnchSaf1 = false;
+      sectorObject.bnchSaf2 = false;
+      sectorObject.bnchTrt1 = false;
+      sectorObject.bnchTrt2 = false;
+      sectorObject.bnchTrt3 = false;
+      sectorObject.bnchLzo1 = false;
+      sectorObject.bnchLzo2 = false;
+      sectorObject.bnchLzo3 = false;
+      sectorObject.bnchTri1 = 0;
+      sectorObject.bnchTri2 = 0;
+      sectorObject.bnchTri3 = 0;
+      sectorObject.initialized = false;
+      return sectorObject;
+    }
+  })
+  .factory('CreateNewMayday_Static', function () {
+    return function (incident) {
+      var newMayday = {};
+      newMayday.incident = incident;
+      return newMayday;
+    }
+  })
+  .factory('SaveMayday_Static', function ($q) {
+    return function (mayday) {
+      console.log("SaveMayday_Static - Do nothing.  Always returns TRUE.");
+      var promise = $q.when(true);
+      return promise;
+    }
+  })
+  .factory('DeleteMayday_Static', function ($q) {
+    return function (mayday) {
+      console.log("DeleteMayday_Static - Do nothing.  Always returns TRUE.");
+      var promise = $q.when(true);
+      return promise;
     }
   })
 ;
@@ -195,6 +277,7 @@ var INCIDENTS = [
       "nameLong": "Fire Incident",
       "order": 1
     },
+    "maydays": [],
     "sectors": [
       {"col": 3, "id": "rwjawwLK6o", "row": 0, "sectorType": {"name": "Sector 1"}, "units": []},
       {"col": 3, "id": "XH3meqm1L9", "row": 0, "sectorType": {"name": "Sector 2"}, "units": []},
