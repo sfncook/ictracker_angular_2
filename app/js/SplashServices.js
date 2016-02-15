@@ -15,7 +15,7 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserSer
   .controller('SplashCtrl', function ($q, $scope, $interval,
                                       LoadAllIncidents, Incidents, LoadIncidentTypes, IncidentTypes,
                                       LoadSectorTypes, DefaultErrorLogger,
-                                      InitDbForDepartment, UserLogout, IsLoggedIn, ResetSavedDepartment, DataStore,
+                                      UserLogout, IsLoggedIn, ResetSavedDepartment, DataStore,
                                       SaveIncident, AdapterStore, LoadDefaultTbars, SaveSector) {
     $scope.dataStore = DataStore;
 
