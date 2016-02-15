@@ -4,7 +4,8 @@ angular.module('StaticAdapter', [])
                                       LoadActionTypes_Static, LoadSectorTypes_Static, LoadUnitTypes_Static,
                                       SaveIncident_Static, SaveSector_Static, SaveReportAction_Static,
                                       CreateNewIncident_Static, CreateNewSectorType_Static, CreateNewSector_Static,
-                                      CreateNewMayday_Static, SaveMayday_Static, DeleteMayday_Static) {
+                                      CreateNewMayday_Static, SaveMayday_Static, DeleteMayday_Static,
+                                      CreateNewUnit_Static, DeleteUnit_Static) {
     return {
       adapter_id_str: 'static',
       init: function () {
@@ -28,7 +29,9 @@ angular.module('StaticAdapter', [])
       SaveReportAction: SaveReportAction_Static,
       CreateNewMayday: CreateNewMayday_Static,
       SaveMayday: SaveMayday_Static,
-      DeleteMayday: DeleteMayday_Static
+      DeleteMayday: DeleteMayday_Static,
+      CreateNewUnit:CreateNewUnit_Static,
+      DeleteUnit: DeleteUnit_Static
     };
   })
 
@@ -86,8 +89,14 @@ angular.module('StaticAdapter', [])
     }
   })
 
-  .factory('LoadUnitTypes_Static', function ($q) {
+  .factory('LoadUnitTypes_Static', function ($q, UnitTypes) {
     return function () {
+      for (var i = 0; i < UNIT_TYPES.length; i++) {
+        var unitType = UNIT_TYPES[i];
+        UnitTypes.push(unitType);
+        var nameRefor = unitType.name.toUpperCase();
+        UnitTypes[nameRefor] = unitType;
+      }//for
       var promise = $q.when(UNIT_TYPES);
       return promise;
     }
@@ -201,6 +210,32 @@ angular.module('StaticAdapter', [])
   .factory('DeleteMayday_Static', function ($q) {
     return function (mayday) {
       console.log("DeleteMayday_Static - Do nothing.  Always returns TRUE.");
+      var promise = $q.when(true);
+      return promise;
+    }
+  })
+
+  .factory('CreateNewUnit_Static', function () {
+    return function (sector, unitType) {
+      var newUnit = {};
+      newUnit.hasPar = false;
+      newUnit.manyPeople = 0;
+      newUnit.par = 0;
+      newUnit.psi = 4000;
+      newUnit.type = unitType;
+      newUnit.sector = sector;
+      newUnit.timer_start = new Date();
+      newUnit.save = function(unit) {
+        console.log("unit.save(): unit:",unit);
+        var promise = $q.when(unit);
+        return promise;
+      };
+      return newUnit;
+    }
+  })
+  .factory('DeleteUnit_Static', function () {
+    return function (unit) {
+      console.log("DeleteUnit_Static - Do nothing.  Always returns TRUE.");
       var promise = $q.when(true);
       return promise;
     }
@@ -1060,8 +1095,8 @@ var SECTOR_TYPES = [
     "hasTreatmentBnch": false,
     "hasLzBnch": false,
     "hasTriageBnch": false
-  },
-]
+  }
+];
 
 var UNIT_TYPES = [
   {"city": "Chandler", "type": "Engine", "name": "E282"},

@@ -10,25 +10,6 @@ angular.module('UnitServices', ['DataServices', 'AdapterServices'])
     }
   })
 
-
-  .factory('CreateNewUnit', function (ConvertParseObject, DefaultErrorLogger) {
-    return function (sector, unitType) {
-      var UnitParseObj = Parse.Object.extend('Unit');
-      var newUnit = new UnitParseObj();
-      ConvertParseObject(newUnit, UNIT_DEF);
-//            newUnit.actions = new Array();
-      newUnit.hasPar = false;
-      newUnit.manyPeople = 0;
-      newUnit.par = 0;
-      newUnit.psi = 4000;
-      newUnit.type = unitType;
-      newUnit.sector = sector;
-      newUnit.timer_start = new Date();
-      newUnit.save(null, DefaultErrorLogger);
-      return newUnit;
-    }
-  })
-
   .factory('UpdateUnitTimer', function (DefaultErrorLogger) {
     return function (unit) {
       if(!unit.timer_start) {

@@ -82,9 +82,7 @@ angular.module('TbarServices', ['DataServices', 'SectorServices', 'AdapterServic
         }
     })
 
-    .factory('ToggleUnitTypeForSector', [
-        'CreateNewUnit', 'ReportFunctions', 'DefaultErrorLogger',
-        function (CreateNewUnit, ReportFunctions, DefaultErrorLogger) {
+    .factory('ToggleUnitTypeForSector', function (AdapterStore, ReportFunctions) {
         return function (sector, unitType) {
             if(sector.units) {
                 // search for unitType already in sector
@@ -92,24 +90,20 @@ angular.module('TbarServices', ['DataServices', 'SectorServices', 'AdapterServic
                     var unit = sector.units[i];
                     if(unit.type.name==unitType.name) {
                         sector.units.remByVal(unit);
-                        unit.destroy(null, DefaultErrorLogger);
+                        AdapterStore.adapter.DeleteUnit();
                         return false;
                     }
                 }//for
-                var newUnit = CreateNewUnit(sector, unitType);
-                sector.units.push(newUnit);
-                ReportFunctions.addEvent_unit_to_sector(sector, newUnit);
-                return true;
             } else {
                 // Add unit to sector
-                sector.units = new Array();
-                var newUnit = CreateNewUnit(sector, unitType);
-                sector.units.push(newUnit);
-                ReportFunctions.addEvent_unit_to_sector(sector, newUnit);
-                return true;
+                sector.units = [];
             }
+            var newUnit = AdapterStore.adapter.CreateNewUnit(sector, unitType);
+            sector.units.push(newUnit);
+            ReportFunctions.addEvent_unit_to_sector(sector, newUnit);
+            return true;
         }
-    }])
+    })
 
     /*
      * This is a getter, do not count on the array to be updated dynamically.

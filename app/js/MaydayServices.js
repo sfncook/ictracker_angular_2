@@ -161,7 +161,7 @@ angular.module('MaydayServices', ['DataServices', 'AdapterServices'])
 
     .factory('DeleteMayday', function (AdapterStore) {
         return function (mayday) {
-            return AdapterStore.adapter.DeleteMayday(mayday);;
+            return AdapterStore.adapter.DeleteMayday(mayday);
         }
     })
 

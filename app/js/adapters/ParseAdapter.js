@@ -22,7 +22,8 @@ angular.module('ParseAdapter', ['ParseServices', 'ObjectivesServices', 'OSRServi
                                      UpdateIncidentAsNeeded_Parse, isLoggedIn_Parse,
                                      LoadActionTypes_Parse, LoadSectorTypes_Parse, CreateNewSectorType_Parse, LoadUnitTypes_Parse,
                                      SaveIncident_Parse, SaveSector_Parse, CreateNewSector_Parse, SaveReportAction_Parse,
-                                     CreateNewMayday_Parse, SaveMayday_Parse, DeleteMayday_Parse) {
+                                     CreateNewMayday_Parse, SaveMayday_Parse, DeleteMayday_Parse,
+                                     CreateNewUnit_Parse, DeleteUnit_Parse) {
     return {
       adapter_id_str: 'parse',
       init: function () {
@@ -61,7 +62,9 @@ angular.module('ParseAdapter', ['ParseServices', 'ObjectivesServices', 'OSRServi
       SaveReportAction: SaveReportAction_Parse,
       CreateNewMayday: CreateNewMayday_Parse,
       SaveMayday: SaveMayday_Parse,
-      DeleteMayday: DeleteMayday_Parse
+      DeleteMayday: DeleteMayday_Parse,
+      CreateNewUnit:CreateNewUnit_Parse,
+      DeleteUnit: DeleteUnit_Parse
     };
   })
 
@@ -753,6 +756,28 @@ angular.module('ParseAdapter', ['ParseServices', 'ObjectivesServices', 'OSRServi
       mayday.unit.hasMayday = false;
       DataStore.maydays.remByVal(mayday);
       return mayday.destroy(null, DefaultErrorLogger);
+    }
+  })
+
+  .factory('CreateNewUnit_Parse', function (ConvertParseObject, DefaultErrorLogger) {
+    return function (sector, unitType) {
+      var UnitParseObj = Parse.Object.extend('Unit');
+      var newUnit = new UnitParseObj();
+      ConvertParseObject(newUnit, UNIT_DEF);
+      newUnit.hasPar = false;
+      newUnit.manyPeople = 0;
+      newUnit.par = 0;
+      newUnit.psi = 4000;
+      newUnit.type = unitType;
+      newUnit.sector = sector;
+      newUnit.timer_start = new Date();
+      newUnit.save(null, DefaultErrorLogger);
+      return newUnit;
+    }
+  })
+  .factory('DeleteUnit_Parse', function (DefaultErrorLogger) {
+    return function (unit) {
+      return unit.destroy(null, DefaultErrorLogger);
     }
   })
 
