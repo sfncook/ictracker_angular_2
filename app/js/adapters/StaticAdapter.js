@@ -61,6 +61,11 @@ angular.module('StaticAdapter', [])
         var sector = sectors[i];
         sector.sectorType = SECTOR_TYPES.findObjByName(sector.sectorType.name);
       }
+      incident.save = function() {
+        console.log("incident.save(): incident:",incident);
+        var promise = $q.when(incident);
+        return promise;
+      };
 
       var promise = $q.when(incident);
       return promise;
