@@ -2,8 +2,8 @@
 
 angular.module("ictApp", ['ngDraggable', 'DataServices', 'TbarServices', 'ActionServices', 'UnitServices', 'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices', 'UserServices', 'TimerServices', 'MaydayServices'])
 
-  .run(function ($q, IsLoggedIn, InitDatabase, DataStore, LoadIncident, StartIncidentTimer, StartIncidentUpdateTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
-    if (!InitDatabase()) {
+  .run(function ($q, IsLoggedIn, InitDataServices, DataStore, LoadIncident, StartIncidentTimer, StartIncidentUpdateTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
+    if (!InitDataServices()) {
       var urlLink = "login.html";
       window.location.href = urlLink;
     }

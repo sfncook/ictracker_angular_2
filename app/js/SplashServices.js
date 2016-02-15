@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserServices', 'DepartmentServices', 'AdapterServices', 'TbarServices'])
-  .run(function (IsLoggedIn, InitDatabase, ResetSavedDepartment) {
-    InitDatabase();
+  .run(function (IsLoggedIn, InitDataServices, ResetSavedDepartment) {
+    InitDataServices();
 
     //if(!IsLoggedIn()){
     //    console.log("Not logged in");

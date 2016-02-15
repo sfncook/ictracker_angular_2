@@ -2,7 +2,7 @@
 
 angular.module("AdminModule", ['DataServices', 'UserServices', 'DepartmentServices'])
 
-    .controller('AdminUserCtrl', function ($scope, AllDepartments, LoadAllDepartments, InitDatabase, LoadCurrentUser, DataStore, IsLoggedIn, LoadAllUsers, AllUsers, CreateUser, UserLogout) {
+    .controller('AdminUserCtrl', function ($scope, AllDepartments, LoadAllDepartments, LoadCurrentUser, DataStore, IsLoggedIn, LoadAllUsers, AllUsers, CreateUser, UserLogout) {
         $scope.username = "";
         $scope.password = "";
         $scope.email = "";

@@ -56,10 +56,15 @@ angular.module('DataServices', ['ParseServices', 'AdapterServices'])
         }
     }])
 
-    .factory('InitDatabase', function (AdapterStore) {
+    .factory('InitDataServices', function (AdapterStore) {
         return function () {
             return AdapterStore.init();
         }
     })
+
+/*****
+ * Adapter factories
+ */
+
 
 ;
