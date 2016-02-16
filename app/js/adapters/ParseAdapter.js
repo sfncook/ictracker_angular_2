@@ -16,7 +16,7 @@ var DISPATCHED_UNITS_DEF = ['incident', 'unitTypes'];
 var USER_DEF = ['username', 'email', 'name', 'department'];
 //var ROLE_DEF = ['name', 'users', 'roles'];
 
-angular.module('ParseAdapter', ['ParseServices'])
+angular.module('ParseAdapter', [])
 
   .factory('ParseAdapter', function (LoadIncident_Parse, LoadAllIncidents_Parse, LoadIncidentTypes_Parse, CreateNewIncident_Parse,
                                      UpdateIncidentAsNeeded_Parse, isLoggedIn_Parse,

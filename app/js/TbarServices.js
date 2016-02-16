@@ -90,7 +90,7 @@ angular.module('TbarServices', ['DataServices', 'SectorServices'])
                     var unit = sector.units[i];
                     if(unit.type.name==unitType.name) {
                         sector.units.remByVal(unit);
-                        DataStore.adapter.DeleteUnit();
+                        DataStore.adapter.DeleteUnit(unit);
                         return false;
                     }
                 }//for
