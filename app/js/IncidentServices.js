@@ -21,11 +21,6 @@ angular.module('IncidentServices', ['DataServices'])
       return DataStore.adapter.LoadAllIncidents();
     }
   })
-  .factory('LoadIncidentTypes', function (DataStore) {
-    return function () {
-      return DataStore.adapter.LoadIncidentTypes();
-    }
-  })
 
   .factory('UpdateIncidentAsNeeded', function (DataStore) {
     return function (incident) {
