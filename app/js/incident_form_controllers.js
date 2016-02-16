@@ -113,7 +113,7 @@ angular.module("ictApp", ['ngDraggable',
     }
   })
 
-  .controller('TbarContainer', function ($scope, $filter, DataStore, DoesSectorHavePar, DoesSectorHaveCriticalUnitTimer, AddNewMayday, DefaultErrorLogger) {
+  .controller('TbarContainer', function ($scope, $filter, DataStore, DoesSectorHavePar, DoesSectorHaveCriticalUnitTimer, AddNewMayday) {
 
     $scope.openMaydayDlg = function () {
       $("#mayday_dlg").dialog("open");
@@ -208,12 +208,12 @@ angular.module("ictApp", ['ngDraggable',
       return "benchmark_black";
     }
 
-    $scope.onDropUnitOnSector=function(drag_data, dest_sector){
-      DataStore.choseMoveUnit=false
+    $scope.onDropUnitOnSector = function (drag_data, dest_sector) {
+      DataStore.choseMoveUnit = false
       console.log("Drop drag_data:", drag_data, " dest_sector:", dest_sector);
       var unit = drag_data.unit;
       var src_sector = drag_data.src_sector;
-      if(dest_sector != src_sector) {
+      if (dest_sector != src_sector) {
         dest_sector.units.push(unit);
         src_sector.units.remByVal(unit);
       }
@@ -259,11 +259,11 @@ angular.module("ictApp", ['ngDraggable',
     };
   })
 
-  .controller('ChannelDlg', function ($scope, DataStore, DefaultErrorLogger) {
+  .controller('ChannelDlg', function ($scope, DataStore, SaveSector) {
     $scope.selectedSector = {};
 
-    $scope.channel_letters=['A','B','C','D','E','F','G','H','I','J','K'];
-    $scope.channel_numbers=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+    $scope.channel_letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
+    $scope.channel_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
     DataStore.openChannelDlg = function (sector) {
       $scope.selectedSector = sector;
@@ -272,17 +272,17 @@ angular.module("ictApp", ['ngDraggable',
 
     $scope.setChannelLetter = function (channel_letter) {
       $scope.selectedSector.channel_letter = channel_letter;
-      $scope.selectedSector.save(null, DefaultErrorLogger);
+      SaveSector($scope.selectedSector);
     }
 
     $scope.setChannelNumber = function (channel_number) {
       $scope.selectedSector.channel_number = channel_number;
-      $scope.selectedSector.save(null, DefaultErrorLogger);
+      SaveSector($scope.selectedSector);
     }
 
   })
 
-  .controller('ParDlg', function ($scope, DataStore, DoesSectorHavePar, ReportFunctions, DefaultErrorLogger) {
+  .controller('ParDlg', function ($scope, DataStore, DoesSectorHavePar, ReportFunctions, SaveUnit) {
     $scope.selectedSector = {};
 
     DataStore.openParDlg = function (sector) {
@@ -297,7 +297,7 @@ angular.module("ictApp", ['ngDraggable',
         unit.manyPar = i;
         ReportFunctions.addEvent_person_has_par($scope.selectedSector, unit);
       }
-      unit.save(null, DefaultErrorLogger);
+      SaveUnit(unit);
     }
 
     $scope.selectUnitPar = function (unit) {
@@ -311,7 +311,7 @@ angular.module("ictApp", ['ngDraggable',
         ReportFunctions.addEvent_unit_has_par($scope.selectedSector, unit);
       }
 
-      unit.save(null, DefaultErrorLogger);
+      SaveUnit(unit);
     }
 
     $scope.selectSectorPar = function () {
@@ -331,7 +331,7 @@ angular.module("ictApp", ['ngDraggable',
 
       for (var i = 0; i < selectedSector.units.length; i++) {
         var unit = selectedSector.units[i];
-        unit.save(null, DefaultErrorLogger);
+        SaveUnit(unit);
       }
     }
 
@@ -342,7 +342,7 @@ angular.module("ictApp", ['ngDraggable',
     $scope.doesSectorHavePar = DoesSectorHavePar;
   })
 
-  .controller('BnchDlg', function ($scope, DataStore, DoesSectorHavePar, DefaultErrorLogger) {
+  .controller('BnchDlg', function ($scope, DataStore, DoesSectorHavePar, SaveSector) {
     $scope.dataStore = DataStore;
     $scope.doesSectorHavePar = DoesSectorHavePar;
 
@@ -409,7 +409,7 @@ angular.module("ictApp", ['ngDraggable',
           break;
       }
 
-      $scope.dataStore.selectedSector.save(null, DefaultErrorLogger);
+      SaveSector($scope.dataStore.selectedSector);
     }
 
     $scope.showParDlgFromBnch = function () {
@@ -417,7 +417,7 @@ angular.module("ictApp", ['ngDraggable',
     }
 
     $scope.onChangeTriage = function () {
-      $scope.dataStore.selectedSector.save(null, DefaultErrorLogger);
+      SaveSector($scope.dataStore.selectedSector);
     }
 
   })
@@ -427,7 +427,7 @@ angular.module("ictApp", ['ngDraggable',
     $scope.dataStore = DataStore;
     $scope.forAcct = false;
 
-    $scope.acct_opts = ['N','E','S','W','A','B','C','D'];
+    $scope.acct_opts = ['N', 'E', 'S', 'W', 'A', 'B', 'C', 'D'];
 
     $scope.cities = [];
     $scope.type_names = [];
@@ -863,7 +863,7 @@ angular.module("ictApp", ['ngDraggable',
     }
   })
 
-  .controller('UnitOptionsDlg', function ($scope, DataStore, DefaultErrorLogger, UpdateUnitTimer) {
+  .controller('UnitOptionsDlg', function ($scope, DataStore, UpdateUnitTimer, SaveUnit) {
     $scope.pars = [1, 2, 3, 4, 5];
     $scope.psis = [];
     $scope.selected_unit = {};
@@ -883,20 +883,20 @@ angular.module("ictApp", ['ngDraggable',
       if (unit.par < unit.manyPar) {
         unit.manyPar = unit.par;
       }
-      unit.save(null, DefaultErrorLogger);
+      SaveUnit(unit);
       $("#unit_options_dlg").dialog("close");
     }
 
     $scope.selectPsi = function (psi) {
       $scope.selected_unit.psi = psi;
-      $scope.selected_unit.save(null, DefaultErrorLogger);
+      SaveUnit($scope.selected_unit);
       $("#unit_options_dlg").dialog("close");
     }
 
     $scope.resetClock = function () {
       $scope.selected_unit.timer_start = new Date();
       UpdateUnitTimer($scope.selected_unit);
-      $scope.selected_unit.save(null, DefaultErrorLogger);
+      SaveUnit($scope.selected_unit);
       $("#unit_options_dlg").dialog("close");
     }
 
@@ -949,79 +949,131 @@ function initDialogs() {
     resizable: false,
     modal: true,
     width: 940,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#sector_name_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#sector_name_dlg').dialog('close');
+      })
+    }
   });
   $("#channel-dlg").dialog({
     resizable: false,
     modal: true,
     width: 350,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#channel-dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#channel-dlg').dialog('close');
+      })
+    }
   });
   $("#par-dlg").dialog({
     resizable: false,
     modal: true,
     width: 839,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#par-dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#par-dlg').dialog('close');
+      })
+    }
   });
   $("#bnch_dlg").dialog({
     resizable: false,
     width: 343,
     modal: true,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#bnch_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#bnch_dlg').dialog('close');
+      })
+    }
   });
   $("#bnch_vent_dlg").dialog({
     resizable: false,
     width: 250,
     modal: true,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#bnch_vent_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#bnch_vent_dlg').dialog('close');
+      })
+    }
   });
   $("#bnch_iric_dlg").dialog({
     resizable: false,
     width: 250,
     modal: true,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#bnch_iric_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#bnch_iric_dlg').dialog('close');
+      })
+    }
   });
   $("#bnch_safety_dlg").dialog({
     resizable: false,
     width: 250,
     modal: true,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#bnch_safety_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#bnch_safety_dlg').dialog('close');
+      })
+    }
   });
   $("#bnch_treatment_dlg").dialog({
     resizable: false,
     width: 250,
     modal: true,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#bnch_treatment_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#bnch_treatment_dlg').dialog('close');
+      })
+    }
   });
   $("#bnch_triage_dlg").dialog({
     resizable: false,
     width: 250,
     modal: true,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#bnch_triage_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#bnch_triage_dlg').dialog('close');
+      })
+    }
   });
   $("#units_dlg").dialog({
     resizable: false,
     modal: true,
     width: 855,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#units_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#units_dlg').dialog('close');
+      })
+    }
   });
   $("#actions_dlg").dialog({
     resizable: false,
     modal: true,
     width: 810,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#actions_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#actions_dlg').dialog('close');
+      })
+    }
   });
   $("#cmdxfer_dialog").dialog({
     resizable: false,
     modal: true,
     width: 350,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#cmdxfer_dialog').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#cmdxfer_dialog').dialog('close');
+      })
+    }
   });
   $("#upgrade_dlg").dialog({
     resizable: false,
     modal: true,
     width: 485,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#upgrade_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#upgrade_dlg').dialog('close');
+      })
+    }
   });
   $("#osr_dlg").dialog({
     resizable: false,
@@ -1030,14 +1082,22 @@ function initDialogs() {
     close: function (event, ui) {
       angular.element('#osr_dlg').scope().dataStore.incident.osr.save();
     },
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#osr_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#osr_dlg').dialog('close');
+      })
+    }
 
   });
   $("#dispatch_address_dlg").dialog({
     resizable: false,
     modal: true,
     width: 450,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#dispatch_address_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#dispatch_address_dlg').dialog('close');
+      })
+    }
   });
   $("#objectives_dlg").dialog({
     resizable: false,
@@ -1046,7 +1106,11 @@ function initDialogs() {
     close: function (event, ui) {
       angular.element('#objectives_dlg').scope().dataStore.incident.objectives.save();
     },
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#objectives_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#objectives_dlg').dialog('close');
+      })
+    }
   });
   $("#iap_dlg").dialog({
     resizable: false,
@@ -1055,61 +1119,101 @@ function initDialogs() {
     close: function (event, ui) {
       angular.element('#iap_dlg').scope().dataStore.incident.iap.save();
     },
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#iap_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#iap_dlg').dialog('close');
+      })
+    }
   });
   $("#unit_options_dlg").dialog({
     resizable: false,
     modal: true,
     width: 575,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#unit_options_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#unit_options_dlg').dialog('close');
+      })
+    }
   });
   $("#psi_dlg").dialog({
     resizable: false,
     modal: true,
     width: 423,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#psi_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#psi_dlg').dialog('close');
+      })
+    }
   });
   $("#address_dialog").dialog({
     resizable: false,
     modal: true,
     width: 450,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#address_dialog').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#address_dialog').dialog('close');
+      })
+    }
   });
   $("#reports_dlg").dialog({
     resizable: false,
     modal: true,
     width: 820,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#reports_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#reports_dlg').dialog('close');
+      })
+    }
   });
   $("#clear_mayday_dlg").dialog({
     resizable: false,
     modal: true,
     width: 348,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#clear_mayday_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#clear_mayday_dlg').dialog('close');
+      })
+    }
   });
   $("#incident_info_dlg").dialog({
     resizable: false,
     modal: true,
     width: 450,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#incident_info_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#incident_info_dlg').dialog('close');
+      })
+    }
   });
   $("#branch_dlg").dialog({
     resizable: false,
     modal: true,
     width: 550,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#branch_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#branch_dlg').dialog('close');
+      })
+    }
   });
   $("#strategy_dlg").dialog({
     resizable: false,
     modal: true,
     width: 258,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#strategy_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#strategy_dlg').dialog('close');
+      })
+    }
   });
   $("#settings_dlg").dialog({
     resizable: false,
     modal: true,
     width: 258,
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#settings_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#settings_dlg').dialog('close');
+      })
+    }
   });
   $("#osr_dlg").dialog({
     resizable: false,
@@ -1118,7 +1222,11 @@ function initDialogs() {
     close: function (event, ui) {
       angular.element('#osr_dlg').scope().dataStore.incident.osr.save();
     },
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#osr_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#osr_dlg').dialog('close');
+      })
+    }
   });
   $("#mayday_dlg").dialog({
     resizable: false,
@@ -1128,7 +1236,11 @@ function initDialogs() {
       var dataStore = angular.element('#osr_dlg').scope().dataStore;
       dataStore.saveSelectedMayday();
     },
-    open: function(){jQuery('.ui-widget-overlay').bind('click',function(){jQuery('#mayday_dlg').dialog('close');})}
+    open: function () {
+      jQuery('.ui-widget-overlay').bind('click', function () {
+        jQuery('#mayday_dlg').dialog('close');
+      })
+    }
   });
 
   $(".ui-dialog .ui-dialog-titlebar-close").html("Close");
