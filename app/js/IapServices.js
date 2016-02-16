@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('IapServices', ['ParseServices', 'DataServices'])
+angular.module('IapServices', ['DataServices'])
 
     .controller('IapDlg', function($scope, DataStore){
         $scope.dataStore = DataStore;

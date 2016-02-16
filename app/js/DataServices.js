@@ -17,7 +17,7 @@ angular.module('DataServices', ['ParseAdapter', 'StaticAdapter'])
       isLoggedIn:         function()       {return this.adapter.isLoggedIn();},
       SaveIncident:       function(incident) {return this.adapter.SaveIncident(incident);},
       SaveSector:         function(sector) {return this.adapter.SaveSector(sector);},
-      SaveReportAction:   function(sector, text) {return this.adapter.SaveReportAction(sector, text);}
+      SaveReportAction:   function(sector, text) {return this.adapter.SaveReportAction(this.incident, sector, text);}
     };
   })
 

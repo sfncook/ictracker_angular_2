@@ -494,11 +494,11 @@ angular.module("ictApp", ['ngDraggable',
       } else {
         var wasAdded = ToggleUnitTypeForSector($scope.selectedSector, unitType);
         if (wasAdded) {
-          if (!$scope.dataStore.dispatchedUnits.unitTypes.contains(unitType)) {
-            $scope.dataStore.dispatchedUnits.unitTypes.push(unitType);
-            $scope.dataStore.dispatchedUnits.save(null, {
+          if (!$scope.dataStore.incident.dispatchedUnits.unitTypes.contains(unitType)) {
+            $scope.dataStore.incident.dispatchedUnits.unitTypes.push(unitType);
+            $scope.dataStore.incident.dispatchedUnits.save(null, {
               error: function (error) {
-                console.log('(2) Failed to $scope.dataStore.dispatchedUnits.save() with error code: ' + error.message);
+                console.log('(2) Failed to $scope.dataStore.incident.dispatchedUnits.save() with error code: ' + error.message);
               }
             });
           }
@@ -522,10 +522,10 @@ angular.module("ictApp", ['ngDraggable',
             DataStore.setRehab();
           }
         } else {
-          $scope.dataStore.dispatchedUnits.unitTypes.remByVal(unitType);
-          $scope.dataStore.dispatchedUnits.save(null, {
+          $scope.dataStore.incident.dispatchedUnits.unitTypes.remByVal(unitType);
+          $scope.dataStore.incident.dispatchedUnits.save(null, {
             error: function (error) {
-              console.log('(3) Failed to $scope.dataStore.dispatchedUnits.save() with error code: ' + error.message);
+              console.log('(3) Failed to $scope.dataStore.incident.dispatchedUnits.save() with error code: ' + error.message);
             }
           });
         }
