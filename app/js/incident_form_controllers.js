@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("ictApp", ['ngDraggable', 'DataServices', 'TbarServices', 'ActionServices', 'UnitServices', 'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices', 'UserServices', 'TimerServices', 'MaydayServices'])
+angular.module("ictApp", ['ngDraggable', 'DataServices', 'TbarServices', 'ActionServices', 'UnitServices', 'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices', 'UserServices', 'TimerServices', 'MaydayServices', 'UpgradeServices'])
 
   .run(function ($q, IsLoggedIn, InitDataServices, DataStore, LoadIncident, StartIncidentTimer, StartIncidentUpdateTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
     if (!InitDataServices()) {
