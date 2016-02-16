@@ -10,11 +10,11 @@ angular.module('UnitServices', ['DataServices'])
     }
   })
 
-  .factory('UpdateUnitTimer', function (DefaultErrorLogger) {
+  .factory('UpdateUnitTimer', function (SaveUnit) {
     return function (unit) {
       if(!unit.timer_start) {
         unit.timer_start = new Date();
-        unit.save(null, DefaultErrorLogger);
+        SaveUnit(unit);
       }
       var t0 = (unit.timer_start).getTime();
       var t1 = (new Date()).getTime();
