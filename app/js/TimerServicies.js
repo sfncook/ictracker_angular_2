@@ -5,11 +5,12 @@ angular.module('TimerServices', ['DataServices', 'IncidentServices', 'UnitServic
     return function () {
       DataStore.timer_text = "00:00";
       DataStore.hourRollOverDone = false;
+      var t0;
       if (DataStore.incident && DataStore.incident.inc_startDate) {
-        var t0 = (new Date(DataStore.incident.inc_startDate)).getTime();
+        t0 = (new Date(DataStore.incident.inc_startDate)).getTime();
       } else {
         DataStore.incident.inc_startDate = new Date();
-        var t0 = (DataStore.incident.inc_startDate).getTime();
+        t0 = (DataStore.incident.inc_startDate).getTime();
       }
       function updateTimer() {
         var t1 = (new Date()).getTime();
@@ -39,19 +40,20 @@ angular.module('TimerServices', ['DataServices', 'IncidentServices', 'UnitServic
   })
 
   .factory('StartUnitTimerTimer',
-  function ($interval, DataStore, DefaultErrorLogger, UpdateUnitTimer) {
+  function ($interval, DataStore, UpdateUnitTimer) {
     return function () {
       function updateAllUnitTimers() {
-        if(DataStore.incident.sectors) {
-          DataStore.incident.sectors.forEach(function(sector) {
-            if(sector.sectorType.hasClock) {
-              sector.units.forEach(function(unit) {
+        if (DataStore.incident.sectors) {
+          DataStore.incident.sectors.forEach(function (sector) {
+            if (sector.sectorType.hasClock) {
+              sector.units.forEach(function (unit) {
                 UpdateUnitTimer(unit);
               });
             }
           });
         }
       }
+
       updateAllUnitTimers();
       $interval(updateAllUnitTimers, 30000);
     }
