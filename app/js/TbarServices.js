@@ -1,4 +1,4 @@
-angular.module('TbarServices', ['DataServices', 'SectorServices', 'DataAdapter'])
+angular.module('TbarServices', ['DataServices', 'SectorServices'])
 
     .factory('TbarSectors', function() {
         return new Array();
@@ -28,14 +28,14 @@ angular.module('TbarServices', ['DataServices', 'SectorServices', 'DataAdapter']
         };
     })
 
-    .factory('LoadDefaultTbars', function (DataAdapter, GridsterOpts, SectorTypes) {
+    .factory('LoadDefaultTbars', function (DataStore, GridsterOpts, SectorTypes) {
         return function (incident) {
             incident.sectors = new Array();
 
             var orderIndex = 0;
             for(var row=0; row<GridsterOpts.rows; row++) {
                 for(var col=0; col<GridsterOpts.columns; col++) {
-                    var sector = DataAdapter.adapter.CreateNewSector();
+                    var sector = DataStore.adapter.CreateNewSector();
                     if( orderIndex == 0 ) {
                         sector.sectorType = SectorTypes.RESCUE;
                         sector.initialized = true;
@@ -74,15 +74,15 @@ angular.module('TbarServices', ['DataServices', 'SectorServices', 'DataAdapter']
         }
     }])
 
-    .factory('CreateBlankSectorType', function (DataAdapter) {
+    .factory('CreateBlankSectorType', function (DataStore) {
         return function () {
-            var BLANK_SECTOR_TYPE = DataAdapter.adapter.CreateNewSectorType();
+            var BLANK_SECTOR_TYPE = DataStore.adapter.CreateNewSectorType();
             BLANK_SECTOR_TYPE.isVisible = false;
             return BLANK_SECTOR_TYPE;
         }
     })
 
-    .factory('ToggleUnitTypeForSector', function (DataAdapter, ReportFunctions) {
+    .factory('ToggleUnitTypeForSector', function (DataStore, ReportFunctions) {
         return function (sector, unitType) {
             if(sector.units) {
                 // search for unitType already in sector
@@ -90,7 +90,7 @@ angular.module('TbarServices', ['DataServices', 'SectorServices', 'DataAdapter']
                     var unit = sector.units[i];
                     if(unit.type.name==unitType.name) {
                         sector.units.remByVal(unit);
-                        DataAdapter.adapter.DeleteUnit();
+                        DataStore.adapter.DeleteUnit();
                         return false;
                     }
                 }//for
@@ -98,7 +98,7 @@ angular.module('TbarServices', ['DataServices', 'SectorServices', 'DataAdapter']
                 // Add unit to sector
                 sector.units = [];
             }
-            var newUnit = DataAdapter.adapter.CreateNewUnit(sector, unitType);
+            var newUnit = DataStore.adapter.CreateNewUnit(sector, unitType);
             sector.units.push(newUnit);
             ReportFunctions.addEvent_unit_to_sector(sector, newUnit);
             return true;

@@ -84,19 +84,19 @@ angular.module("ReportServices", ['ParseServices', 'DataServices'])
 
     })
 
-    .factory('ReportFunctions', function(DataAdapter) {
+    .factory('ReportFunctions', function(DataStore) {
         return {
-            addEvent_title_to_sector:       function(sector)                        {DataAdapter.SaveReportAction(sector, "Sector initialized: "+sector.sectorType.name);},
-            addEvent_unit_to_sector:        function(sector, unit)                  {DataAdapter.SaveReportAction(sector, "Unit: " + unit.type.name + " added to Sector: " + sector.sectorType.name);},
-            addEvent_unitType_to_acct:      function(sector, unitType)              {DataAdapter.SaveReportAction(sector, "Accountability Unit: " + unitType.name + " for Sector: " + sector.sectorType.name);},
-            addEvent_action_to_unit:        function(sector, unit, actionType)      {DataAdapter.SaveReportAction(sector, "Action: " + actionType.name + " Unit:" + unit.type.name + " for Sector: " + sector.sectorType.name);},
-            addEvent_sector_has_par:        function(sector)                        {DataAdapter.SaveReportAction(sector, "Sector has par - Sector: " + sector.sectorType.name);},
-            addEvent_unit_has_par:          function(sector, unit)                  {DataAdapter.SaveReportAction(sector, "Unit has par - Unit:" + unit.type.name + " for Sector: " + sector.sectorType.name);},
-            addEvent_person_has_par:        function(sector, unit)                  {DataAdapter.SaveReportAction(sector, "Fire fighter has par - Unit:" + unit.type.name + " for Sector: " + sector.sectorType.name);},
-            addEvent_benchmark:             function(sector, benchmarkText)         {DataAdapter.SaveReportAction(sector, "Benchmark:" + benchmarkText + " for Sector: " + sector.sectorType.name);},
-            addEvent_osr:                   function(osrText)                       {DataAdapter.SaveReportAction(sector, "OSR:" + osrText);},
-            addEvent_objective:             function(objectiveText)                 {DataAdapter.SaveReportAction(sector, "Objective:" + objectiveText);},
-            addEvent_iap:                   function(iapText)                       {DataAdapter.SaveReportAction(sector, "IAP:" + iapText);},
+            addEvent_title_to_sector:       function(sector)                        {DataStore.SaveReportAction(sector, "Sector initialized: "+sector.sectorType.name);},
+            addEvent_unit_to_sector:        function(sector, unit)                  {DataStore.SaveReportAction(sector, "Unit: " + unit.type.name + " added to Sector: " + sector.sectorType.name);},
+            addEvent_unitType_to_acct:      function(sector, unitType)              {DataStore.SaveReportAction(sector, "Accountability Unit: " + unitType.name + " for Sector: " + sector.sectorType.name);},
+            addEvent_action_to_unit:        function(sector, unit, actionType)      {DataStore.SaveReportAction(sector, "Action: " + actionType.name + " Unit:" + unit.type.name + " for Sector: " + sector.sectorType.name);},
+            addEvent_sector_has_par:        function(sector)                        {DataStore.SaveReportAction(sector, "Sector has par - Sector: " + sector.sectorType.name);},
+            addEvent_unit_has_par:          function(sector, unit)                  {DataStore.SaveReportAction(sector, "Unit has par - Unit:" + unit.type.name + " for Sector: " + sector.sectorType.name);},
+            addEvent_person_has_par:        function(sector, unit)                  {DataStore.SaveReportAction(sector, "Fire fighter has par - Unit:" + unit.type.name + " for Sector: " + sector.sectorType.name);},
+            addEvent_benchmark:             function(sector, benchmarkText)         {DataStore.SaveReportAction(sector, "Benchmark:" + benchmarkText + " for Sector: " + sector.sectorType.name);},
+            addEvent_osr:                   function(osrText)                       {DataStore.SaveReportAction(sector, "OSR:" + osrText);},
+            addEvent_objective:             function(objectiveText)                 {DataStore.SaveReportAction(sector, "Objective:" + objectiveText);},
+            addEvent_iap:                   function(iapText)                       {DataStore.SaveReportAction(sector, "IAP:" + iapText);},
         };
     })
 

@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserServices', 'DepartmentServices', 'DataAdapter', 'TbarServices'])
-  .run(function (IsLoggedIn, InitDataServices, ResetSavedDepartment) {
-    InitDataServices();
+angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserServices', 'DepartmentServices', 'TbarServices'])
+  .run(function (IsLoggedIn, DataStore, ResetSavedDepartment) {
+    DataStore.init();
 
     //if(!IsLoggedIn()){
     //    console.log("Not logged in");
@@ -15,8 +15,8 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserSer
   .controller('SplashCtrl', function ($q, $scope, $interval,
                                       LoadAllIncidents, Incidents, LoadIncidentTypes, IncidentTypes,
                                       LoadSectorTypes,
-                                      UserLogout, IsLoggedIn, ResetSavedDepartment, DataStore,
-                                      SaveIncident, DataAdapter, LoadDefaultTbars, SaveSector) {
+                                      UserLogout, IsLoggedIn, ResetSavedDepartment,
+                                      SaveIncident, DataStore, LoadDefaultTbars, SaveSector) {
     $scope.dataStore = DataStore;
 
     //if(!IsLoggedIn()) {
@@ -42,7 +42,7 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserSer
 
     LoadSectorTypes();
 
-    $scope.incidentObj = DataAdapter.adapter.CreateNewIncident();
+    $scope.incidentObj = DataStore.adapter.CreateNewIncident();
 
     $scope.userLogout = function () {
       //UserLogout();
@@ -82,7 +82,7 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserSer
 
 
     $scope.loadIncident = function (incidentId) {
-      var urlLink = "incident_form.html?i=" + incidentId + "&adapter=" + DataAdapter.adapter.adapter_id_str;
+      var urlLink = "incident_form.html?i=" + incidentId + "&adapter=" + DataStore.adapter.adapter_id_str;
       window.location.href = urlLink;
     };
 

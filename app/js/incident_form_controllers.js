@@ -1,9 +1,14 @@
 'use strict';
 
-angular.module("ictApp", ['ngDraggable', 'DataServices', 'TbarServices', 'ActionServices', 'UnitServices', 'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices', 'UserServices', 'TimerServices', 'MaydayServices', 'UpgradeServices'])
+angular.module("ictApp", ['ngDraggable',
+  'DataServices', 'TbarServices', 'ActionServices', 'UnitServices',
+  'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices',
+  'UserServices', 'TimerServices', 'MaydayServices', 'UpgradeServices',
+  'ObjectivesServices', 'OSRServices', 'ActionServices', 'SectorServices',
+  'UnitServices'])
 
-  .run(function ($q, IsLoggedIn, InitDataServices, DataStore, LoadIncident, StartIncidentTimer, StartIncidentUpdateTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
-    if (!InitDataServices()) {
+  .run(function ($q, IsLoggedIn, DataStore, LoadIncident, StartIncidentTimer, StartIncidentUpdateTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
+    if (!DataStore.init()) {
       var urlLink = "login.html";
       window.location.href = urlLink;
     }

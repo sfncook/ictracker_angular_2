@@ -17,25 +17,25 @@ angular.module('IncidentServices', ['DataServices'])
         }
     })
 
-    .factory('LoadIncident', function (DataAdapter) {
+    .factory('LoadIncident', function (DataStore) {
         return function (incidentObjectId) {
-            return DataAdapter.adapter.LoadIncident(incidentObjectId);
+            return DataStore.adapter.LoadIncident(incidentObjectId);
         }
     })
-    .factory('LoadAllIncidents', function (DataAdapter) {
+    .factory('LoadAllIncidents', function (DataStore) {
         return function () {
-            return DataAdapter.adapter.LoadAllIncidents();
+            return DataStore.adapter.LoadAllIncidents();
         }
     })
-    .factory('LoadIncidentTypes', function (DataAdapter) {
+    .factory('LoadIncidentTypes', function (DataStore) {
         return function () {
-            return DataAdapter.adapter.LoadIncidentTypes();
+            return DataStore.adapter.LoadIncidentTypes();
         }
     })
 
-    .factory('UpdateIncidentAsNeeded', function (DataAdapter) {
+    .factory('UpdateIncidentAsNeeded', function (DataStore) {
         return function (incidentObjectId) {
-            return DataAdapter.adapter.UpdateIncidentAsNeeded();
+            return DataStore.adapter.UpdateIncidentAsNeeded();
         }
     })
 
@@ -43,19 +43,9 @@ angular.module('IncidentServices', ['DataServices'])
         return [];
     })
 
-    .factory('SaveIncident', function (DataAdapter) {
+    .factory('SaveIncident', function (DataStore) {
         return function (incident) {
-            return DataAdapter.adapter.SaveIncident(incident);
-        }
-    })
-
-    .factory('CreateNewIncident', function (DataAdapter) {
-        return function () {
-            var incidentObject = DataAdapter.adapter.CreateNewIncident();
-            incidentObject.inc_number = "";
-            incidentObject.inc_address = "";
-            incidentObject.strategy = "";
-            return incidentObject;
+            return DataStore.adapter.SaveIncident(incident);
         }
     })
 
