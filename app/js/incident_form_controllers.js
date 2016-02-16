@@ -7,7 +7,7 @@ angular.module("ictApp", ['ngDraggable',
   'ObjectivesServices', 'OSRServices', 'ActionServices', 'SectorServices',
   'UnitServices'])
 
-  .run(function ($q, IsLoggedIn, DataStore, LoadIncident, StartIncidentTimer, StartIncidentUpdateTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
+  .run(function ($q, IsLoggedIn, DataStore, LoadIncident, StartIncidentTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
     if (!DataStore.init()) {
       var urlLink = "login.html";
       window.location.href = urlLink;
@@ -31,7 +31,6 @@ angular.module("ictApp", ['ngDraggable',
         UpdateObjectivesPercent(incident);
       }).then(function () {
         StartIncidentTimer();
-        StartIncidentUpdateTimer();
         StartUnitTimerTimer();
       });
     } else {

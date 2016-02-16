@@ -38,17 +38,6 @@ angular.module('TimerServices', ['DataServices', 'IncidentServices', 'UnitServic
     }
   })
 
-  .factory('StartIncidentUpdateTimer',
-  function ($interval, DataStore, UpdateIncidentAsNeeded) {
-    return function () {
-      function updateIncidentData() {
-        var resp = UpdateIncidentAsNeeded(DataStore.incident);
-      }
-
-      $interval(updateIncidentData, 3000);
-    }
-  })
-
   .factory('StartUnitTimerTimer',
   function ($interval, DataStore, DefaultErrorLogger, UpdateUnitTimer) {
     return function () {

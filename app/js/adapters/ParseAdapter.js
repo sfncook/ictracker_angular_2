@@ -18,12 +18,11 @@ var USER_DEF = ['username', 'email', 'name', 'department'];
 
 angular.module('ParseAdapter', [])
 
-  .factory('ParseAdapter', function (LoadIncident_Parse, LoadAllIncidents_Parse, LoadIncidentTypes_Parse, CreateNewIncident_Parse,
-                                     UpdateIncidentAsNeeded_Parse, isLoggedIn_Parse,
+  .factory('ParseAdapter', function (LoadIncident_Parse, LoadAllIncidents_Parse, LoadIncidentTypes_Parse, CreateNewIncident_Parse, isLoggedIn_Parse,
                                      LoadActionTypes_Parse, LoadSectorTypes_Parse, CreateNewSectorType_Parse, LoadUnitTypes_Parse,
                                      SaveIncident_Parse, SaveSector_Parse, CreateNewSector_Parse, SaveReportAction_Parse,
                                      CreateNewMayday_Parse, SaveMayday_Parse, DeleteMayday_Parse,
-                                     CreateNewUnit_Parse, DeleteUnit_Parse) {
+                                     CreateNewUnit_Parse, DeleteUnit_Parse, StartIncidentUpdateTimer_Parse) {
     return {
       adapter_id_str: 'parse',
       init: function () {
@@ -34,6 +33,7 @@ angular.module('ParseAdapter', [])
           var js_key = "1Qc5tKwXrMNm9tOlBsRw4VapXgNUHe9DIyNU9XMp";
           if (app_key && js_key) {
             Parse.initialize(app_key, js_key);
+            StartIncidentUpdateTimer_Parse();
             return true;
           } else {
             console.log("app_key and js_key not defined.  Logging out.");
@@ -50,7 +50,6 @@ angular.module('ParseAdapter', [])
       LoadAllIncidents: LoadAllIncidents_Parse,
       LoadIncident: LoadIncident_Parse,
       CreateNewIncident: CreateNewIncident_Parse,
-      UpdateIncidentAsNeeded: UpdateIncidentAsNeeded_Parse,
       isLoggedIn: isLoggedIn_Parse,
       LoadActionTypes: LoadActionTypes_Parse,
       LoadSectorTypes: LoadSectorTypes_Parse,
@@ -68,16 +67,18 @@ angular.module('ParseAdapter', [])
     };
   })
 
-  .factory('DefaultParseErrorLogger', [function () {
+  .factory('DataStore_Parse', function () { return {} })
+
+  .factory('DefaultParseErrorLogger', function () {
     return {
       error: function (obj, error) {
         console.log('Failed to create new object, with error code: ' + error.message);
       }
     }
-  }])
+  })
 
 
-  .factory('ParseQuery', ['$q', '$rootScope', function ($q, $rootScope){
+  .factory('ParseQuery', function ($q, $rootScope){
     return function(query, options){
       var defer = $q.defer();
 
@@ -85,8 +86,6 @@ angular.module('ParseAdapter', [])
       var functionToCall = 'find';
       if(options != undefined && options.functionToCall != undefined)
         functionToCall = options.functionToCall;
-
-//		console.log(functionToCall, query);
 
       //wrap defer resolve/reject in $apply so angular updates watch listeners
       var defaultParams = [{
@@ -112,9 +111,9 @@ angular.module('ParseAdapter', [])
 
       return defer.promise;
     }
-  }])
+  })
 
-  .factory('ParseObject', ['ParseQuery', function(ParseQuery){
+  .factory('ParseObject', function(ParseQuery){
 
     return function (parseData, fields){
 
@@ -166,10 +165,10 @@ angular.module('ParseAdapter', [])
       }
     };
 
-  }])
+  })
 
 
-  .factory('ConvertParseObject', [function () {
+  .factory('ConvertParseObject', function () {
     return function (parseObject, fields) {
       //add dynamic properties from fields array
       for (var i = 0; i < fields.length; i++) {
@@ -187,7 +186,7 @@ angular.module('ParseAdapter', [])
         })();
       }
     }
-  }])
+  })
 
   .factory('isLoggedIn_Parse', function () {
     return function () {
@@ -513,7 +512,7 @@ angular.module('ParseAdapter', [])
                                            FetchTypeForIncident_Parse, LoadIAPForIncident_Parse, LoadSectorsForIncident_Parse,
                                            LoadAllMaydaysForIncident_Parse, FetchObjectivesForIncident_Parse, FetchOSRForIncident_Parse,
                                            LoadUpgradeForIncident_Parse, LoadDispatchedUnitsForIncident_Parse,
-                                           FindAllMaydayUnitsForIncident, DefaultParseErrorLogger) {
+                                           FindAllMaydayUnitsForIncident, DefaultParseErrorLogger, DataStore_Parse) {
     return function (incidentObjectId) {
       var queryIncident = new Parse.Query(Parse.Object.extend('Incident'));
       queryIncident.equalTo("objectId", incidentObjectId);
@@ -534,6 +533,7 @@ angular.module('ParseAdapter', [])
           }
           return $q.all(promises).then(function () {
               FindAllMaydayUnitsForIncident(incident);
+              DataStore_Parse.incident = incident;
               return incident;
             },
             DefaultParseErrorLogger);
@@ -594,12 +594,13 @@ angular.module('ParseAdapter', [])
 
 
   .factory('UpdateIncidentAsNeeded_Parse',
-  function (LoadIncident_Parse, DefaultParseErrorLogger) {
+  function (LoadIncident_Parse, DefaultParseErrorLogger, DataStore_Parse) {
     return function (incident_orig) {
       incident_orig.fetch({
         success: function (incident_) {
           if (incident_.get('txid') != incident_orig.txid) {
             LoadIncident_Parse(incident_orig.id).then(function (incident__) {
+                DataStore_Parse.incident = incident;
                 return incident__;
               },
               DefaultParseErrorLogger);
@@ -613,15 +614,14 @@ angular.module('ParseAdapter', [])
       });
     }
   })
-  .factory('UpdateSectorsAsNeeded_Parse',
-  function (DiffUpdatedTimes_Parse) {
+  .factory('UpdateSectorsAsNeeded_Parse', function (DiffUpdatedTimes_Parse) {
     return function (incident) {
       for (var i = 0; i < incident.sectors.length; i++) {
         var sector = incident.sectors[i];
         var querySectors = new Parse.Query(Parse.Object.extend('Sector'));
         querySectors.equalTo("objectId", sector.id);
         querySectors.first({
-          success: DiffUpdatedTimes_Parse($scope, sector),
+          success: DiffUpdatedTimes_Parse(sector),
           error: function (error) {
             console.log('Failed to UpdateSectors, with error code: ' + error.message);
           }
@@ -630,11 +630,11 @@ angular.module('ParseAdapter', [])
     }
   })
   .factory('DiffUpdatedTimes_Parse', function (ConvertParseObject, UpdateSector_Parse) {
-    return function ($scope, sector) {
+    return function (sector) {
       return function (sectorNew) {
         if (sector.updatedAt.getTime() != sectorNew.updatedAt.getTime()) {
           sector.fetch({
-            success: UpdateSector_Parse($scope, sector),
+            success: UpdateSector_Parse(sector),
             error: function (error) {
               console.log('Failed to updateSector, with error code: ' + error.message);
             }
@@ -645,10 +645,10 @@ angular.module('ParseAdapter', [])
   })
   .factory('UpdateSector_Parse',
   function (ConvertParseObject, FetchTypeForSector_Parse, FetchAcctTypeForSector_Parse) {
-    return function ($scope, sector) {
+    return function ( sector) {
       return function () {
-        FetchTypeForSector_Parse($scope, sector);
-        FetchAcctTypeForSector_Parse($scope, sector);
+        FetchTypeForSector_Parse(sector);
+        FetchAcctTypeForSector_Parse(sector);
       };
     }
   })
@@ -881,6 +881,21 @@ angular.module('ParseAdapter', [])
   .factory('DeleteUnit_Parse', function (DefaultErrorLogger) {
     return function (unit) {
       return unit.destroy(null, DefaultErrorLogger);
+    }
+  })
+
+  .factory('StartIncidentUpdateTimer_Parse', function ($interval, DataStore_Parse, UpdateIncidentAsNeeded_Parse) {
+    return function () {
+      function updateIncidentData() {
+        if(DataStore_Parse.incident) {
+          var resp = UpdateIncidentAsNeeded_Parse(DataStore_Parse.incident);
+          if(resp) {
+            DataStore_Parse.incident = resp;
+          }
+        }
+      }
+
+      $interval(updateIncidentData, 3000);
     }
   })
 
