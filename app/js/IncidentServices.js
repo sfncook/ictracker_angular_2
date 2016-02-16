@@ -34,8 +34,8 @@ angular.module('IncidentServices', ['DataServices'])
     })
 
     .factory('UpdateIncidentAsNeeded', function (DataStore) {
-        return function (incidentObjectId) {
-            return DataStore.adapter.UpdateIncidentAsNeeded();
+        return function (incident) {
+            return DataStore.adapter.UpdateIncidentAsNeeded(incident);
         }
     })
 

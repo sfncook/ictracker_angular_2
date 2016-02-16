@@ -363,7 +363,7 @@ angular.module('ParseAdapter', ['ParseServices'])
             ConvertParseObject(dispatchedUnitsObj, DISPATCHED_UNITS_DEF);
             dispatchedUnitsObj.incident = incident;
             dispatchedUnitsObj.unitTypes = [];
-            //DataStore.dispatchedUnits = dispatchedUnitsObj;
+            incident.dispatchedUnits = dispatchedUnitsObj;
             return dispatchedUnitsObj.save(null, {
               error: function (error) {
                 console.log('(2) Failed to save dispatechedUnitsObj with error code: ' + error.message);
@@ -371,7 +371,7 @@ angular.module('ParseAdapter', ['ParseServices'])
             });
           } else {
             ConvertParseObject(dispatchedUnitsObj, DISPATCHED_UNITS_DEF);
-            //DataStore.dispatchedUnits = dispatchedUnitsObj;
+            incident.dispatchedUnits = dispatchedUnitsObj;
             for (var i = 0; i < dispatchedUnitsObj.unitTypes.length; i++) {
               var unitType = dispatchedUnitsObj.unitTypes[i];
               ConvertParseObject(unitType, UNIT_TYPE_DEF);
@@ -406,9 +406,9 @@ angular.module('ParseAdapter', ['ParseServices'])
         function (upgradeObject) {
           if (upgradeObject) {
             ConvertParseObject(upgradeObject, UPGRADE_DEF);
-            //DataStore.upgrade = upgradeObject;
+            incident.upgrade = upgradeObject;
           } else {
-            //DataStore.upgrade = CreateNewUpgrade_Parse(incident);
+            incident.upgrade = CreateNewUpgrade_Parse(incident);
           }
           return incident;
         },
@@ -459,7 +459,7 @@ angular.module('ParseAdapter', ['ParseServices'])
 
 
   .factory('LoadAllIncidents_Parse',
-  function ($q, ConvertParseObject, Incidents, DataStore, FetchTypeForIncident_Parse, DefaultParseErrorLogger) {
+  function ($q, ConvertParseObject, Incidents, FetchTypeForIncident_Parse, DefaultParseErrorLogger) {
     return function () {
       var queryIncidents = new Parse.Query(Parse.Object.extend('Incident'));
       return queryIncidents.find().then(function (incidents_qry) {
@@ -501,16 +501,17 @@ angular.module('ParseAdapter', ['ParseServices'])
 
 
   .factory('UpdateIncidentAsNeeded_Parse',
-  function (DataStore, LoadIncident_Parse, DefaultParseErrorLogger) {
-    return function () {
-      var prevTxId = DataStore.incident.txid;
-      DataStore.incident.fetch({
-        success: function (incident) {
-          if (incident.get('txid') != prevTxId) {
-            LoadIncident_Parse(incident.id).then(function (incident) {
-                DataStore.incident = incident;
+  function (LoadIncident_Parse, DefaultParseErrorLogger) {
+    return function (incident_orig) {
+      incident_orig.fetch({
+        success: function (incident_) {
+          if (incident_.get('txid') != incident_orig.txid) {
+            LoadIncident_Parse(incident_orig.id).then(function (incident__) {
+                return incident__;
               },
               DefaultParseErrorLogger);
+          } else {
+            return false;
           }
         },
         error: function (obj, error) {
@@ -520,10 +521,10 @@ angular.module('ParseAdapter', ['ParseServices'])
     }
   })
   .factory('UpdateSectorsAsNeeded_Parse',
-  function (DataStore, DiffUpdatedTimes_Parse) {
-    return function () {
-      for (var i = 0; i < DataStore.incident.sectors.length; i++) {
-        var sector = DataStore.incident.sectors[i];
+  function (DiffUpdatedTimes_Parse) {
+    return function (incident) {
+      for (var i = 0; i < incident.sectors.length; i++) {
+        var sector = incident.sectors[i];
         var querySectors = new Parse.Query(Parse.Object.extend('Sector'));
         querySectors.equalTo("objectId", sector.id);
         querySectors.first({
@@ -693,11 +694,11 @@ angular.module('ParseAdapter', ['ParseServices'])
     }
   })
 
-  .factory('SaveReportAction_Parse', function (DefaultErrorLogger, DataStore) {
-    return function (sector, text) {
+  .factory('SaveReportAction_Parse', function (DefaultErrorLogger) {
+    return function (incident, sector, text) {
       var ReportAction = Parse.Object.extend("ReportAction");
       var reportAction = new ReportAction();
-      reportAction.set("incident", DataStore.incident);
+      reportAction.set("incident", incident);
       reportAction.set("sector", sector);
       reportAction.set("text", text);
       reportAction.save(null, DefaultErrorLogger);
@@ -761,10 +762,9 @@ angular.module('ParseAdapter', ['ParseServices'])
       return newMayday;
     }
   })
-  .factory('DeleteMayday_Parse', function (DataStore, DefaultErrorLogger) {
+  .factory('DeleteMayday_Parse', function (DefaultErrorLogger) {
     return function (mayday) {
       mayday.unit.hasMayday = false;
-      DataStore.maydays.remByVal(mayday);
       return mayday.destroy(null, DefaultErrorLogger);
     }
   })

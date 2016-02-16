@@ -21,6 +21,16 @@ angular.module('DataServices', ['ParseAdapter', 'StaticAdapter'])
     };
   })
 
+  // TODO: Move this into the ParseAdaptor
+  // Pass this into Parse save commands to log errors.
+  .factory('DefaultErrorLogger', [function () {
+    return {
+      error: function (obj, error) {
+        console.log('Failed to create new object, with error code: ' + error.message);
+      }
+    }
+  }])
+
   .factory('_Init', function (ParseAdapter, StaticAdapter) {
     return function () {
       var adapter_id_str = getHttpRequestByName('adapter');

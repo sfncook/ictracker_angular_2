@@ -42,7 +42,7 @@ angular.module('TimerServices', ['DataServices', 'IncidentServices', 'UnitServic
   function ($interval, DataStore, UpdateIncidentAsNeeded) {
     return function () {
       function updateIncidentData() {
-        UpdateIncidentAsNeeded();
+        var resp = UpdateIncidentAsNeeded(DataStore.incident);
       }
 
       $interval(updateIncidentData, 3000);
