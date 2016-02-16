@@ -1,7 +1,7 @@
 angular.module('UnitServices', ['DataServices'])
 
   .factory('UnitTypes', function () {
-    return new Array();
+    return [];
   })
 
   .factory('LoadUnitTypes', function (DataStore) {

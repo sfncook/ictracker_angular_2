@@ -1,7 +1,7 @@
 angular.module('TbarServices', ['DataServices', 'SectorServices'])
 
     .factory('TbarSectors', function() {
-        return new Array();
+        return [];
     })
 
     .factory('GridsterOpts', function () {
@@ -30,7 +30,7 @@ angular.module('TbarServices', ['DataServices', 'SectorServices'])
 
     .factory('LoadDefaultTbars', function (DataStore, GridsterOpts, SectorTypes) {
         return function (incident) {
-            incident.sectors = new Array();
+            incident.sectors = [];
 
             var orderIndex = 0;
             for(var row=0; row<GridsterOpts.rows; row++) {
@@ -110,7 +110,7 @@ angular.module('TbarServices', ['DataServices', 'SectorServices'])
      */
     .factory('GetIncidentUnits', ['TbarSectors', function (TbarSectors) {
         return function () {
-            var incidentUnits = new Array();
+            var incidentUnits = [];
             for(var t=0; t<TbarSectors.length; t++) {
                 var sector = TbarSectors[t];
                 for(var u=0; u<sector.units.length; u++) {

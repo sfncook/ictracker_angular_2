@@ -3,7 +3,7 @@ angular.module('MaydayServices', ['DataServices'])
 
     .controller('MaydayDlg', function($scope, $interval, DataStore, OpenMaydayDlgForMayday, SaveSelectedMayday, DeleteMayday){
         $scope.dataStore = DataStore;
-        DataStore.maydays = new Array();
+        DataStore.maydays = [];
         $scope.openMaydayDlgForMayday = OpenMaydayDlgForMayday;
         $scope.dataStore.saveSelectedMayday = SaveSelectedMayday;
 

@@ -2,7 +2,7 @@
 angular.module('ActionServices', ['DataServices'])
 
     .factory('ActionTypes', function() {
-        return new Array();
+        return [];
     })
 
     .factory('LoadActionTypes', function (DataStore) {
@@ -29,7 +29,7 @@ angular.module('ActionServices', ['DataServices'])
                 // Add unit to sector
                 relation.add(actionType);
                 if(!unit.actionsArr) {
-                    unit.actionsArr = new Array();
+                    unit.actionsArr = [];
                 }
                 unit.actionsArr.push(actionType);
                 addedAction = true;

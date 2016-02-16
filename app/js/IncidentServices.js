@@ -2,7 +2,7 @@
 angular.module('IncidentServices', ['DataServices'])
 
     .factory('IncidentTypes', function() {
-        return new Array();
+        return [];
     })
 
     .controller('StrategyDlg', function($scope, $http, DataStore){

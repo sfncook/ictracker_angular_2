@@ -429,8 +429,8 @@ angular.module("ictApp", ['ngDraggable',
 
     $scope.acct_opts = ['N','E','S','W','A','B','C','D'];
 
-    $scope.cities = new Array();
-    $scope.type_names = new Array();
+    $scope.cities = [];
+    $scope.type_names = [];
 
     LoadUnitTypes().then(
       function () {

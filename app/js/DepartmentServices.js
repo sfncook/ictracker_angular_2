@@ -3,7 +3,7 @@
 angular.module('DepartmentServices', ['DataServices'])
 
     .factory('AllDepartments', function() {
-        return new Array();
+        return [];
     })
 
     .factory('LoadAllDepartments', ['ConvertParseObject', 'AllDepartments', function (ConvertParseObject, AllDepartments) {

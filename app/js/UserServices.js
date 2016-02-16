@@ -29,7 +29,7 @@ angular.module('UserServices', ['DataServices', 'DepartmentServices'])
     }])
 
     .factory('AllUsers', function() {
-        return new Array();
+        return [];
     })
 
     .factory('LoadAllUsers', ['ConvertParseObject', 'AllUsers', function (ConvertParseObject, AllUsers) {

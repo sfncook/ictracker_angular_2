@@ -1,7 +1,7 @@
 angular.module('SectorServices', ['DataServices'])
 
   .factory('SectorTypes', function () {
-    return new Array();
+    return [];
   })
 
   .controller('SectorNamesDlg', function ($scope, $http, DataStore, ReportFunctions, LoadSectorTypes, SectorTypes, CreateBlankSectorType, SaveSector) {
