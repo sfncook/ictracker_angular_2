@@ -1,5 +1,5 @@
 
-angular.module('MaydayServices', ['DataServices', 'AdapterServices'])
+angular.module('MaydayServices', ['DataServices', 'DataAdapter'])
 
     .controller('MaydayDlg', function($scope, $interval, DataStore, OpenMaydayDlgForMayday, SaveSelectedMayday, DeleteMayday){
         $scope.dataStore = DataStore;
@@ -90,10 +90,10 @@ angular.module('MaydayServices', ['DataServices', 'AdapterServices'])
         }
     })
 
-    .factory('AddNewMayday', function (AdapterStore, DataStore, OpenMaydayDlgForMayday, GetNextMaydayId) {
+    .factory('AddNewMayday', function (DataAdapter, DataStore, OpenMaydayDlgForMayday, GetNextMaydayId) {
         return function (sector, unit) {
             unit.hasMayday = true;
-            var mayday = AdapterStore.adapter.CreateNewMayday(DataStore.incident);
+            var mayday = DataAdapter.adapter.CreateNewMayday(DataStore.incident);
             mayday.number               = GetNextMaydayId();
             mayday.sector               = sector;
             mayday.unit                 = unit;
@@ -115,9 +115,9 @@ angular.module('MaydayServices', ['DataServices', 'AdapterServices'])
         }
     })
 
-    .factory('SaveSelectedMayday', function (DataStore, AdapterStore) {
+    .factory('SaveSelectedMayday', function (DataStore, DataAdapter) {
         return function () {
-            return AdapterStore.adapter.SaveMayday(DataStore.selectedMayday);
+            return DataAdapter.adapter.SaveMayday(DataStore.selectedMayday);
         }
     })
 
@@ -159,9 +159,9 @@ angular.module('MaydayServices', ['DataServices', 'AdapterServices'])
         }
     })
 
-    .factory('DeleteMayday', function (AdapterStore) {
+    .factory('DeleteMayday', function (DataAdapter) {
         return function (mayday) {
-            return AdapterStore.adapter.DeleteMayday(mayday);
+            return DataAdapter.adapter.DeleteMayday(mayday);
         }
     })
 

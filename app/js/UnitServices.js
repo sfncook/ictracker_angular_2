@@ -1,12 +1,12 @@
-angular.module('UnitServices', ['DataServices', 'AdapterServices'])
+angular.module('UnitServices', ['DataServices', 'DataAdapter'])
 
   .factory('UnitTypes', function () {
     return new Array();
   })
 
-  .factory('LoadUnitTypes', function (AdapterStore) {
+  .factory('LoadUnitTypes', function (DataAdapter) {
     return function () {
-      return AdapterStore.adapter.LoadUnitTypes();
+      return DataAdapter.adapter.LoadUnitTypes();
     }
   })
 

@@ -1,4 +1,4 @@
-angular.module('SectorServices', ['DataServices', 'AdapterServices'])
+angular.module('SectorServices', ['DataServices', 'DataAdapter'])
 
   .factory('SectorTypes', function () {
     return new Array();
@@ -74,9 +74,9 @@ angular.module('SectorServices', ['DataServices', 'AdapterServices'])
     }
   })
 
-  .factory('LoadSectorTypes', function (AdapterStore, SectorTypes) {
+  .factory('LoadSectorTypes', function (DataAdapter, SectorTypes) {
     return function () {
-      return AdapterStore.adapter.LoadSectorTypes().then(function (sectorTypes) {
+      return DataAdapter.adapter.LoadSectorTypes().then(function (sectorTypes) {
         SectorTypes.removeAll();
         for (var i = 0; i < sectorTypes.length; i++) {
           var sectorType = sectorTypes[i];
@@ -95,9 +95,9 @@ angular.module('SectorServices', ['DataServices', 'AdapterServices'])
     }
   })
 
-  .factory('SaveSector', function (AdapterStore) {
+  .factory('SaveSector', function (DataAdapter) {
     return function (sector) {
-      return AdapterStore.SaveSector(sector);
+      return DataAdapter.SaveSector(sector);
     }
   })
 

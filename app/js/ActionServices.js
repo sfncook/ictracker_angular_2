@@ -1,13 +1,13 @@
 
-angular.module('ActionServices', ['DataServices', 'AdapterServices'])
+angular.module('ActionServices', ['DataServices', 'DataAdapter'])
 
     .factory('ActionTypes', function() {
         return new Array();
     })
 
-    .factory('LoadActionTypes', function (AdapterStore) {
+    .factory('LoadActionTypes', function (DataAdapter) {
         return function () {
-            return AdapterStore.adapter.LoadActionTypes();
+            return DataAdapter.adapter.LoadActionTypes();
         }
     })
 

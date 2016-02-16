@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('UserServices', ['DataServices', 'DepartmentServices', 'AdapterServices'])
+angular.module('UserServices', ['DataServices', 'DepartmentServices', 'DataAdapter'])
 
-    .factory('IsLoggedIn', function (AdapterStore) {
+    .factory('IsLoggedIn', function (DataAdapter) {
         return function () {
-            return AdapterStore.isLoggedIn();
+            return DataAdapter.isLoggedIn();
         }
     })
 

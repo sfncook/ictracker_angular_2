@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserServices', 'DepartmentServices', 'AdapterServices', 'TbarServices'])
+angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserServices', 'DepartmentServices', 'DataAdapter', 'TbarServices'])
   .run(function (IsLoggedIn, InitDataServices, ResetSavedDepartment) {
     InitDataServices();
 
@@ -14,9 +14,9 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserSer
 
   .controller('SplashCtrl', function ($q, $scope, $interval,
                                       LoadAllIncidents, Incidents, LoadIncidentTypes, IncidentTypes,
-                                      LoadSectorTypes, DefaultErrorLogger,
+                                      LoadSectorTypes,
                                       UserLogout, IsLoggedIn, ResetSavedDepartment, DataStore,
-                                      SaveIncident, AdapterStore, LoadDefaultTbars, SaveSector) {
+                                      SaveIncident, DataAdapter, LoadDefaultTbars, SaveSector) {
     $scope.dataStore = DataStore;
 
     //if(!IsLoggedIn()) {
@@ -42,7 +42,7 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserSer
 
     LoadSectorTypes();
 
-    $scope.incidentObj = AdapterStore.adapter.CreateNewIncident();
+    $scope.incidentObj = DataAdapter.adapter.CreateNewIncident();
 
     $scope.userLogout = function () {
       //UserLogout();
@@ -82,7 +82,7 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserSer
 
 
     $scope.loadIncident = function (incidentId) {
-      var urlLink = "incident_form.html?i=" + incidentId + "&adapter=" + AdapterStore.adapter.adapter_id_str;
+      var urlLink = "incident_form.html?i=" + incidentId + "&adapter=" + DataAdapter.adapter.adapter_id_str;
       window.location.href = urlLink;
     };
 

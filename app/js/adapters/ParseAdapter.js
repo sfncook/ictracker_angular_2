@@ -443,9 +443,6 @@ angular.module('ParseAdapter', ['ParseServices', 'ObjectivesServices', 'OSRServi
       var IncidentParseObj = Parse.Object.extend('Incident');
       var incidentObject = new IncidentParseObj();
       ConvertParseObject(incidentObject, INCIDENT_DEF);
-      incidentObject.inc_number = "";
-      incidentObject.inc_address = "";
-      incidentObject.strategy = "";
       return incidentObject;
     }
   })

@@ -129,9 +129,6 @@ angular.module('StaticAdapter', [])
   .factory('CreateNewIncident_Static', function () {
     return function () {
       var incidentObject = {};
-      incidentObject.inc_number = "";
-      incidentObject.inc_address = "";
-      incidentObject.strategy = "";
       return incidentObject;
     }
   })

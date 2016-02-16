@@ -1,5 +1,5 @@
 
-angular.module('IncidentServices', ['ParseServices', 'DataServices', 'IapServices', 'ObjectivesServices', 'OSRServices', 'UpgradeServices'])
+angular.module('IncidentServices', ['DataServices'])
 
     .factory('IncidentTypes', function() {
         return new Array();
@@ -17,35 +17,45 @@ angular.module('IncidentServices', ['ParseServices', 'DataServices', 'IapService
         }
     })
 
-    .factory('LoadIncident', function (AdapterStore) {
+    .factory('LoadIncident', function (DataAdapter) {
         return function (incidentObjectId) {
-            return AdapterStore.adapter.LoadIncident(incidentObjectId);
+            return DataAdapter.adapter.LoadIncident(incidentObjectId);
         }
     })
-    .factory('LoadAllIncidents', function (AdapterStore) {
+    .factory('LoadAllIncidents', function (DataAdapter) {
         return function () {
-            return AdapterStore.adapter.LoadAllIncidents();
+            return DataAdapter.adapter.LoadAllIncidents();
         }
     })
-    .factory('LoadIncidentTypes', function (AdapterStore) {
+    .factory('LoadIncidentTypes', function (DataAdapter) {
         return function () {
-            return AdapterStore.adapter.LoadIncidentTypes();
+            return DataAdapter.adapter.LoadIncidentTypes();
         }
     })
 
-    .factory('UpdateIncidentAsNeeded', function (AdapterStore) {
+    .factory('UpdateIncidentAsNeeded', function (DataAdapter) {
         return function (incidentObjectId) {
-            return AdapterStore.adapter.UpdateIncidentAsNeeded();
+            return DataAdapter.adapter.UpdateIncidentAsNeeded();
         }
     })
 
     .factory('Incidents', function() {
-        return new Array();
+        return [];
     })
 
-    .factory('SaveIncident', function (AdapterStore) {
+    .factory('SaveIncident', function (DataAdapter) {
         return function (incident) {
-            return AdapterStore.adapter.SaveIncident(incident);
+            return DataAdapter.adapter.SaveIncident(incident);
+        }
+    })
+
+    .factory('CreateNewIncident', function (DataAdapter) {
+        return function () {
+            var incidentObject = DataAdapter.adapter.CreateNewIncident();
+            incidentObject.inc_number = "";
+            incidentObject.inc_address = "";
+            incidentObject.strategy = "";
+            return incidentObject;
         }
     })
 
