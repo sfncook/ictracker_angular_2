@@ -157,5 +157,11 @@ angular.module('SectorServices', ['DataServices'])
     }
   })
 
+  .factory('SaveSector', function (DataStore) {
+    return function (sector) {
+      return DataStore.adapter.SaveSector(sector);
+    }
+  })
+
 ;
 
