@@ -29,5 +29,11 @@ angular.module('UnitServices', ['DataServices'])
     }
   })
 
+  .factory('SaveUnit', function (DataStore) {
+    return function (unit) {
+      return DataStore.adapter.SaveUnit(unit);
+    }
+  })
+
 ;
 

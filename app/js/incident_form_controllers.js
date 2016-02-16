@@ -603,13 +603,14 @@ angular.module("ictApp", ['ngDraggable',
     };
   })
 
-  .controller('ActionsDlg', function ($scope, DataStore, LoadActionTypes, ActionTypes, ToggleActionTypeForUnit, ReportFunctions) {
+  .controller('ActionsDlg', function ($scope, DataStore, LoadActionTypes, ActionTypes, ToggleActionTypeForUnit, ReportFunctions, SaveUnit) {
     $scope.selectedUnit = {};
     LoadActionTypes();
     $scope.actionTypes = ActionTypes;
 
     $scope.selectAction = function (actionType) {
       ToggleActionTypeForUnit($scope.selectedUnit, actionType);
+      SaveUnit($scope.selectedUnit);
       // ReportFunctions.addEvent_action_to_unit([needs sector], $scope.selectedUnit, actionType);
       // if(actionType.name=="Take a Line") {DataStore.estSupply();}
     };

@@ -22,7 +22,8 @@ angular.module('ParseAdapter', [])
                                      LoadActionTypes_Parse, LoadSectorTypes_Parse, CreateNewSectorType_Parse, LoadUnitTypes_Parse,
                                      SaveIncident_Parse, SaveSector_Parse, CreateNewSector_Parse, SaveReportAction_Parse,
                                      CreateNewMayday_Parse, SaveMayday_Parse, DeleteMayday_Parse,
-                                     CreateNewUnit_Parse, DeleteUnit_Parse, StartIncidentUpdateTimer_Parse) {
+                                     CreateNewUnit_Parse, DeleteUnit_Parse, StartIncidentUpdateTimer_Parse,
+                                     SaveUnit_Parse) {
     return {
       adapter_id_str: 'parse',
       init: function () {
@@ -63,7 +64,8 @@ angular.module('ParseAdapter', [])
       SaveMayday: SaveMayday_Parse,
       DeleteMayday: DeleteMayday_Parse,
       CreateNewUnit: CreateNewUnit_Parse,
-      DeleteUnit: DeleteUnit_Parse
+      DeleteUnit: DeleteUnit_Parse,
+      SaveUnit: SaveUnit_Parse
     };
   })
 
@@ -541,11 +543,12 @@ angular.module('ParseAdapter', [])
         DefaultParseErrorLogger);
     }
   })
-  .factory('CreateNewIncident_Parse', function (ConvertParseObject) {
+  .factory('CreateNewIncident_Parse', function (ConvertParseObject, DataStore_Parse) {
     return function () {
       var IncidentParseObj = Parse.Object.extend('Incident');
       var incidentObject = new IncidentParseObj();
       ConvertParseObject(incidentObject, INCIDENT_DEF);
+      DataStore_Parse.incident = incidentObject;
       return incidentObject;
     }
   })
@@ -881,6 +884,11 @@ angular.module('ParseAdapter', [])
   .factory('DeleteUnit_Parse', function (DefaultErrorLogger) {
     return function (unit) {
       return unit.destroy(null, DefaultErrorLogger);
+    }
+  })
+  .factory('SaveUnit_Parse', function (DefaultErrorLogger) {
+    return function (unit) {
+      return unit.save(null, DefaultErrorLogger);
     }
   })
 
