@@ -68,6 +68,11 @@ angular.module('DataServices', ['ParseAdapter', 'StaticAdapter'])
 
   .factory('DataAdapter', function () { return {}; })
 
+  .factory('LoadIncident', function (DataAdapter) {
+    return function (incidentObjectId) {
+      return DataAdapter.LoadIncident(incidentObjectId);
+    }
+  })
   .factory('CreateNewIncident', function (DataAdapter) {
     return function () {
       var incidentObject = DataAdapter.CreateNewIncident();
