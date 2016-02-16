@@ -3,7 +3,7 @@ angular.module('DataServices', ['ParseAdapter', 'StaticAdapter'])
     return "Mesa";
   })
 
-  .factory('DataStore', function (_Init) {
+  .factory('DataStore', function (_Init, DataAdapter) {
     return {
       incident: {},
       currentUser: {},
@@ -11,13 +11,11 @@ angular.module('DataServices', ['ParseAdapter', 'StaticAdapter'])
       loadSuccess: false,
       choosing_unit_for_new_mayday: false,
 
-      // Adaptor Services
-      adapter:{},
       init: _Init,
-      isLoggedIn:         function()       {return this.adapter.isLoggedIn();},
-      SaveIncident:       function(incident) {return this.adapter.SaveIncident(incident);},
-      SaveSector:         function(sector) {return this.adapter.SaveSector(sector);},
-      SaveReportAction:   function(sector, text) {return this.adapter.SaveReportAction(this.incident, sector, text);}
+      isLoggedIn:         function()       {return DataAdapter.isLoggedIn();},
+      SaveIncident:       function(incident) {return DataAdapter.SaveIncident(incident);},
+      SaveSector:         function(sector) {return DataAdapter.SaveSector(sector);},
+      SaveReportAction:   function(sector, text) {return DataAdapter.SaveReportAction(this.incident, sector, text);}
     };
   })
 
@@ -31,7 +29,7 @@ angular.module('DataServices', ['ParseAdapter', 'StaticAdapter'])
     }
   }])
 
-  .factory('_Init', function (ParseAdapter, StaticAdapter) {
+  .factory('_Init', function (ParseAdapter, StaticAdapter, DataAdapter) {
     return function () {
       var adapter_id_str = getHttpRequestByName('adapter');
 
@@ -40,22 +38,22 @@ angular.module('DataServices', ['ParseAdapter', 'StaticAdapter'])
         adapter_id_str = getHttpRequestByName('adaptor');
         if(adapter_id_str=="") {
           console.log("Missing required 'adapter' parameter. Using default 'parse' adapter.");
-          this.adapter = ParseAdapter;
+          DataAdapter = ParseAdapter;
         }
       }
 
       if(adapter_id_str!="") {
         if (ParseAdapter.adapter_id_str == adapter_id_str) {
-          this.adapter = ParseAdapter;
+          DataAdapter = ParseAdapter;
         } else if (StaticAdapter.adapter_id_str == adapter_id_str) {
-          this.adapter = StaticAdapter;
+          DataAdapter = StaticAdapter;
         } else {
           console.error("Invalid or unhandled adapter parameter: ", adapter);
         }
       }
 
-      if(this.adapter.init) {
-        return this.adapter.init();
+      if(DataAdapter.init) {
+        return DataAdapter.init();
       } else {
         return null;
       }
@@ -68,9 +66,11 @@ angular.module('DataServices', ['ParseAdapter', 'StaticAdapter'])
  * Adaptor Services
  */
 
-  .factory('CreateNewIncident', function (DataStore) {
+  .factory('DataAdapter', function () { return {}; })
+
+  .factory('CreateNewIncident', function (DataAdapter) {
     return function () {
-      var incidentObject = DataStore.CreateNewIncident();
+      var incidentObject = DataAdapter.CreateNewIncident();
       incidentObject.inc_number = "";
       incidentObject.inc_address = "";
       incidentObject.strategy = "";
