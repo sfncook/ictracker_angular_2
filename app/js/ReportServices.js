@@ -44,7 +44,7 @@ angular.module("ReportServices", ['DataServices'])
   })
 
 
-  .controller('ReportsDlg', function ($scope, ReportFunctions, DefaultErrorLogger, LoadReportsForIncident, ReportActions, DataStore) {
+  .controller('ReportsDlg', function ($scope, ReportFunctions, LoadReportsForIncident, ReportActions, DataStore) {
     $scope.reportActions = ReportActions;
     $scope.dataStore = DataStore;
     $scope.orderByField = "createdBy";
