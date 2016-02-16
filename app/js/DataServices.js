@@ -65,29 +65,4 @@ angular.module('DataServices', ['ParseAdapter', 'StaticAdapter'])
     }
   }])
 
-
-  /*
-   * Adaptor Services
-   */
-
-  .factory('LoadIncident', function (DataStore) {
-    return function (incidentObjectId) {
-      return DataStore.adapter.LoadIncident(incidentObjectId);
-    }
-  })
-  .factory('LoadIncidentTypes', function (DataStore) {
-    return function () {
-      return DataStore.adapter.LoadIncidentTypes();
-    }
-  })
-  .factory('CreateNewIncident', function (DataStore) {
-    return function () {
-      var incidentObject = DataStore.adapter.CreateNewIncident();
-      incidentObject.inc_number = "";
-      incidentObject.inc_address = "";
-      incidentObject.strategy = "";
-      return incidentObject;
-    }
-  })
-
 ;

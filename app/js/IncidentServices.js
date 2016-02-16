@@ -22,6 +22,26 @@ angular.module('IncidentServices', ['DataServices'])
     }
   })
 
+  .factory('LoadIncident', function (DataStore) {
+    return function (incidentObjectId) {
+      return DataStore.adapter.LoadIncident(incidentObjectId);
+    }
+  })
+  .factory('LoadIncidentTypes', function (DataStore) {
+    return function () {
+      return DataStore.adapter.LoadIncidentTypes();
+    }
+  })
+  .factory('CreateNewIncident', function (DataStore) {
+    return function () {
+      var incidentObject = DataStore.adapter.CreateNewIncident();
+      incidentObject.inc_number = "";
+      incidentObject.inc_address = "";
+      incidentObject.strategy = "";
+      return incidentObject;
+    }
+  })
+
   .factory('UpdateIncidentAsNeeded', function (DataStore) {
     return function (incident) {
       return DataStore.adapter.UpdateIncidentAsNeeded(incident);
