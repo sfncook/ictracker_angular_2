@@ -73,7 +73,7 @@
 
         <button class="mode_btn button_top"
                 ng-class="{'glowgreen':(dataStore.incident.strategy=='OFFENSE'), 'glowred':(dataStore.incident.strategy=='DEFENSE')}"
-                ng-click="showStrategyDlg()">{{(dataStore.incident.strategy==undefined || dataStore.incident.strategy=='') ? '+Strategy' :
+                ng-click="showStrategyDlg()">{{(dataStore.incident.strategy==undefined || dataStore.incident.strategy=='') ? '+ Strategy' :
           dataStore.incident.strategy}}
         </button>
 
@@ -104,8 +104,9 @@
           <div class="tbar_guts_uninitialized"
                ng-show="!sector.initialized"
                ng-click="showSectorNameDlg(sector)">
-            <span style="color: rgba(0, 0, 255, 0.14); font-size:2.5rem;">Click to<br>add sector</span>
-            <img src="img/add_sector_icon.png" style="background: rgba(0, 0, 255, 0.14); width:30%"/>
+            + Sector
+            <!--<span style="color: rgba(0, 0, 255, 0.14); font-size:2.5rem;">Click to<br>add sector</span>-->
+            <!--<img src="img/add_sector_icon.png" style="background: rgba(0, 0, 255, 0.14); width:30%"/>-->
           </div>
           <div class="tbar_guts_initialized"
                ng-show="sector.initialized">
@@ -181,7 +182,7 @@
                           ng-class="{has_actions:unit.actionsArr.length, no_actions:!unit.actionsArr.length}"
                           ng-click="showActionsDlg(unit)">
                     <div class="add_actions_label" ng-hide="unit.actionsArr.length" ng-class="{actions_while_moving:dataStore.choseMoveUnit}">
-                      +Add actions
+                      + Actions
                     </div>
 
                     <div
@@ -209,7 +210,7 @@
                   </div>
                   <div style="display: table-cell; text-align: right; min-width:100px">
                     <button class="acct_unit_btn"
-                            ng-class="{acct_unit_btn_wide:sector.acctUnit.name.length>5, has_acct_unit:sector.acctUnit, btn_smtext:sector.acctUnit.name.length>5, btn_medtext: sector.acctUnit.name.length==5}"
+                            ng-class="{acct_unit_btn_wide:sector.acctUnit.name.length>5, has_acct_unit:sector.acctUnit, needs_acct_unit:!sector.acctUnit, btn_smtext:sector.acctUnit.name.length>5, btn_medtext: sector.acctUnit.name.length==5}"
                             ng-click="showUnitsDlgForAcct(sector)"
                             ng-show="sector.sectorType.hasAcctBtn">
                       <div class="units_dlg_acct_options_label" ng-show="sector.acctUnitOpt">{{sector.acctUnitOpt}}</div>

@@ -19,6 +19,9 @@ tbar {
     height:100%;
     cursor:pointer;
     padding-top: 30px;
+    color: white;
+    font-size: 2.5rem;
+    background: rgb(213, 216, 253);
 }
 .tbar_guts_initialized {
 
@@ -47,7 +50,6 @@ tbar {
 }
 .benchmark_green {
     background-color: lightgreen;
-    border: 1px grey solid;
 }
 .benchmark_black {
     background-color: black;
@@ -94,8 +96,7 @@ tbar {
 }
 .unit_row_left_column {
     min-height: 63px;
-    width:66px;
-    background: #DDD;
+    width: 66px;
     float: left;
     border-right: none;
     border-bottom-right-radius: 0;
@@ -105,10 +106,7 @@ tbar {
     float: left;
     width: 204px;
     min-height: 63px;
-    border-left: none;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    background: white;
+    background: rgba(238, 238, 238, 0.39);
 }
 .unit_btn {
     width: 57px;
@@ -152,11 +150,14 @@ tbar {
 .acct_unit_btn_wide {
     width: 90px;
 }
+.needs_acct_unit {
+    background: rgb(213, 216, 253);
+}
 .has_acct_unit {
     background: rgba(255, 255, 0, 0.47);
 }
 .add_acct_unit_label {
-    color: rgba(0, 0, 255, 0.39);
+    color: white;
     font-weight: bold;
 }
 .add_actions_label {
@@ -298,12 +299,13 @@ tbar {
 }
 .action_tbar_btn {
     width: 95px;
-    height: 13px;
+    height: 15px;
     margin: 1px;
     font-size: 0.6rem;
     float: left;
-    background: #DDD;
+    background: #fff;
     text-align: center;
+    border: 1px solid;
 }
 
 .tbar_unit_info_btn {
@@ -331,9 +333,9 @@ tbar {
     margin-left: 2px;
 }
 .personnel_not_set {
-    background: white;
+    background: rgb(213, 216, 253);
     border: 1px solid darkgray;
-    color: rgba(0, 0, 255, 0.39);
+    color: white;
     font-weight: bold;
 }
 .personnel_set {
@@ -350,6 +352,7 @@ tbar {
 .has_actions {
 }
 .no_actions {
+    background:rgb(213, 216, 253);
 }
 
 .unit_timer_bar_border {
@@ -396,10 +399,11 @@ tbar {
     height: 24px;
     background: white;
     text-align: center;
-    color: rgba(0, 0, 255, 0.39);
+    color: white;
     font-weight: bold;
     margin: 2px 4px;
     padding: 0;
+    background: rgba(0, 0, 255, 0.13);
 }
 
 .unit_options_row_container {
