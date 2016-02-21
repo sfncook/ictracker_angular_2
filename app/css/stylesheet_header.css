@@ -2,16 +2,17 @@
  **** HEADER ITEMS ****
  */
 .main_menu_container {
-    background: rgb(100, 139, 172);
+    background: #9ad1ff;
     position: fixed;
     right: 0;
     top: 0;
     height: 100%;
     z-index: 50;
     padding: 4px;
+    border-left: 3px double #999;
 }
 .main_menu_container_width {
-    width:100px;
+    width:110px;
 }
 .main_menu_container > .button {
     background: white;
@@ -47,7 +48,7 @@
     text-align: center;
 }
 .single_row_header_item {
-    height: 25px;
+    height: 45px;
 }
 .double_row_header_item {
     height: 45px;
@@ -249,5 +250,14 @@ img.settings_btn_img {
     }
     .main_menu_container_width {
         display: none;
+    }
+}
+
+@media (height: 550px) {
+    .single_row_header_item {
+        height: 25px;
+    }
+    .double_row_header_item {
+        height: 25px;
     }
 }

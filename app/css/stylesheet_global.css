@@ -237,7 +237,7 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     color: white;
 }
 .glowgreen {
-    background: green !important;
+    background: lightgreen !important;
     color: white;
 }
 .glowgreen:hover {
@@ -296,29 +296,38 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
 }
 
 .inc_type_icon {
-    width: 52px;
-    height: 51px;
+    height: 40px;
     float:left;
     border: none;
     background: white;
 }
+.inc_info_text_col {
+    float:right;
+}
 
 
 .mode_btn {
-    float: right;
+    width: 130px;
     margin-right: 10px;
     pointer-events: auto;
     background: rgb(213, 216, 253);
     color: white;
     font-size: 1.2rem;
+    padding:0;
+}
+.mode_header_btn {
+    float: right;
+}
+.mode_dlg_btn {
+
 }
 .offensive_btn {
-    background: green !important;
-    color: white;
+    background: lightgreen !important;
+    color: black;
 }
 .defensive_btn {
     background: #FF2B21 !important;
-    color: white;
+    color: black;
 }
 #mode_dialog {
     width: 250px;
