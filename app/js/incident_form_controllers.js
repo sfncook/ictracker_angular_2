@@ -3,11 +3,11 @@
 angular.module("ictApp", ['ngDraggable',
   'DataServices', 'TbarServices', 'ActionServices', 'UnitServices',
   'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices',
-  'UserServices', 'TimerServices', 'MaydayServices', 'UpgradeServices',
+  'TimerServices', 'MaydayServices', 'UpgradeServices',
   'ObjectivesServices', 'OSRServices', 'ActionServices', 'SectorServices',
   'UnitServices'])
 
-  .run(function ($q, IsLoggedIn, DataStore, LoadIncident, StartIncidentTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
+  .run(function ($q, DataStore, LoadIncident, StartIncidentTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
     if (!DataStore.init()) {
       var urlLink = "login.html";
       window.location.href = urlLink;

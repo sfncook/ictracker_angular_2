@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserServices', 'DepartmentServices', 'TbarServices'])
-  .run(function (IsLoggedIn, DataStore, ResetSavedDepartment) {
+angular.module("SplashController", ['DataServices', 'IncidentServices', 'DepartmentServices', 'TbarServices'])
+  .run(function (DataStore, ResetSavedDepartment) {
     DataStore.init();
 
     //if(!IsLoggedIn()){
@@ -15,7 +15,7 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'UserSer
   .controller('SplashCtrl', function ($q, $scope, $interval,
                                       LoadAllIncidents, Incidents, LoadIncidentTypes, IncidentTypes,
                                       LoadSectorTypes,
-                                      UserLogout, IsLoggedIn, ResetSavedDepartment,
+                                      ResetSavedDepartment,
                                       SaveIncident, DataStore, LoadDefaultTbars, SaveSector) {
     $scope.dataStore = DataStore;
 
