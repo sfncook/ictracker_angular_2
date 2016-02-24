@@ -64,14 +64,17 @@
       <div class="top_header_container" ng-controller="HeaderContainer2">
         <button class="inc_info_btn button_top"
                 ng-click="showIncInfoDlg()">
-          <div class="inc_num">{{dataStore.incident.inc_number}}</div>
-          <div class="inc_add">{{dataStore.incident.inc_address}}</div>
+          <img class="inc_type_icon" ng-src="{{dataStore.incident.incidentType.icon}}"/>
+          <div class="inc_info_text_col">
+            <div class="inc_num">{{dataStore.incident.inc_number}}</div>
+            <div class="inc_add">{{dataStore.incident.inc_address}}</div>
+          </div>
+          <div class="clear_both"></div>
         </button>
-        <img class="inc_type_icon" ng-src="{{dataStore.incident.incidentType.icon}}"/>
 
-        <button class="mode_btn button_top"
-                ng-class="{'glowgreen':(dataStore.incident.strategy=='OFFENSE'), 'glowred':(dataStore.incident.strategy=='DEFENSE')}"
-                ng-click="showStrategyDlg()">{{(dataStore.incident.strategy==undefined || dataStore.incident.strategy=='') ? '+Strategy' :
+        <button class="mode_btn mode_header_btn button_top"
+                ng-class="{offensive_btn:(dataStore.incident.strategy=='OFFENSIVE'), defensive_btn:(dataStore.incident.strategy=='DEFENSIVE')}"
+                ng-click="showStrategyDlg()">{{(dataStore.incident.strategy==undefined || dataStore.incident.strategy=='') ? '+ Strategy' :
           dataStore.incident.strategy}}
         </button>
 
@@ -88,7 +91,7 @@
         </div>
 
         <div class="mayday_header_btn_container">
-          <button class="new_mayday_btn button_top button" ng-click="click_new_mayday()" ng-controller="MaydayDlg">+ NEW MAYDAY</button>
+          <button class="new_mayday_btn button_top button" ng-click="click_new_mayday()" ng-controller="MaydayDlg">+ MAYDAY</button>
         </div>
 
         <div class="clear_both"></div>
@@ -102,8 +105,9 @@
           <div class="tbar_guts_uninitialized"
                ng-show="!sector.initialized"
                ng-click="showSectorNameDlg(sector)">
-            <span style="color: rgba(0, 0, 255, 0.14); font-size:2.5rem;">Click to<br>add sector</span>
-            <img src="img/add_sector_icon.png" style="background: rgba(0, 0, 255, 0.14); width:30%"/>
+            + Sector
+            <!--<span style="color: rgba(0, 0, 255, 0.14); font-size:2.5rem;">Click to<br>add sector</span>-->
+            <!--<img src="img/add_sector_icon.png" style="background: rgba(0, 0, 255, 0.14); width:30%"/>-->
           </div>
           <div class="tbar_guts_initialized"
                ng-show="sector.initialized">
@@ -179,7 +183,7 @@
                           ng-class="{has_actions:unit.actionsArr.length, no_actions:!unit.actionsArr.length}"
                           ng-click="showActionsDlg(unit)">
                     <div class="add_actions_label" ng-hide="unit.actionsArr.length" ng-class="{actions_while_moving:dataStore.choseMoveUnit}">
-                      +Add actions
+                      + Actions
                     </div>
 
                     <div
@@ -207,7 +211,7 @@
                   </div>
                   <div style="display: table-cell; text-align: right; min-width:100px">
                     <button class="acct_unit_btn"
-                            ng-class="{acct_unit_btn_wide:sector.acctUnit.name.length>5, has_acct_unit:sector.acctUnit, btn_smtext:sector.acctUnit.name.length>5, btn_medtext: sector.acctUnit.name.length==5}"
+                            ng-class="{acct_unit_btn_wide:sector.acctUnit.name.length>5, has_acct_unit:sector.acctUnit, needs_acct_unit:!sector.acctUnit, btn_smtext:sector.acctUnit.name.length>5, btn_medtext: sector.acctUnit.name.length==5}"
                             ng-click="showUnitsDlgForAcct(sector)"
                             ng-show="sector.sectorType.hasAcctBtn">
                       <div class="units_dlg_acct_options_label" ng-show="sector.acctUnitOpt">{{sector.acctUnitOpt}}</div>
@@ -384,7 +388,7 @@
           <button class="mayday_par_btn">Mayday</button>
           <button class="personnel_dlg_btn personnel_btn"
                   ng-click="showUnitOptionsDlg(unit)"
-                  ng-class="{bg_orange:unit.par>0}">{{unit.par|getUnitPar}}
+                  ng-class="{glowgreen:unit.par>0}">{{unit.par|getUnitPar}}
           </button>
           <div class="clear_float"></div>
         </td>
@@ -718,10 +722,10 @@
 
 <!-- Objectives Dialog Unit Component Prototype -->
 <div id="strategy_dlg" title="Strategy" ng-controller="StrategyDlg" class="dialog">
-  <button class="glowgreen strat_btn" ng-class="{outer_glow:dataStore.incident.strategy=='OFFENSE'}" ng-click="setStrategy('OFFENSE');">
+  <button class=offensive_btn mode_btn" ng-class="{outer_glow:dataStore.incident.strategy=='OFFENSE'}" ng-click="setStrategy('OFFENSIVE');">
     OFFENSIVE
   </button>
-  <button class="glowred strat_btn" ng-class="{outer_glow:dataStore.incident.strategy=='DEFENSE'}" ng-click="setStrategy('DEFENSE');">
+  <button class="defensive_btn mode_btn" ng-class="{outer_glow:dataStore.incident.strategy=='DEFENSE'}" ng-click="setStrategy('DEFENSIVE');">
     DEFENSIVE
   </button>
 </div>
@@ -853,7 +857,7 @@
     <button class="personnel_dlg_btn personnel_btn"
             ng-repeat="par in pars"
             ng-click="selectPar(par)"
-            ng-class="{glow_orange: selected_unit.par==par}">{{par}}
+            ng-class="{glowgreen: selected_unit.par==par}">{{par}}
     </button>
     <button class='reset_clock_btn'
         ng-click="resetClock()">
