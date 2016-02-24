@@ -65,7 +65,7 @@ angular.module("ictApp", ['ngDraggable',
     }
   })
 
-  .controller('HeaderContainer', function ($scope, $interval, DataStore, UserLogout) {
+  .controller('HeaderContainer', function ($scope, $interval, DataStore) {
     $scope.dataStore = DataStore;
     $scope.osrPerc = 0;
     $scope.objPerc = 0;
@@ -99,7 +99,7 @@ angular.module("ictApp", ['ngDraggable',
     }
 
     $scope.userLogout = function () {
-      UserLogout();
+      //UserLogout();
       var urlLink = "login.html";
       window.location.href = urlLink;
     }
@@ -699,7 +699,7 @@ angular.module("ictApp", ['ngDraggable',
     }
   })
 
-  .controller('SettingsDlg', function ($scope, DataStore, UserLogout) {
+  .controller('SettingsDlg', function ($scope, DataStore) {
 
     DataStore.showSettingsDlg = function () {
       $("#settings_dlg").dialog("open");
@@ -710,7 +710,7 @@ angular.module("ictApp", ['ngDraggable',
     }
 
     $scope.userLogout = function () {
-      UserLogout();
+      //UserLogout();
       var urlLink = "login.html";
       window.location.href = urlLink;
     }
