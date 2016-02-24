@@ -310,7 +310,7 @@ angular.module('ParseAdapter', [])
     }
   })
   .factory('LoadUnitsForSector_Parse',
-  function ($q, ConvertParseObject, FetchTypeForUnit_Parse, FetchActionsForUnit_Parse, UpdateUnitTimer, DefaultParseErrorLogger) {
+  function ($q, ConvertParseObject, FetchTypeForUnit_Parse, FetchActionsForUnit_Parse, DefaultParseErrorLogger) {
     return function (sector) {
       sector.units = [];
       var queryUnits = new Parse.Query(Parse.Object.extend('Unit'));
@@ -322,7 +322,7 @@ angular.module('ParseAdapter', [])
             ConvertParseObject(unit, UNIT_DEF);
             unit.allowClone = true;
             sector.units.push(unit);
-            UpdateUnitTimer(unit);
+            //UpdateUnitTimer(unit);
             promises.push(FetchTypeForUnit_Parse(unit));
             promises.push(FetchActionsForUnit_Parse(unit));
           }
