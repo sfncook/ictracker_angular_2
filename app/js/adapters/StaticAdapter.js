@@ -4,12 +4,25 @@ angular.module('StaticAdapter', ['DataServices'])
     DataStore.registered_adapters.push(StaticAdapter);
   })
 
-  .factory('StaticAdapter', function (LoadIncidentTypes_Static, LoadAllIncidents_Static, LoadIncident_Static, isLoggedIn_Static,
-                                      LoadActionTypes_Static, LoadSectorTypes_Static, LoadUnitTypes_Static,
-                                      SaveIncident_Static, SaveSector_Static, SaveReportAction_Static,
-                                      CreateNewIncident_Static, UpdateIncidentAsNeeded_Static, CreateNewSectorType_Static, CreateNewSector_Static,
-                                      CreateNewMayday_Static, SaveMayday_Static, DeleteMayday_Static,
-                                      CreateNewUnit_Static, DeleteUnit_Static) {
+  .factory('StaticAdapter', function (LoadIncidentTypes_Static,
+                                      LoadAllIncidents_Static,
+                                      LoadIncident_Static,
+                                      isLoggedIn_Static,
+                                      LoadActionTypes_Static,
+                                      LoadSectorTypes_Static,
+                                      LoadUnitTypes_Static,
+                                      SaveIncident_Static,
+                                      SaveSector_Static,
+                                      SaveReportAction_Static,
+                                      CreateNewIncident_Static,
+                                      UpdateIncidentAsNeeded_Static,
+                                      CreateNewSectorType_Static,
+                                      CreateNewSector_Static,
+                                      CreateNewMayday_Static,
+                                      SaveMayday_Static,
+                                      DeleteMayday_Static,
+                                      CreateNewUnit_Static,
+                                      DeleteUnit_Static) {
     return {
       adapter_id_str: 'static',
       init: function () {
@@ -32,7 +45,7 @@ angular.module('StaticAdapter', ['DataServices'])
       CreateNewMayday: CreateNewMayday_Static,
       SaveMayday: SaveMayday_Static,
       DeleteMayday: DeleteMayday_Static,
-      CreateNewUnit:CreateNewUnit_Static,
+      CreateNewUnit: CreateNewUnit_Static,
       DeleteUnit: DeleteUnit_Static
     };
   })
@@ -66,8 +79,8 @@ angular.module('StaticAdapter', ['DataServices'])
         var sector = sectors[i];
         sector.sectorType = SECTOR_TYPES.findObjByName(sector.sectorType.name);
       }
-      incident.save = function() {
-        console.log("incident.save(): incident:",incident);
+      incident.save = function () {
+        console.log("incident.save(): incident:", incident);
         var promise = $q.when(incident);
         return promise;
       };
@@ -230,8 +243,8 @@ angular.module('StaticAdapter', ['DataServices'])
       newUnit.type = unitType;
       newUnit.sector = sector;
       newUnit.timer_start = new Date();
-      newUnit.save = function(unit) {
-        console.log("unit.save(): unit:",unit);
+      newUnit.save = function (unit) {
+        console.log("unit.save(): unit:", unit);
         var promise = $q.when(unit);
         return promise;
       };
