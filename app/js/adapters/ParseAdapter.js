@@ -16,7 +16,11 @@ var DISPATCHED_UNITS_DEF = ['incident', 'unitTypes'];
 var USER_DEF = ['username', 'email', 'name', 'department'];
 //var ROLE_DEF = ['name', 'users', 'roles'];
 
-angular.module('ParseAdapter', [])
+angular.module('ParseAdapter', ['DataServices'])
+
+  .run(function (DataStore, ParseAdapter) {
+    DataStore.registered_adapters.push(ParseAdapter);
+  })
 
   .factory('ParseAdapter', function (LoadIncident_Parse, LoadAllIncidents_Parse, LoadIncidentTypes_Parse, CreateNewIncident_Parse, isLoggedIn_Parse,
                                      LoadActionTypes_Parse, LoadSectorTypes_Parse, CreateNewSectorType_Parse, LoadUnitTypes_Parse,

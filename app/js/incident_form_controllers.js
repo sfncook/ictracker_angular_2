@@ -1,6 +1,11 @@
 'use strict';
 
 angular.module("ictApp", ['ngDraggable',
+  /*** BEGIN Adapter Area ***/
+  'ParseAdapter',
+  'StaticAdapter',
+/*** END Adapter Area ***/
+
   'DataServices', 'TbarServices', 'ActionServices', 'UnitServices',
   'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices',
   'TimerServices', 'MaydayServices', 'UpgradeServices',
@@ -10,7 +15,7 @@ angular.module("ictApp", ['ngDraggable',
   .run(function ($q, DataStore, LoadIncident, StartIncidentTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
     if (!DataStore.init()) {
       var urlLink = "login.html";
-      window.location.href = urlLink;
+      //window.location.href = urlLink;
     }
 
     //if(!IsLoggedIn()){
@@ -52,6 +57,7 @@ angular.module("ictApp", ['ngDraggable',
 
   .controller('LoadingSplashDlg', function ($scope, DataStore) {
     $scope.dataStore = DataStore;
+    console.log(DataStore.registered_adapters);
   })
 
   .controller('HeaderContainer2', function ($scope, DataStore) {

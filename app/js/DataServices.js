@@ -1,10 +1,11 @@
-angular.module('DataServices', ['ParseAdapter', 'StaticAdapter'])
+angular.module('DataServices', [])
   .factory('DefaultCity', function () {
     return "Mesa";
   })
 
-  .factory('DataStore', function (ParseAdapter, StaticAdapter) {
+  .factory('DataStore', function () {
     return {
+      registered_adapters: [],
       incident: {},
       currentUser: {},
       waitingToLoad: true,
@@ -18,17 +19,20 @@ angular.module('DataServices', ['ParseAdapter', 'StaticAdapter'])
           // Check for misspelling of work adapter
           adapter_id_str = getHttpRequestByName('adaptor');
           if (adapter_id_str == "") {
-            console.log("Missing required 'adapter' parameter. Using default 'parse' adapter.");
-            this.adapter = ParseAdapter;
+            console.log("Missing required 'adapter' parameter. Using default 'static' adapter.");
+            adapter_id_str = "static";
           }
         }
 
         if (adapter_id_str != "") {
-          if (ParseAdapter.adapter_id_str == adapter_id_str) {
-            this.adapter = ParseAdapter;
-          } else if (StaticAdapter.adapter_id_str == adapter_id_str) {
-            this.adapter = StaticAdapter;
-          } else {
+          for(var i=0; i<this.registered_adapters.length; i++) {
+            var adapter = this.registered_adapters[i];
+            if (adapter.adapter_id_str == adapter_id_str) {
+              this.adapter = adapter;
+              break;
+            }
+          }
+          if(!this.adapter){
             console.error("Invalid or unhandled adapter parameter: ", this.adapter);
           }
         }

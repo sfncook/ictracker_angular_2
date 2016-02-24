@@ -1,4 +1,8 @@
-angular.module('StaticAdapter', [])
+angular.module('StaticAdapter', ['DataServices'])
+
+  .run(function (DataStore, StaticAdapter) {
+    DataStore.registered_adapters.push(StaticAdapter);
+  })
 
   .factory('StaticAdapter', function (LoadIncidentTypes_Static, LoadAllIncidents_Static, LoadIncident_Static, isLoggedIn_Static,
                                       LoadActionTypes_Static, LoadSectorTypes_Static, LoadUnitTypes_Static,
