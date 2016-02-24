@@ -7,7 +7,6 @@ angular.module('StaticAdapter', ['DataServices'])
   .factory('StaticAdapter', function (LoadIncidentTypes_Static,
                                       LoadAllIncidents_Static,
                                       LoadIncident_Static,
-                                      isLoggedIn_Static,
                                       LoadActionTypes_Static,
                                       LoadSectorTypes_Static,
                                       LoadUnitTypes_Static,
@@ -33,7 +32,6 @@ angular.module('StaticAdapter', ['DataServices'])
       LoadIncident: LoadIncident_Static,
       CreateNewIncident: CreateNewIncident_Static,
       UpdateIncidentAsNeeded: UpdateIncidentAsNeeded_Static,
-      isLoggedIn: isLoggedIn_Static,
       LoadActionTypes: LoadActionTypes_Static,
       LoadSectorTypes: LoadSectorTypes_Static,
       CreateNewSectorType: CreateNewSectorType_Static,
@@ -50,15 +48,16 @@ angular.module('StaticAdapter', ['DataServices'])
     };
   })
 
-  .factory('isLoggedIn_Static', function () {
-    return function () {
-      return true;
-    }
-  })
-
   .factory('LoadIncidentTypes_Static', function ($q) {
     return function () {
-      var promise = $q.when(INC_TYPES);
+      //var promise = $q.when(INC_TYPES);
+      var promise = $q.all(INC_TYPES).then(
+        function (INC_TYPES) {
+          return INC_TYPES;
+        },
+        function (obj, error) {
+          //TODO: Error msg goes here
+        });
       return promise;
     }
   })
@@ -99,7 +98,16 @@ angular.module('StaticAdapter', ['DataServices'])
 
   .factory('LoadSectorTypes_Static', function ($q) {
     return function () {
-      var promise = $q.when(SECTOR_TYPES);
+      //var promise = $q.when(SECTOR_TYPES);
+      //return promise;
+      //var promise = $q.when(INC_TYPES);
+      var promise = $q.when(SECTOR_TYPES).then(
+        function (SECTOR_TYPES_) {
+          return SECTOR_TYPES_;
+        },
+        function (obj, error) {
+          //TODO: Error msg goes here
+        });
       return promise;
     }
   })

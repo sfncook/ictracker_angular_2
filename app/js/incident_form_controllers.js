@@ -57,7 +57,6 @@ angular.module("ictApp", ['ngDraggable',
 
   .controller('LoadingSplashDlg', function ($scope, DataStore) {
     $scope.dataStore = DataStore;
-    console.log(DataStore.registered_adapters);
   })
 
   .controller('HeaderContainer2', function ($scope, DataStore) {

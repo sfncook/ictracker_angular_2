@@ -3,6 +3,52 @@
  * and follow the instructions.  TODOs in methods just need to have the method
  * implemented by you.
  *
+ * Most of the methods require that you return a promise and the function inside
+ * promise must return the data requested.  Notic that the data returned will
+ * need to be either an object or an array of objects.  The TODO comment should
+ * indicate what the return value is.  Here are some examples of how to
+ * implement the promises:
+ *
+ * SIMPLE promise:
+ *  var data = [...];
+ *  [do stuff here]
+ *  var promise = $q.when(data);
+ *  return promise;
+ *
+ * COMPLEX promise:
+ *   var promise = $q.when().then(
+ *     function () {
+ *      var data = [...];
+ *      [do stuff here]
+ *      return data;
+ *     },
+ *     function (obj, error) {
+ *      [handle errors here]
+ *     }
+ *   );
+ *   return promise;
+ *
+ * NESTED/DEPENDENT promises:
+ * For this pattern Function_01 and Function_02 are
+ * functions that return a promise (using any of these
+ * three patterns, for instance)
+ * 
+ *   var promises = [];
+ *   promises.push( Function_01() );
+ *   promises.push( Function_02() );
+ *   [do stuff here]
+ *   var promise = $q.all(promises).then(
+ *     function () {
+ *      var data = [...];
+ *      [do stuff here]
+ *      return data;
+ *     },
+ *     function (obj, error) {
+ *      [handle errors here]
+ *     }
+ *   );
+ *   return promise;
+ *
  */
 //TODO: find and replace "TEMPLATE" with your class name
 angular.module('TEMPLATEAdapter', ['DataServices'])
@@ -66,8 +112,13 @@ angular.module('TEMPLATEAdapter', ['DataServices'])
   })
   .factory('LoadIncidentTypes_TEMPLATE', function ($q) {
     return function () {
-      var promise = $q.when(INC_TYPES);
-      return promise;
+      return $q.all(SECTOR_TYPES).then(
+        function (SECTOR_TYPES_) {
+          return SECTOR_TYPES_;
+        },
+        function (obj, error) {
+          //TODO: Error msg goes here
+        });
     }
   })
 
