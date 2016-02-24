@@ -7,7 +7,7 @@ angular.module('StaticAdapter', ['DataServices'])
   .factory('StaticAdapter', function (LoadIncidentTypes_Static, LoadAllIncidents_Static, LoadIncident_Static, isLoggedIn_Static,
                                       LoadActionTypes_Static, LoadSectorTypes_Static, LoadUnitTypes_Static,
                                       SaveIncident_Static, SaveSector_Static, SaveReportAction_Static,
-                                      CreateNewIncident_Static, CreateNewSectorType_Static, CreateNewSector_Static,
+                                      CreateNewIncident_Static, UpdateIncidentAsNeeded_Static, CreateNewSectorType_Static, CreateNewSector_Static,
                                       CreateNewMayday_Static, SaveMayday_Static, DeleteMayday_Static,
                                       CreateNewUnit_Static, DeleteUnit_Static) {
     return {
@@ -19,9 +19,7 @@ angular.module('StaticAdapter', ['DataServices'])
       LoadAllIncidents: LoadAllIncidents_Static,
       LoadIncident: LoadIncident_Static,
       CreateNewIncident: CreateNewIncident_Static,
-      UpdateIncidentAsNeeded: function () {
-        console.log("StaticAdapter UpdateIncidentAsNeeded");
-      },
+      UpdateIncidentAsNeeded: UpdateIncidentAsNeeded_Static,
       isLoggedIn: isLoggedIn_Static,
       LoadActionTypes: LoadActionTypes_Static,
       LoadSectorTypes: LoadSectorTypes_Static,
@@ -134,6 +132,12 @@ angular.module('StaticAdapter', ['DataServices'])
     return function () {
       var incidentObject = {};
       return incidentObject;
+    }
+  })
+
+  .factory('UpdateIncidentAsNeeded_Static', function () {
+    return function () {
+      console.log("StaticAdapter UpdateIncidentAsNeeded");
     }
   })
 
