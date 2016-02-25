@@ -32,7 +32,7 @@
  * For this pattern Function_01 and Function_02 are
  * functions that return a promise (using any of these
  * three patterns, for instance)
- * 
+ *
  *   var promises = [];
  *   promises.push( Function_01() );
  *   promises.push( Function_02() );
@@ -112,47 +112,25 @@ angular.module('TEMPLATEAdapter', ['DataServices'])
   })
   .factory('LoadIncidentTypes_TEMPLATE', function ($q) {
     return function () {
-      return $q.all(SECTOR_TYPES).then(
-        function (SECTOR_TYPES_) {
-          return SECTOR_TYPES_;
-        },
-        function (obj, error) {
-          //TODO: Error msg goes here
-        });
+      //TODO: Return promise that returns an array of IncidentTypes
     }
   })
 
   .factory('LoadAllIncidents_TEMPLATE', function ($q) {
     return function () {
-      var promise = $q.when(INCIDENTS);
-      return promise;
+      //TODO: Return promise that returns an array of Incidents
     }
   })
 
   .factory('LoadIncident_TEMPLATE', function ($q) {
     return function () {
-      console.log("NOTE: You are using the TEMPLATE Adapter so the inc_id config parameter is ignored.  The same incident data is always returned.");
-      var incident = INCIDENTS[0];
-      var sectors = incident.sectors;
-      for (var i = 0; i < sectors.length; i++) {
-        var sector = sectors[i];
-        sector.sectorType = SECTOR_TYPES.findObjByName(sector.sectorType.name);
-      }
-      incident.save = function () {
-        console.log("incident.save(): incident:", incident);
-        var promise = $q.when(incident);
-        return promise;
-      };
-
-      var promise = $q.when(incident);
-      return promise;
+      //TODO: Return promise that returns an Incident object
     }
   })
 
   .factory('LoadActionTypes_TEMPLATE', function ($q) {
     return function () {
-      var promise = $q.when(ACTION_TYPES);
-      return promise;
+      //TODO: Return promise that returns an array of ActionTypes
     }
   })
 
