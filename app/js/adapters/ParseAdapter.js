@@ -538,7 +538,9 @@ angular.module('ParseAdapter', ['DataServices'])
             promises.push(LoadDispatchedUnitsForIncident_Parse(incident));
           }
           return $q.all(promises).then(function () {
-              FindAllMaydayUnitsForIncident(incident);
+              if(incident) {
+                FindAllMaydayUnitsForIncident(incident);
+              }
               DataStore_Parse.incident = incident;
               return incident;
             },
@@ -830,26 +832,28 @@ angular.module('ParseAdapter', ['DataServices'])
   })
   .factory('FindAllMaydayUnitsForIncident', function () {
     return function (incident) {
-      incident.maydays.forEach(function (mayday) {
-        // Find instantiation of this mayday's sector and unit in the sector list
-        var foundSector = false;
-        incident.sectors.forEach(function (sector) {
-          if (sector.id == mayday.sector.id) {
-            mayday.sector = sector;
-            foundSector = true;
-            sector.units.forEach(function (unit) {
-              if (unit.id == mayday.unit.id) {
-                mayday.unit = unit;
-                unit.hasMayday = true;
-                foundSector = true;
-              }
-            });
+      if(incident.maydays) {
+        incident.maydays.forEach(function (mayday) {
+          // Find instantiation of this mayday's sector and unit in the sector list
+          var foundSector = false;
+          incident.sectors.forEach(function (sector) {
+            if (sector.id == mayday.sector.id) {
+              mayday.sector = sector;
+              foundSector = true;
+              sector.units.forEach(function (unit) {
+                if (unit.id == mayday.unit.id) {
+                  mayday.unit = unit;
+                  unit.hasMayday = true;
+                  foundSector = true;
+                }
+              });
+            }
+          });
+          if (!foundSector) {
+            console.log("Did not find sector!");
           }
         });
-        if (!foundSector) {
-          console.log("Did not find sector!");
-        }
-      });
+      }
     }
   })
   .factory('SaveMayday_Parse', function (DefaultErrorLogger) {

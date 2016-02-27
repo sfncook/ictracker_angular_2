@@ -607,8 +607,13 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
 
   .controller('ActionsDlg', function ($scope, DataStore, LoadActionTypes, ActionTypes, ToggleActionTypeForUnit, ReportFunctions, SaveUnit) {
     $scope.selectedUnit = {};
-    LoadActionTypes();
-    $scope.actionTypes = ActionTypes;
+    LoadActionTypes().then(function (actionTypes_) {
+      ActionTypes.removeAll();
+      for(var i=0; i<actionTypes_.length; i++) {
+        ActionTypes.push(actionTypes_[i]);
+      }
+      $scope.actionTypes = ActionTypes;
+    });
 
     $scope.selectAction = function (actionType) {
       ToggleActionTypeForUnit($scope.selectedUnit, actionType);
