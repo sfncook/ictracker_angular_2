@@ -50,6 +50,7 @@
  *   return promise;
  *
  */
+//TODO: Add the module name (ie "TEMPLATEAdapter" to the list in AdaptersList.js
 //TODO: find and replace "TEMPLATE" with your class name
 angular.module('TEMPLATEAdapter', ['DataServices'])
 

@@ -1,8 +1,7 @@
 angular.module('AdaptersList', [
-/*** BEGIN Adapter Area ***/
   'ParseAdapter',
   'StaticAdapter'
-/*** END Adapter Area ***/
+  // Add all adapters to this list otherwise it with not get loaded.
 ])
 
 ;
