@@ -81,6 +81,14 @@ angular.module('StaticAdapter', ['DataServices'])
         var promise = $q.when(incident);
         return promise;
       };
+      incident.dispatchedUnits = {
+        'unitTypes':[],
+        'save': function (obj) {
+          console.log("incident.dispatchedUnits.save(): incident.dispatchedUnits:", obj);
+          var promise = $q.when(incident);
+          return promise;
+        }
+      };
 
       var promise = $q.when(incident);
       return promise;
@@ -245,7 +253,7 @@ angular.module('StaticAdapter', ['DataServices'])
       return newUnit;
     }
   })
-  .factory('DeleteUnit_Static', function () {
+  .factory('DeleteUnit_Static', function ($q) {
     return function (unit) {
       console.log("DeleteUnit_Static - Do nothing.  Always returns TRUE.");
       var promise = $q.when(true);

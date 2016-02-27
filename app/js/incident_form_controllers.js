@@ -433,7 +433,8 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
     $scope.type_names = [];
 
     LoadUnitTypes().then(
-      function () {
+      function (unitTypes_) {
+        UnitTypes = unitTypes_;
         // In order to eliminate duplicates write everything to objects
         var cities_local = [];
         for (var i = 0; i < UnitTypes.length; i++) {
@@ -493,6 +494,7 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
       } else {
         var wasAdded = ToggleUnitTypeForSector($scope.selectedSector, unitType);
         if (wasAdded) {
+          console.log("incident:",$scope.dataStore.incident);
           if (!$scope.dataStore.incident.dispatchedUnits.unitTypes.contains(unitType)) {
             $scope.dataStore.incident.dispatchedUnits.unitTypes.push(unitType);
             $scope.dataStore.incident.dispatchedUnits.save(null, {
