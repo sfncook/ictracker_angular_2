@@ -377,7 +377,7 @@ angular.module('ParseAdapter', ['DataServices'])
       return objectivesObject;
     }
   })
-  .factory('FetchObjectivesForIncident_Parse', function (ConvertParseObject, CreateNewObjectives_Parse, UpdateObjectivesPercent, DefaultParseErrorLogger) {
+  .factory('FetchObjectivesForIncident_Parse', function (ConvertParseObject, CreateNewObjectives_Parse, DefaultParseErrorLogger) {
     return function (incident) {
       var queryObjectives = new Parse.Query(Parse.Object.extend('Objectives'));
       queryObjectives.equalTo("incident", incident);
@@ -389,7 +389,7 @@ angular.module('ParseAdapter', ['DataServices'])
           } else {
             incident.objectives = CreateNewObjectives_Parse(incident);
           }
-          UpdateObjectivesPercent(incident);
+          //UpdateObjectivesPercent(incident);
           return incident;
         },
         DefaultParseErrorLogger
@@ -431,7 +431,7 @@ angular.module('ParseAdapter', ['DataServices'])
       return osrObject;
     }
   })
-  .factory('FetchOSRForIncident_Parse', function (ConvertParseObject, CreateNewOSR_Parse, UpdateOsrPercent, DefaultParseErrorLogger) {
+  .factory('FetchOSRForIncident_Parse', function (ConvertParseObject, CreateNewOSR_Parse, DefaultParseErrorLogger) {
     return function (incident) {
       var queryOSR = new Parse.Query(Parse.Object.extend('OSR'));
       queryOSR.equalTo("incident", incident);
@@ -443,7 +443,7 @@ angular.module('ParseAdapter', ['DataServices'])
           } else {
             incident.osr = CreateNewOSR_Parse(incident);
           }
-          UpdateOsrPercent(incident);
+          //UpdateOsrPercent(incident);
           return incident;
         },
         DefaultParseErrorLogger
@@ -661,19 +661,21 @@ angular.module('ParseAdapter', ['DataServices'])
   })
 
 
-  .factory('LoadActionTypes_Parse', function (ActionTypes, ParseQuery, ConvertParseObject) {
+  .factory('LoadActionTypes_Parse', function (ParseQuery, ConvertParseObject) {
     return function () {
       var queryActionTypes = new Parse.Query(Parse.Object.extend('ActionType'));
       queryActionTypes.limit(1000);
       return queryActionTypes.find({
         success: function (actionTypes) {
+          var actionTypes = [];
           for (var i = 0; i < actionTypes.length; i++) {
             var actionType = actionTypes[i];
             ConvertParseObject(actionType, ACTION_TYPE_DEF);
-            ActionTypes.push(actionType);
+            actionTypes.push(actionType);
             var nameRefor = actionType.name.toUpperCase();
-            ActionTypes[nameRefor] = actionType;
+            actionTypes[nameRefor] = actionType;
           }//for
+          return actionTypes;
         },
         error: function (error) {
           console.log('Failed to LoadActionTypes, with error code: ' + error.message);
@@ -723,19 +725,21 @@ angular.module('ParseAdapter', ['DataServices'])
     }
   })
 
-  .factory('LoadUnitTypes_Parse', function (UnitTypes, ParseQuery, ConvertParseObject) {
+  .factory('LoadUnitTypes_Parse', function (ParseQuery, ConvertParseObject) {
     return function () {
       var queryUniTypes = new Parse.Query(Parse.Object.extend('UnitType'));
       queryUniTypes.limit(1000);
       return queryUniTypes.find({
         success: function (unitTypes) {
+          var unitTypes = [];
           for (var i = 0; i < unitTypes.length; i++) {
             var unitType = unitTypes[i];
             ConvertParseObject(unitType, UNIT_TYPE_DEF);
-            UnitTypes.push(unitType);
+            unitTypes.push(unitType);
             var nameRefor = unitType.name.toUpperCase();
-            UnitTypes[nameRefor] = unitType;
+            unitTypes[nameRefor] = unitType;
           }//for
+          return unitTypes;
         },
         error: function (error) {
           console.log('Failed to LoadUnitTypes, with error code: ' + error.message);

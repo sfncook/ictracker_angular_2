@@ -110,14 +110,8 @@ angular.module('StaticAdapter', ['DataServices'])
     }
   })
 
-  .factory('LoadUnitTypes_Static', function ($q, UnitTypes) {
+  .factory('LoadUnitTypes_Static', function ($q) {
     return function () {
-      for (var i = 0; i < UNIT_TYPES.length; i++) {
-        var unitType = UNIT_TYPES[i];
-        UnitTypes.push(unitType);
-        var nameRefor = unitType.name.toUpperCase();
-        UnitTypes[nameRefor] = unitType;
-      }//for
       var promise = $q.when(UNIT_TYPES);
       return promise;
     }
