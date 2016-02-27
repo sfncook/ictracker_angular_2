@@ -14,7 +14,6 @@ angular.module('StaticAdapter', ['DataServices'])
                                       SaveSector_Static,
                                       SaveReportAction_Static,
                                       CreateNewIncident_Static,
-                                      UpdateIncidentAsNeeded_Static,
                                       CreateNewSectorType_Static,
                                       CreateNewSector_Static,
                                       CreateNewMayday_Static,
@@ -31,7 +30,6 @@ angular.module('StaticAdapter', ['DataServices'])
       LoadAllIncidents: LoadAllIncidents_Static,
       LoadIncident: LoadIncident_Static,
       CreateNewIncident: CreateNewIncident_Static,
-      UpdateIncidentAsNeeded: UpdateIncidentAsNeeded_Static,
       LoadActionTypes: LoadActionTypes_Static,
       LoadSectorTypes: LoadSectorTypes_Static,
       CreateNewSectorType: CreateNewSectorType_Static,
@@ -153,12 +151,6 @@ angular.module('StaticAdapter', ['DataServices'])
     return function () {
       var incidentObject = {};
       return incidentObject;
-    }
-  })
-
-  .factory('UpdateIncidentAsNeeded_Static', function () {
-    return function () {
-      console.log("StaticAdapter UpdateIncidentAsNeeded");
     }
   })
 

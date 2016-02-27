@@ -67,7 +67,6 @@ angular.module('TEMPLATEAdapter', ['DataServices'])
                                         SaveSector_TEMPLATE,
                                         SaveReportAction_TEMPLATE,
                                         CreateNewIncident_TEMPLATE,
-                                        UpdateIncidentAsNeeded_TEMPLATE,
                                         CreateNewSectorType_TEMPLATE,
                                         CreateNewSector_TEMPLATE,
                                         CreateNewMayday_TEMPLATE,
@@ -86,7 +85,6 @@ angular.module('TEMPLATEAdapter', ['DataServices'])
       LoadAllIncidents: LoadAllIncidents_TEMPLATE,
       LoadIncident: LoadIncident_TEMPLATE,
       CreateNewIncident: CreateNewIncident_TEMPLATE,
-      UpdateIncidentAsNeeded: UpdateIncidentAsNeeded_TEMPLATE,
       LoadActionTypes: LoadActionTypes_TEMPLATE,
       LoadSectorTypes: LoadSectorTypes_TEMPLATE,
       CreateNewSectorType: CreateNewSectorType_TEMPLATE,
@@ -136,58 +134,40 @@ angular.module('TEMPLATEAdapter', ['DataServices'])
 
   .factory('LoadSectorTypes_TEMPLATE', function ($q) {
     return function () {
-      var promise = $q.when(SECTOR_TYPES);
-      return promise;
+      //TODO: Return promise that returns an array of SectorTypes
     }
   })
 
   .factory('LoadUnitTypes_TEMPLATE', function ($q, UnitTypes) {
     return function () {
-      for (var i = 0; i < UNIT_TYPES.length; i++) {
-        var unitType = UNIT_TYPES[i];
-        UnitTypes.push(unitType);
-        var nameRefor = unitType.name.toUpperCase();
-        UnitTypes[nameRefor] = unitType;
-      }//for
-      var promise = $q.when(UNIT_TYPES);
-      return promise;
+      //TODO: Return promise that returns an array of UnitTypes
     }
   })
 
   .factory('SaveIncident_TEMPLATE', function ($q) {
     return function (incident) {
-      console.log("SaveIncident_TEMPLATE - Do nothing.  Always returns TRUE.");
-      var promise = $q.when(true);
-      return promise;
+      //TODO: Return promise that persists the incident argument and
+      // returns a boolean true:save succeeded, false: otherwise
     }
   })
 
   .factory('SaveSector_TEMPLATE', function ($q) {
     return function (sector) {
-      console.log("SaveSector_TEMPLATE - Do nothing.  Always returns TRUE.");
-      var promise = $q.when(true);
-      return promise;
+      //TODO: Return promise that persists the sector argument and
+      // returns a boolean true:save succeeded, false: otherwise
     }
   })
 
   .factory('SaveReportAction_TEMPLATE', function ($q) {
     return function (sector, text) {
-      console.log("SaveReportAction_TEMPLATE - Do nothing.  Always returns TRUE.");
-      var promise = $q.when(true);
-      return promise;
+      //TODO: Return promise that persists the report action argument and
+      // returns a boolean true:save succeeded, false: otherwise
     }
   })
 
   .factory('CreateNewIncident_TEMPLATE', function () {
     return function () {
-      var incidentObject = {};
-      return incidentObject;
-    }
-  })
-
-  .factory('UpdateIncidentAsNeeded_TEMPLATE', function () {
-    return function () {
-      console.log("TEMPLATEAdapter UpdateIncidentAsNeeded");
+      //TODO: Return promise that returns a new blank Incident object
     }
   })
 

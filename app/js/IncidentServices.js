@@ -42,11 +42,11 @@ angular.module('IncidentServices', ['DataServices'])
     }
   })
 
-  .factory('UpdateIncidentAsNeeded', function (DataStore) {
-    return function (incident) {
-      return DataStore.adapter.UpdateIncidentAsNeeded(incident);
-    }
-  })
+  //.factory('UpdateIncidentAsNeeded', function (DataStore) {
+  //  return function (incident) {
+  //    return DataStore.adapter.UpdateIncidentAsNeeded(incident);
+  //  }
+  //})
 
   .factory('Incidents', function () {
     return [];
