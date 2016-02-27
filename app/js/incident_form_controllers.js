@@ -1,11 +1,6 @@
 'use strict';
 
-angular.module("ictApp", ['ngDraggable',
-  /*** BEGIN Adapter Area ***/
-  'ParseAdapter',
-  'StaticAdapter',
-/*** END Adapter Area ***/
-
+angular.module("ictApp", ['ngDraggable', 'AdaptersList',
   'DataServices', 'TbarServices', 'ActionServices', 'UnitServices',
   'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices',
   'TimerServices', 'MaydayServices', 'UpgradeServices',
