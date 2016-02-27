@@ -49,6 +49,11 @@
  *   );
  *   return promise;
  *
+ *   The returned objects have very strict structure requirements.  Perhaps
+ *   in the future we can make this more flexible.  but for now this is the
+ *   best we got.  Take a look at the other working Adapters for examples
+ *   of what the data should look like.
+ *
  */
 //TODO: Add the module name (ie "TEMPLATEAdapter" to the list in AdaptersList.js
 //TODO: find and replace "TEMPLATE" with your class name
