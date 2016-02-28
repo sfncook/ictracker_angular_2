@@ -5,8 +5,8 @@ angular.module('ActionServices', ['DataServices'])
   })
 
   .factory('LoadActionTypes', function (DataStore) {
-    return function () {
-      return DataStore.adapter.LoadActionTypes();
+    return function (actionTypes) {
+      return DataStore.adapter.LoadActionTypes(actionTypes);
     }
   })
 

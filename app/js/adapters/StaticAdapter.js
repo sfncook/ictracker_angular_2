@@ -96,7 +96,10 @@ angular.module('StaticAdapter', ['DataServices'])
   })
 
   .factory('LoadActionTypes_Static', function ($q) {
-    return function () {
+    return function (ActionTypes) {
+      for(var i=0; i<ACTION_TYPES.length; i++) {
+        ActionTypes.push(ACTION_TYPES[i]);
+      }
       var promise = $q.when(ACTION_TYPES);
       return promise;
     }
@@ -369,47 +372,60 @@ var INCIDENTS = [
 
 
 var ACTION_TYPES = [
-  {"action_type": "Engine", "is_warning": false, "name": "Supply"},
-  {"action_type": "Engine", "is_warning": false, "name": "Take a Line"},
-  {"action_type": "Engine", "is_warning": false, "name": "Search/Rescue"},
-  {"action_type": "Engine", "is_warning": false, "name": "Fire Attack"},
-  {"action_type": "Engine", "is_warning": false, "name": "IRIC"},
-  {"action_type": "Engine", "is_warning": false, "name": "Check Extension"},
-  {"action_type": "Engine", "is_warning": false, "name": "Protect Exposures"},
-  {"action_type": "Engine", "is_warning": false, "name": "Overhaul"},
-  {"action_type": "Engine", "is_warning": false, "name": "Deck Gun"},
-  {"action_type": "Engine", "is_warning": false, "name": "Portable Monitor"},
-  {"action_type": "Ladder", "is_warning": false, "name": "Secure Utilities"},
-  {"action_type": "Ladder", "is_warning": false, "name": "Vert Ventilation"},
-  {"action_type": "Ladder", "is_warning": false, "name": "Trench Cut"},
-  {"action_type": "Ladder", "is_warning": false, "name": "Roof Profile"},
-  {"action_type": "Ladder", "is_warning": false, "name": "Fan to the Door"},
-  {"action_type": "Ladder", "is_warning": false, "name": "Soften Building"},
-  {"action_type": "Ladder", "is_warning": false, "name": "Open Building"},
-  {"action_type": "Ladder", "is_warning": false, "name": "Salvage"},
-  {"action_type": "Ladder", "is_warning": false, "name": "Elevated Master"},
-  {"action_type": "Safety", "is_warning": false, "name": "Agrees With Strategy"},
-  {"action_type": "Safety", "is_warning": false, "name": "360 recon"},
-  {"action_type": "Safety", "is_warning": true, "name": "*Pool"},
-  {"action_type": "Safety", "is_warning": true, "name": "*Empty Pool"},
-  {"action_type": "Safety", "is_warning": true, "name": "*Powerlines"},
-  {"action_type": "Safety", "is_warning": true, "name": "*Powerlines Down"},
-  {"action_type": "Safety", "is_warning": true, "name": "*Bars on Windows"},
-  {"action_type": "Safety", "is_warning": true, "name": "*Dogs in Yard"},
-  {"action_type": "Safety", "is_warning": true, "name": "*Hoarders House"},
-  {"action_type": "Safety", "is_warning": true, "name": "*Basement"},
-  {"action_type": "Rescue", "is_warning": false, "name": "Grab RIC Bag"},
-  {"action_type": "Rescue", "is_warning": false, "name": "Accountability Update"},
-  {"action_type": "Rescue", "is_warning": false, "name": "Throw Ladders"},
-  {"action_type": "Lines", "is_warning": false, "name": "1-3/4"},
-  {"action_type": "Lines", "is_warning": false, "name": "2\""},
-  {"action_type": "Lines", "is_warning": false, "name": "2-1/2"},
-  {"action_type": "Lines", "is_warning": false, "name": "3\""},
-  {"action_type": "Lines", "is_warning": false, "name": "Piercing Nozzle"},
-  {"action_type": "Lines", "is_warning": false, "name": "Horizontal Standpipe"},
-  {"action_type": "Lines", "is_warning": false, "name": "Support Sprinklers"},
-  {"action_type": "Lines", "is_warning": false, "name": "Standpipe"}
-]
+  {"category":"Engine","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Supply"},
+  {"category":"Engine","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Take a Line"},
+  {"category":"Engine","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Search/Rescue"},
+  {"category":"Engine","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Fire Attack"},
+  {"category":"Engine","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"IRIC"},
+  {"category":"Engine","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Check Extension"},
+  {"category":"Engine","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Protect Exposures"},
+  {"category":"Engine","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Overhaul"},
+  {"category":"Engine","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Deck Gun"},
+  {"category":"Engine","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Portable Monitor"},
+  {"category":"Engine","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Secondary Search"},
+  {"category":"Engine","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Victim Found"},
+  {"category":"Engine","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Firefighter Located"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Secure Utilities"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Vert Ventilation"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"2nd Hole"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Trench Cut"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Roof Profile"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Fan to the Door"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Pressurize Exposures"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Forcible Entry"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Soften Building"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Open Building"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Open Rollup"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Salvage"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Position for Def. Ops"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Put Stick Up"},
+  {"category":"Ladder","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Elevated Master"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Agrees With Strategy"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"360 recon"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Pool"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Empty Pool"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Powerlines"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Powerlines Down"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Bars on Windows"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Dogs in Yard"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Hoarders House"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Basement"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Flashover"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Backdraft"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Eminent Collapse"},
+  {"category":"Safety","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":1,"name":"*Collapse"},
+  {"category":"Rescue","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Grab RIC Bag"},
+  {"category":"Rescue","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Accountability Update"},
+  {"category":"Rescue","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Throw Ladders"},
+  {"category":"Rescue","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Monitor Ch. 16"},
+  {"category":"Lines","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"1/3/04"},
+  {"category":"Lines","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"2\""},
+  {"category":"Lines","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"2/1/02"},
+  {"category":"Lines","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"3\""},
+  {"category":"Lines","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Piercing Nozzle"},
+  {"category":"Lines","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Horizontal Standpipe"},
+  {"category":"Lines","incidentType":["fire","medical","arff","hazmat","water","trench","mountain","palm","struct","confined"],"isWarning":0,"name":"Support Sprinklers"}
+];
 
 var SECTOR_TYPES = [
   {

@@ -494,7 +494,6 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
       } else {
         var wasAdded = ToggleUnitTypeForSector($scope.selectedSector, unitType);
         if (wasAdded) {
-          console.log("incident:",$scope.dataStore.incident);
           if (!$scope.dataStore.incident.dispatchedUnits.unitTypes.contains(unitType)) {
             $scope.dataStore.incident.dispatchedUnits.unitTypes.push(unitType);
             $scope.dataStore.incident.dispatchedUnits.save(null, {
@@ -607,13 +606,9 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
 
   .controller('ActionsDlg', function ($scope, DataStore, LoadActionTypes, ActionTypes, ToggleActionTypeForUnit, ReportFunctions, SaveUnit) {
     $scope.selectedUnit = {};
-    LoadActionTypes().then(function (actionTypes_) {
-      ActionTypes.removeAll();
-      for(var i=0; i<actionTypes_.length; i++) {
-        ActionTypes.push(actionTypes_[i]);
-      }
-      $scope.actionTypes = ActionTypes;
-    });
+    $scope.actionTypes = ActionTypes = [];
+
+    LoadActionTypes($scope.actionTypes);
 
     $scope.selectAction = function (actionType) {
       ToggleActionTypeForUnit($scope.selectedUnit, actionType);

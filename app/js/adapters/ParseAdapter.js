@@ -664,14 +664,13 @@ angular.module('ParseAdapter', ['DataServices'])
 
 
   .factory('LoadActionTypes_Parse', function (ParseQuery, ConvertParseObject) {
-    return function () {
+    return function (actionTypes) {
       var queryActionTypes = new Parse.Query(Parse.Object.extend('ActionType'));
       queryActionTypes.limit(1000);
       return queryActionTypes.find({
-        success: function (actionTypes) {
-          var actionTypes = [];
-          for (var i = 0; i < actionTypes.length; i++) {
-            var actionType = actionTypes[i];
+        success: function (actionTypes_) {
+          for (var i = 0; i < actionTypes_.length; i++) {
+            var actionType = actionTypes_[i];
             ConvertParseObject(actionType, ACTION_TYPE_DEF);
             actionTypes.push(actionType);
             var nameRefor = actionType.name.toUpperCase();
