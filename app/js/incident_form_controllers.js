@@ -646,7 +646,7 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
     }
   })
 
-  .controller('IncInfoDlg', function ($scope, DataStore) {
+  .controller('IncInfoDlg', function ($scope, DataStore, SaveIncident) {
     $scope.inc_address = '';
     $scope.inc_number = '';
 
@@ -659,7 +659,7 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
     $scope.clickOk = function () {
       DataStore.incident.inc_address = $scope.inc_address;
       DataStore.incident.inc_number = $scope.inc_number;
-      DataStore.incident.save();
+      SaveIncident(DataStore.incident);
       $("#incident_info_dlg").dialog("close");
     }
 

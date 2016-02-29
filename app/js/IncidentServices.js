@@ -54,7 +54,14 @@ angular.module('IncidentServices', ['DataServices'])
 
   .factory('SaveIncident', function (DataStore) {
     return function (incident) {
-      return DataStore.adapter.SaveIncident(incident);
+      DataStore.dirtyData = true;
+      incident.dirty = true;
+      return DataStore.adapter.SaveIncident(incident).then(
+        function() {
+          DataStore.dirtyData = false;
+          incident.dirty = false;
+        }
+      );
     }
   })
 
