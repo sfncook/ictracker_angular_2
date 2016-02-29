@@ -167,10 +167,11 @@
                       <div class="clear_float"></div>
 
                       <div class="unit_timer_bar_border"
+                           ng-class="{unit_timer_bar_border_discontinued:!unit.timer_running}"
                            ng-show="sector.sectorType.hasClock">
                         <div class="unit_timer_bar_fill"
                              ng-style="{'width':unit.timer_perc+'%'}"
-                             ng-class="{unit_timer_good:unit.timer_perc>=66, unit_timer_warn:unit.timer_perc>=33 && unit.timer_perc<66, unit_timer_crit:unit.timer_perc>=10 && unit.timer_perc<33, unit_timer_done:unit.timer_perc<10}"
+                             ng-class="{hidden_div:!unit.timer_running, unit_timer_good:unit.timer_perc>=66, unit_timer_warn:unit.timer_perc>=33 && unit.timer_perc<66, unit_timer_crit:unit.timer_perc>=10 && unit.timer_perc<33, unit_timer_done:unit.timer_perc<10}"
                             ></div>
                       </div>
                       <div class="clear_float"></div>
@@ -861,7 +862,13 @@
             ng-click="selectPar(par)"
             ng-class="{glowgreen: selected_unit.par==par}">{{par}}
     </button>
+    <button class='discon_clock_btn'
+        ng-click="discontinueClock()">
+      <img class='clock_icon' src='img/clock.png'/>
+      {{selected_unit.timer_running ? "Discontinue Clock" : "Resume Clock"}}
+    </button>
     <button class='reset_clock_btn'
+            ng-show="selected_unit.timer_running"
         ng-click="resetClock()">
       <img class='clock_icon' src='img/clock.png'/>Reset Clock
     </button>

@@ -359,6 +359,9 @@ tbar {
     width: 57px;
     margin-top: 4px;
 }
+.unit_timer_bar_border_discontinued {
+    border: 1px solid lightgrey;
+}
 .unit_timer_bar_fill {
     /*background: red;*/
     height: 3px;

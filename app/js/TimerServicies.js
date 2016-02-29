@@ -47,7 +47,9 @@ angular.module('TimerServices', ['DataServices', 'IncidentServices', 'UnitServic
           DataStore.incident.sectors.forEach(function (sector) {
             if (sector.sectorType.hasClock) {
               sector.units.forEach(function (unit) {
-                UpdateUnitTimer(unit);
+                if(unit.timer_running) {
+                  UpdateUnitTimer(unit);
+                }
               });
             }
           });

@@ -895,6 +895,13 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
       $("#unit_options_dlg").dialog("close");
     }
 
+    $scope.discontinueClock = function () {
+      $scope.selected_unit.timer_running = !$scope.selected_unit.timer_running;
+      UpdateUnitTimer($scope.selected_unit);
+      SaveUnit($scope.selected_unit);
+      $("#unit_options_dlg").dialog("close");
+    }
+
     $scope.resetClock = function () {
       $scope.selected_unit.timer_start = new Date();
       UpdateUnitTimer($scope.selected_unit);
