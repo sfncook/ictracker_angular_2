@@ -731,10 +731,10 @@ angular.module('ParseAdapter', ['DataServices'])
       var queryUniTypes = new Parse.Query(Parse.Object.extend('UnitType'));
       queryUniTypes.limit(1000);
       return queryUniTypes.find({
-        success: function (unitTypes) {
+        success: function (unitTypes_) {
           var unitTypes = [];
-          for (var i = 0; i < unitTypes.length; i++) {
-            var unitType = unitTypes[i];
+          for (var i = 0; i < unitTypes_.length; i++) {
+            var unitType = unitTypes_[i];
             ConvertParseObject(unitType, UNIT_TYPE_DEF);
             unitTypes.push(unitType);
             var nameRefor = unitType.name.toUpperCase();
