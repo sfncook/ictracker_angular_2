@@ -31,7 +31,15 @@ angular.module('UnitServices', ['DataServices'])
 
   .factory('SaveUnit', function (DataStore) {
     return function (unit) {
-      return DataStore.adapter.SaveUnit(unit);
+      //return DataStore.adapter.SaveUnit(unit);
+      DataStore.dirtyData = true;
+      unit.dirty = true;
+      return DataStore.adapter.SaveUnit(unit).then(
+        function() {
+          DataStore.dirtyData = false;
+          unit.dirty = false;
+        }
+      );
     }
   })
 
