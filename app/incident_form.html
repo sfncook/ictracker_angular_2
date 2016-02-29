@@ -930,22 +930,22 @@
 
 <div id="bnch_vent_dlg" title="Ventilation Benchmarks" ng-controller="BnchDlg" class="dialog">
   <div class="benchmark_col_container">
-    <button class="benchmark_item_btn benchmark_single_btn"
+    <button class="bnch_vent_btn benchmark_item_btn benchmark_single_btn"
             ng-click="selectBnch(bnchVnt1)"
             ng-class="{glowlightgreen: dataStore.selectedSector.bnchVnt1}">
       Holes Cut
     </button>
-    <button class="benchmark_item_btn benchmark_single_btn"
+    <button class="bnch_vent_btn benchmark_item_btn benchmark_single_btn"
             ng-click="selectBnch(bnchVnt2)"
             ng-class="{glowlightgreen: dataStore.selectedSector.bnchVnt2}">
       Positive Return
     </button>
-    <button class="benchmark_item_btn benchmark_single_btn"
+    <button class="bnch_vent_btn benchmark_item_btn benchmark_single_btn"
             ng-click="selectBnch(bnchVnt3)"
             ng-class="{glowlightgreen: dataStore.selectedSector.bnchVnt3}">
       Off the Roof
     </button>
-    <button class="benchmark_item_btn benchmark_single_btn"
+    <button class="bnch_vent_btn benchmark_item_btn benchmark_single_btn"
             ng-click="showParDlgFromBnch()"
             ng-class="{glowlightgreen: doesSectorHavePar(dataStore.selectedSector)}">
       PAR

@@ -989,7 +989,7 @@ function initDialogs() {
   });
   $("#bnch_vent_dlg").dialog({
     resizable: false,
-    width: 250,
+    width: 300,
     modal: true,
     open: function () {
       jQuery('.ui-widget-overlay').bind('click', function () {
