@@ -48,7 +48,7 @@ angular.module('SectorServices', ['DataServices'])
       SaveSector($scope.selectedSector);
 
       if (sectorType.name == "Customer Service") {
-        DataStore.setCustSvcSector();
+        //DataStore.setCustSvcSector();
       }
 
       ReportFunctions.addEvent_title_to_sector($scope.selectedSector);
