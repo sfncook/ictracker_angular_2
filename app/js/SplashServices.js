@@ -63,6 +63,7 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'Departm
       //if (!$scope.incidentObj.inc_number) {
       //  $scope.incidentObj.inc_number = "[Incident Number]"
       //}
+      $scope.incidentObj.inc_startDate = new Date();
 
       LoadDefaultTbars($scope.incidentObj);
 
