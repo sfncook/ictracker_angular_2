@@ -718,7 +718,8 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
     }
 
     $scope.redirectIncidentPage = function () {
-      var urlLink = "splash.html";
+      var adapter_id_str = getHttpRequestByName('adapter');
+      var urlLink = "splash.html?adapter="+adapter_id_str;
       window.location.href = urlLink;
     }
   })
