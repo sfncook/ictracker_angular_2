@@ -97,7 +97,6 @@ angular.module('SectorServices', ['DataServices'])
 
   .factory('SaveSector', function (DataStore) {
     return function (sector) {
-      //return DataStore.SaveSector(sector);
       DataStore.dirtyData = true;
       sector.dirty = true;
       return DataStore.adapter.SaveSector(sector).then(

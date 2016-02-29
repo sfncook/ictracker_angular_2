@@ -31,12 +31,10 @@ angular.module('UnitServices', ['DataServices'])
 
   .factory('SaveUnit', function (DataStore) {
     return function (unit) {
-      console.log("SaveUnit");
       DataStore.dirtyData = true;
       unit.dirty = true;
       return DataStore.adapter.SaveUnit(unit).then(
         function() {
-          console.log("done");
           DataStore.dirtyData = false;
           unit.dirty = false;
         }
