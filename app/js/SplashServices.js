@@ -60,9 +60,9 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'Departm
       $scope.incidentObj.incidentType = incidentType;
 
       // Default value for inc_number
-      if (!$scope.incidentObj.inc_number) {
-        $scope.incidentObj.inc_number = "[Incident Number]"
-      }
+      //if (!$scope.incidentObj.inc_number) {
+      //  $scope.incidentObj.inc_number = "[Incident Number]"
+      //}
 
       LoadDefaultTbars($scope.incidentObj);
 
