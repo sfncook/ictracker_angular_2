@@ -10,8 +10,8 @@ function ActionType(name,         // string
                     isWarning     // bool
 
 ) {
+  this.name = typeof name !== 'undefined' ? name : DEFAULT_name;
   this.category = typeof category !== 'undefined' ? category : DEFAULT_category;
   this.incidentType = typeof incidentType !== 'undefined' ? incidentType : DEFAULT_incidentType;
   this.isWarning = typeof isWarning !== 'undefined' ? isWarning : DEFAULT_isWarning;
-  this.name = typeof name !== 'undefined' ? name : DEFAULT_name;
 }
