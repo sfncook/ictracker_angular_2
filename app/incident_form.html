@@ -81,6 +81,7 @@
         </button>
 
         <div class="db_status_container">
+          <div class="db_dirty_msg button_top db_status" ng-show="dataStore.dirtyData">Waiting</div>
           <div class="db_status_msg button_top db_status" ng-show="dataStore.waitingToLoad">Loading Incident</div>
           <div id="db_status_msg_success"
                class="button_top db_status"
@@ -167,10 +168,11 @@
                       <div class="clear_float"></div>
 
                       <div class="unit_timer_bar_border"
+                           ng-class="{unit_timer_bar_border_discontinued:!unit.timer_running}"
                            ng-show="sector.sectorType.hasClock">
                         <div class="unit_timer_bar_fill"
                              ng-style="{'width':unit.timer_perc+'%'}"
-                             ng-class="{unit_timer_good:unit.timer_perc>=66, unit_timer_warn:unit.timer_perc>=33 && unit.timer_perc<66, unit_timer_crit:unit.timer_perc>=10 && unit.timer_perc<33, unit_timer_done:unit.timer_perc<10}"
+                             ng-class="{hidden_div:!unit.timer_running, unit_timer_good:unit.timer_perc>=66, unit_timer_warn:unit.timer_perc>=33 && unit.timer_perc<66, unit_timer_crit:unit.timer_perc>=10 && unit.timer_perc<33, unit_timer_done:unit.timer_perc<10}"
                             ></div>
                       </div>
                       <div class="clear_float"></div>
@@ -861,7 +863,13 @@
             ng-click="selectPar(par)"
             ng-class="{glowgreen: selected_unit.par==par}">{{par}}
     </button>
+    <button class='discon_clock_btn'
+        ng-click="discontinueClock()">
+      <img class='clock_icon' src='img/clock.png'/>
+      {{selected_unit.timer_running ? "Discontinue Clock" : "Resume Clock"}}
+    </button>
     <button class='reset_clock_btn'
+            ng-show="selected_unit.timer_running"
         ng-click="resetClock()">
       <img class='clock_icon' src='img/clock.png'/>Reset Clock
     </button>
@@ -930,22 +938,22 @@
 
 <div id="bnch_vent_dlg" title="Ventilation Benchmarks" ng-controller="BnchDlg" class="dialog">
   <div class="benchmark_col_container">
-    <button class="benchmark_item_btn benchmark_single_btn"
+    <button class="bnch_vent_btn benchmark_item_btn benchmark_single_btn"
             ng-click="selectBnch(bnchVnt1)"
             ng-class="{glowlightgreen: dataStore.selectedSector.bnchVnt1}">
       Holes Cut
     </button>
-    <button class="benchmark_item_btn benchmark_single_btn"
+    <button class="bnch_vent_btn benchmark_item_btn benchmark_single_btn"
             ng-click="selectBnch(bnchVnt2)"
             ng-class="{glowlightgreen: dataStore.selectedSector.bnchVnt2}">
       Positive Return
     </button>
-    <button class="benchmark_item_btn benchmark_single_btn"
+    <button class="bnch_vent_btn benchmark_item_btn benchmark_single_btn"
             ng-click="selectBnch(bnchVnt3)"
             ng-class="{glowlightgreen: dataStore.selectedSector.bnchVnt3}">
       Off the Roof
     </button>
-    <button class="benchmark_item_btn benchmark_single_btn"
+    <button class="bnch_vent_btn benchmark_item_btn benchmark_single_btn"
             ng-click="showParDlgFromBnch()"
             ng-class="{glowlightgreen: doesSectorHavePar(dataStore.selectedSector)}">
       PAR

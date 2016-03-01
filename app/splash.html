@@ -98,7 +98,9 @@
                         <button class="delt_btn"
                                 ng-click="deleIncident(incident)">Delete</button>
                     </td>
-                    <td>{{incident.inc_number}}</td>
+                    <td>
+                        {{incident.inc_number ? incident.inc_number : "[Incident Number]"}}
+                    </td>
                     <td>
                         <img class="inc_type_icon" ng-src="{{incident.incidentType.icon}}"/>
                     </td>

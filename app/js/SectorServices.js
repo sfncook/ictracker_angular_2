@@ -48,7 +48,7 @@ angular.module('SectorServices', ['DataServices'])
       SaveSector($scope.selectedSector);
 
       if (sectorType.name == "Customer Service") {
-        DataStore.setCustSvcSector();
+        //DataStore.setCustSvcSector();
       }
 
       ReportFunctions.addEvent_title_to_sector($scope.selectedSector);
@@ -97,7 +97,14 @@ angular.module('SectorServices', ['DataServices'])
 
   .factory('SaveSector', function (DataStore) {
     return function (sector) {
-      return DataStore.SaveSector(sector);
+      DataStore.dirtyData = true;
+      sector.dirty = true;
+      return DataStore.adapter.SaveSector(sector).then(
+        function() {
+          DataStore.dirtyData = false;
+          sector.dirty = false;
+        }
+      );
     }
   })
 

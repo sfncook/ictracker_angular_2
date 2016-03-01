@@ -798,7 +798,7 @@ var SECTOR_TYPES = [
   },
   {
     "name": "Alpha Sector",
-    "hasClock": false,
+    "hasClock": true,
     "hasAcctBtn": true,
     "hasPsiBtn": true,
     "hasActions": true,
@@ -814,7 +814,7 @@ var SECTOR_TYPES = [
   },
   {
     "name": "Bravo Sector",
-    "hasClock": false,
+    "hasClock": true,
     "hasAcctBtn": true,
     "hasPsiBtn": true,
     "hasActions": true,
@@ -830,7 +830,7 @@ var SECTOR_TYPES = [
   },
   {
     "name": "Charlie Sector",
-    "hasClock": false,
+    "hasClock": true,
     "hasAcctBtn": true,
     "hasPsiBtn": true,
     "hasActions": true,
@@ -846,7 +846,7 @@ var SECTOR_TYPES = [
   },
   {
     "name": "Delta Sector",
-    "hasClock": false,
+    "hasClock": true,
     "hasAcctBtn": true,
     "hasPsiBtn": true,
     "hasActions": true,
@@ -862,7 +862,7 @@ var SECTOR_TYPES = [
   },
   {
     "name": "North Sector",
-    "hasClock": false,
+    "hasClock": true,
     "hasAcctBtn": true,
     "hasPsiBtn": true,
     "hasActions": true,
@@ -878,7 +878,7 @@ var SECTOR_TYPES = [
   },
   {
     "name": "East Sector",
-    "hasClock": false,
+    "hasClock": true,
     "hasAcctBtn": true,
     "hasPsiBtn": true,
     "hasActions": true,
@@ -894,7 +894,7 @@ var SECTOR_TYPES = [
   },
   {
     "name": "South Sector",
-    "hasClock": false,
+    "hasClock": true,
     "hasAcctBtn": true,
     "hasPsiBtn": true,
     "hasActions": true,
@@ -910,7 +910,7 @@ var SECTOR_TYPES = [
   },
   {
     "name": "West Sector",
-    "hasClock": false,
+    "hasClock": true,
     "hasAcctBtn": true,
     "hasPsiBtn": true,
     "hasActions": true,

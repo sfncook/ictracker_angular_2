@@ -646,7 +646,7 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
     }
   })
 
-  .controller('IncInfoDlg', function ($scope, DataStore) {
+  .controller('IncInfoDlg', function ($scope, DataStore, SaveIncident) {
     $scope.inc_address = '';
     $scope.inc_number = '';
 
@@ -659,7 +659,7 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
     $scope.clickOk = function () {
       DataStore.incident.inc_address = $scope.inc_address;
       DataStore.incident.inc_number = $scope.inc_number;
-      DataStore.incident.save();
+      SaveIncident(DataStore.incident);
       $("#incident_info_dlg").dialog("close");
     }
 
@@ -718,7 +718,8 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
     }
 
     $scope.redirectIncidentPage = function () {
-      var urlLink = "splash.html";
+      var adapter_id_str = getHttpRequestByName('adapter');
+      var urlLink = "splash.html?adapter="+adapter_id_str;
       window.location.href = urlLink;
     }
   })
@@ -895,6 +896,13 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
       $("#unit_options_dlg").dialog("close");
     }
 
+    $scope.discontinueClock = function () {
+      $scope.selected_unit.timer_running = !$scope.selected_unit.timer_running;
+      UpdateUnitTimer($scope.selected_unit);
+      SaveUnit($scope.selected_unit);
+      $("#unit_options_dlg").dialog("close");
+    }
+
     $scope.resetClock = function () {
       $scope.selected_unit.timer_start = new Date();
       UpdateUnitTimer($scope.selected_unit);
@@ -989,7 +997,7 @@ function initDialogs() {
   });
   $("#bnch_vent_dlg").dialog({
     resizable: false,
-    width: 250,
+    width: 300,
     modal: true,
     open: function () {
       jQuery('.ui-widget-overlay').bind('click', function () {

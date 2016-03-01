@@ -615,7 +615,14 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     float: left;
     margin-left: 10px;
 }
-
+.discon_clock_btn {
+    float: right;
+    width: 180px;
+    height: 30px;
+    padding: 0 4px;
+    margin-top: 4px;
+    margin-right: 4px;
+}
 .reset_clock_btn {
     float: right;
     width: 140px;
@@ -660,6 +667,7 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
 
 .benchmark_col_container {
     float: left;
+    width: 100%;
 }
 .benchmark_1st_col_container {
     border-right: 1px solid #666;
@@ -685,6 +693,10 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
 .benchmark_triage_input {
     width: 50px;
     margin: 10px;
+}
+.bnch_vent_btn {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #address_dialog>*>input {
@@ -782,6 +794,9 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     border: 1px solid #9a9a9a;
     padding: 4px 4px 4px 4px;
     box-shadow: 1px 1px 2px #888;
+}
+.db_dirty_msg {
+    background: blue;
 }
 .db_status_msg {
     background: blue;
