@@ -670,15 +670,9 @@ angular.module('ParseAdapter', ['DataServices'])
       return queryActionTypes.find({
         success: function (actionTypes_) {
           for (var i = 0; i < actionTypes_.length; i++) {
-            //var actionType = actionTypes_[i];
-            var name = actionTypes_[i].get('name');
-            var category= actionTypes_[i].get('category');
-            var incidentType= actionTypes_[i].get('incidentType');
-            var isWarning= actionTypes_[i].get('isWarning');
-            var actionType = new ActionType(name, category, incidentType, isWarning);
             ConvertParseObject(actionTypes_[i], ACTION_TYPE_DEF);
+            var actionType = createActionTypeFromObj(ACTION_TYPE_DEF, actionTypes_[i]);
             actionType.parse_obj = actionTypes_[i];
-            
             actionTypes.push(actionType);
             var nameRefor = actionType.name.toUpperCase();
             actionTypes[nameRefor] = actionType;
