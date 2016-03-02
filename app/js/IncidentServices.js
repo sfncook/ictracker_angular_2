@@ -70,12 +70,12 @@ angular.module('IncidentServices', ['DataServices'])
     }
   })
 
-  .filter('IncidentDeepCopy', function () {
-    return function (dest_incident, src_incident) {
-      dest_incident.inc_number = src_incident.inc_number;
-      dest_incident.inc_address = src_incident.inc_address;
-      dest_incident.strategy = src_incident.strategy;
-      dest_incident.txid = src_incident.txid;
+  .factory('UpdateIncidentWithIncident', function (DataStore) {
+    return function (incident) {
+      DataStore.incident.inc_number = incident.inc_number;
+      DataStore.incident.inc_address = incident.inc_address;
+      DataStore.incident.strategy = incident.strategy;
+      DataStore.incident.txid = incident.txid;
     }
   })
 

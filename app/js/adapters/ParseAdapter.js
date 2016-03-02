@@ -603,14 +603,13 @@ angular.module('ParseAdapter', ['DataServices'])
   })
 
 
-  .factory('UpdateIncidentAsNeeded_Parse',
-  function (LoadIncident_Parse, DefaultParseErrorLogger, DataStore_Parse) {
+  .factory('GetUpdatedIncidentOrFalse',
+  function (LoadIncident_Parse, DefaultParseErrorLogger) {
     return function (incident_orig) {
       incident_orig.fetch({
         success: function (incident_) {
           if (incident_.get('txid') != incident_orig.txid) {
             LoadIncident_Parse(incident_orig.id).then(function (incident__) {
-                DataStore_Parse.incident = incident;
                 return incident__;
               },
               DefaultParseErrorLogger);
@@ -904,13 +903,13 @@ angular.module('ParseAdapter', ['DataServices'])
     }
   })
 
-  .factory('StartIncidentUpdateTimer_Parse', function ($interval, DataStore_Parse, UpdateIncidentAsNeeded_Parse) {
+  .factory('StartIncidentUpdateTimer_Parse', function ($interval, DataStore_Parse, GetUpdatedIncidentOrFalse) {
     return function () {
       function updateIncidentData() {
         if(DataStore_Parse.incident) {
-          var resp = UpdateIncidentAsNeeded_Parse(DataStore_Parse.incident);
+          var resp = GetUpdatedIncidentOrFalse(DataStore_Parse.incident);
           if(resp) {
-            DataStore_Parse.incident = resp;
+            UpdateIncidentWithIncident(resp);
           }
         }
       }
@@ -920,10 +919,11 @@ angular.module('ParseAdapter', ['DataServices'])
   })
 
   .factory('SetCallbacks_Parse', function (DataStore_Parse) {
-    return function (UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer) {
+    return function (UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer, UpdateIncidentWithIncident) {
       DataStore_Parse.UpdateObjectivesPercent = UpdateObjectivesPercent;
       DataStore_Parse.UpdateOsrPercent = UpdateOsrPercent;
       DataStore_Parse.UpdateUnitTimer = UpdateUnitTimer;
+      DataStore_Parse.UpdateIncidentWithIncident = UpdateIncidentWithIncident;
 
     }
   })
