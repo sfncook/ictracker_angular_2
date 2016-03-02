@@ -170,5 +170,14 @@ angular.module('SectorServices', ['DataServices'])
     }
   })
 
+//var SECTOR_DEF = ['sectorType', 'direction', 'number', 'orderIndex', 'row', 'col', 'incident', 'acctUnit', 'acctUnitOpt', 'bnchClsUnablePrim', 'bnchClsUnableSec', 'bnchCls1', 'bnchCls2', 'bnchCls3', 'bnchCls4', 'bnchVnt1', 'bnchVnt2', 'bnchVnt3', 'bnchIrc1', 'bnchIrc2', 'bnchIrc3', 'bnchIrc4', 'bnchSaf1', 'bnchSaf2', 'bnchTrt1', 'bnchTrt2', 'bnchTrt3', 'bnchLzo1', 'bnchLzo2', 'bnchLzo3', 'bnchTri1', 'bnchTri2', 'bnchTri3', 'initialized', 'channel_letter', 'channel_number'];
+  .factory('UpdateSectorWithSector', function (DataStore) {
+    return function (sector) {
+      DataStore.incident.inc_number = incident.inc_number;
+      DataStore.incident.inc_address = incident.inc_address;
+      DataStore.incident.strategy = incident.strategy;
+      DataStore.incident.txid = incident.txid;
+    }
+  })
 ;
 

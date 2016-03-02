@@ -70,12 +70,12 @@ angular.module('IncidentServices', ['DataServices'])
     }
   })
 
-  .factory('UpdateIncidentWithIncident', function (DataStore) {
-    return function (incident) {
-      DataStore.incident.inc_number = incident.inc_number;
-      DataStore.incident.inc_address = incident.inc_address;
-      DataStore.incident.strategy = incident.strategy;
-      DataStore.incident.txid = incident.txid;
+  .factory('UpdateIncidentWithIncident', function () {
+    return function (src_incident, dest_incident) {
+      dest_incident.inc_number = src_incident.inc_number;
+      dest_incident.inc_address = src_incident.inc_address;
+      dest_incident.strategy = src_incident.strategy;
+      dest_incident.txid = src_incident.txid;
     }
   })
 

@@ -909,7 +909,7 @@ angular.module('ParseAdapter', ['DataServices'])
         if(DataStore_Parse.incident) {
           var resp = GetUpdatedIncidentOrFalse(DataStore_Parse.incident);
           if(resp) {
-            UpdateIncidentWithIncident(resp);
+            UpdateIncidentWithIncident(resp, DataStore_Parse.incident);
           }
         }
       }
