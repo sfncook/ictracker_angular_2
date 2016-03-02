@@ -42,12 +42,6 @@ angular.module('IncidentServices', ['DataServices'])
     }
   })
 
-  //.factory('UpdateIncidentAsNeeded', function (DataStore) {
-  //  return function (incident) {
-  //    return DataStore.adapter.UpdateIncidentAsNeeded(incident);
-  //  }
-  //})
-
   .factory('Incidents', function () {
     return [];
   })
@@ -73,6 +67,15 @@ angular.module('IncidentServices', ['DataServices'])
         });
       }
       return array;
+    }
+  })
+
+  .filter('IncidentDeepCopy', function () {
+    return function (dest_incident, src_incident) {
+      dest_incident.inc_number = src_incident.inc_number;
+      dest_incident.inc_address = src_incident.inc_address;
+      dest_incident.strategy = src_incident.strategy;
+      dest_incident.txid = src_incident.txid;
     }
   })
 

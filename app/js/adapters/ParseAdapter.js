@@ -27,7 +27,7 @@ angular.module('ParseAdapter', ['DataServices'])
                                      SaveIncident_Parse, SaveSector_Parse, CreateNewSector_Parse, SaveReportAction_Parse,
                                      CreateNewMayday_Parse, SaveMayday_Parse, DeleteMayday_Parse,
                                      CreateNewUnit_Parse, DeleteUnit_Parse, StartIncidentUpdateTimer_Parse,
-                                     SaveUnit_Parse) {
+                                     SaveUnit_Parse, SetCallbacks_Parse) {
     return {
       adapter_id_str: 'parse',
       init: function () {
@@ -69,7 +69,8 @@ angular.module('ParseAdapter', ['DataServices'])
       DeleteMayday: DeleteMayday_Parse,
       CreateNewUnit: CreateNewUnit_Parse,
       DeleteUnit: DeleteUnit_Parse,
-      SaveUnit: SaveUnit_Parse
+      SaveUnit: SaveUnit_Parse,
+      SetCallbacks: SetCallbacks_Parse
     };
   })
 
@@ -314,7 +315,7 @@ angular.module('ParseAdapter', ['DataServices'])
     }
   })
   .factory('LoadUnitsForSector_Parse',
-  function ($q, ConvertParseObject, FetchTypeForUnit_Parse, FetchActionsForUnit_Parse, DefaultParseErrorLogger) {
+  function ($q, DataStore_Parse, ConvertParseObject, FetchTypeForUnit_Parse, FetchActionsForUnit_Parse, DefaultParseErrorLogger) {
     return function (sector) {
       sector.units = [];
       var queryUnits = new Parse.Query(Parse.Object.extend('Unit'));
@@ -326,7 +327,7 @@ angular.module('ParseAdapter', ['DataServices'])
             ConvertParseObject(unit, UNIT_DEF);
             unit.allowClone = true;
             sector.units.push(unit);
-            //UpdateUnitTimer(unit);
+            DataStore_Parse.UpdateUnitTimer(unit);
             promises.push(FetchTypeForUnit_Parse(unit));
             promises.push(FetchActionsForUnit_Parse(unit));
           }
@@ -377,7 +378,7 @@ angular.module('ParseAdapter', ['DataServices'])
       return objectivesObject;
     }
   })
-  .factory('FetchObjectivesForIncident_Parse', function (ConvertParseObject, CreateNewObjectives_Parse, DefaultParseErrorLogger) {
+  .factory('FetchObjectivesForIncident_Parse', function (ConvertParseObject, DataStore_Parse, CreateNewObjectives_Parse, DefaultParseErrorLogger) {
     return function (incident) {
       var queryObjectives = new Parse.Query(Parse.Object.extend('Objectives'));
       queryObjectives.equalTo("incident", incident);
@@ -389,7 +390,7 @@ angular.module('ParseAdapter', ['DataServices'])
           } else {
             incident.objectives = CreateNewObjectives_Parse(incident);
           }
-          //UpdateObjectivesPercent(incident);
+          DataStore_Parse.UpdateObjectivesPercent(incident);
           return incident;
         },
         DefaultParseErrorLogger
@@ -431,7 +432,7 @@ angular.module('ParseAdapter', ['DataServices'])
       return osrObject;
     }
   })
-  .factory('FetchOSRForIncident_Parse', function (ConvertParseObject, CreateNewOSR_Parse, DefaultParseErrorLogger) {
+  .factory('FetchOSRForIncident_Parse', function (ConvertParseObject, DataStore_Parse, CreateNewOSR_Parse, DefaultParseErrorLogger) {
     return function (incident) {
       var queryOSR = new Parse.Query(Parse.Object.extend('OSR'));
       queryOSR.equalTo("incident", incident);
@@ -443,7 +444,7 @@ angular.module('ParseAdapter', ['DataServices'])
           } else {
             incident.osr = CreateNewOSR_Parse(incident);
           }
-          //UpdateOsrPercent(incident);
+          DataStore_Parse.UpdateOsrPercent(incident);
           return incident;
         },
         DefaultParseErrorLogger
@@ -915,6 +916,15 @@ angular.module('ParseAdapter', ['DataServices'])
       }
 
       $interval(updateIncidentData, 3000);
+    }
+  })
+
+  .factory('SetCallbacks_Parse', function (DataStore_Parse) {
+    return function (UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer) {
+      DataStore_Parse.UpdateObjectivesPercent = UpdateObjectivesPercent;
+      DataStore_Parse.UpdateOsrPercent = UpdateOsrPercent;
+      DataStore_Parse.UpdateUnitTimer = UpdateUnitTimer;
+
     }
   })
 

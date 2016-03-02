@@ -7,7 +7,7 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
   'ObjectivesServices', 'OSRServices', 'ActionServices', 'SectorServices',
   'UnitServices'])
 
-  .run(function ($q, DataStore, LoadIncident, StartIncidentTimer, StartUnitTimerTimer, UpdateObjectivesPercent) {
+  .run(function ($q, DataStore, LoadIncident, StartIncidentTimer, StartUnitTimerTimer, UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer) {
     if (!DataStore.init()) {
       var urlLink = "login.html";
       //window.location.href = urlLink;
@@ -22,6 +22,7 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
 
     var incidentObjectId = getHttpRequestByName('i');
     if (incidentObjectId) {
+      DataStore.adapter.SetCallbacks(UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer);
       LoadIncident(incidentObjectId).then(function (incident) {
         //console.log("LoadA afterwards incident:", incident);
         DataStore.loadSuccess = true;
