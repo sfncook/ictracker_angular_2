@@ -283,7 +283,7 @@ angular.module('ParseAdapter', ['DataServices'])
 
   .factory('FetchTypeForUnit_Parse', function (ConvertParseObject, DefaultParseErrorLogger) {
     return function (unit) {
-      return unit.type.fetch().then(
+      return unit.parse_obj.type.fetch().then(
         function (type) {
           ConvertParseObject(type, UNIT_TYPE_DEF);
           unit.type = type;
@@ -322,11 +322,12 @@ angular.module('ParseAdapter', ['DataServices'])
       return queryUnits.find().then(function (units) {
           var promises = [];
           for (var i = 0; i < units.length; i++) {
-            var unit = units[i];
-            ConvertParseObject(unit, UNIT_DEF);
-            unit.allowClone = true;
+            ConvertParseObject(units[i], UNIT_DEF);
+            var unit = createUnitFromObj(UNIT_DEF, units[i]);
+            unit.parse_obj = units[i];
             sector.units.push(unit);
             //UpdateUnitTimer(unit);
+
             promises.push(FetchTypeForUnit_Parse(unit));
             promises.push(FetchActionsForUnit_Parse(unit));
           }
@@ -877,7 +878,7 @@ angular.module('ParseAdapter', ['DataServices'])
     }
   })
 
-  .factory('CreateNewUnit_Parse', function (ConvertParseObject, DefaultErrorLogger) {
+  .factory('CreateNewUnit_Parse', function (ConvertParseObject, SaveUnit_Parse) {
     return function (sector, unitType) {
       var UnitParseObj = Parse.Object.extend('Unit');
       var newUnit = new UnitParseObj();
@@ -889,18 +890,22 @@ angular.module('ParseAdapter', ['DataServices'])
       newUnit.type = unitType;
       newUnit.sector = sector;
       newUnit.timer_start = new Date();
-      newUnit.save(null, DefaultErrorLogger);
-      return newUnit;
+
+      var newUnitLocal = createUnitFromObj(UNIT_DEF, newUnit);
+      newUnitLocal.parse_obj = newUnit;
+
+      SaveUnit_Parse(newUnitLocal);
+      return newUnitLocal;
     }
   })
   .factory('DeleteUnit_Parse', function (DefaultErrorLogger) {
     return function (unit) {
-      return unit.destroy(null, DefaultErrorLogger);
+      return unit.parse_obj.destroy(null, DefaultErrorLogger);
     }
   })
   .factory('SaveUnit_Parse', function (DefaultErrorLogger) {
     return function (unit) {
-      return unit.save(null, DefaultErrorLogger);
+      return unit.parse_obj.save(null, DefaultErrorLogger);
     }
   })
 

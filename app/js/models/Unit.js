@@ -46,6 +46,9 @@ function createUnit(actions,      // ActionType[]
   unit.timer_start = typeof timer_start !== 'undefined' ? timer_start : DEFAULT_timer_start;
   unit.timer_running = typeof timer_running !== 'undefined' ? timer_running : DEFAULT_timer_running;
 
+  // allowClone for draggable js library - for moving unit
+  unit.allowClone = true;
+
   return unit;
 }
 
