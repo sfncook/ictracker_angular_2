@@ -1,4 +1,4 @@
-angular.module('IncidentServices', ['DataServices'])
+angular.module('IncidentServices', ['DataServices', 'SectorServices'])
 
   .factory('IncidentTypes', function () {
     return [];
@@ -70,12 +70,15 @@ angular.module('IncidentServices', ['DataServices'])
     }
   })
 
-  .factory('UpdateIncidentWithIncident', function () {
+  .factory('UpdateIncidentWithIncident', function (UpdateSectorWithSector) {
     return function (src_incident, dest_incident) {
       dest_incident.inc_number = src_incident.inc_number;
       dest_incident.inc_address = src_incident.inc_address;
       dest_incident.strategy = src_incident.strategy;
       dest_incident.txid = src_incident.txid;
+      for(var i=0; i<dest_incident.sectors.length; i++) {
+        UpdateSectorWithSector(src_incident.sectors[i], dest_incident.sectors[i]);
+      }
     }
   })
 
