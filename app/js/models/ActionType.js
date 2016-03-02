@@ -1,16 +1,16 @@
 // Default values
-var DEFAULT_category = '';      // string
-var DEFAULT_incidentType = [];  // string
-var DEFAULT_isWarning = false;  // string[]
-var DEFAULT_name = '';          // bool
+var DEFAULT_category = '';
+var DEFAULT_incidentType = [];
+var DEFAULT_isWarning = false;
+var DEFAULT_name = '';
 
 
 var ActionType = createBaseModelObj();
 
-function createActionType(name,
-                          category,
-                          incidentType,
-                          isWarning
+function createActionType(name,         // string
+                          category,     // string
+                          incidentType, // string[]
+                          isWarning     // bool
 ) {
   var actionType = Object.create(ActionType, {
     fields: {
@@ -33,6 +33,7 @@ function createActionType(name,
   return actionType;
 }
 
+// remoteFields: Array of strings - order must match 'fields' value above
 function createActionTypeFromObj(remoteFields, remoteObj) {
   var actionType = createActionType();
   actionType.updateRemoteToLocal(remoteFields, remoteObj);
