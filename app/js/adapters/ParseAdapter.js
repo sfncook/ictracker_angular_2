@@ -542,7 +542,8 @@ angular.module('ParseAdapter', ['DataServices'])
               if(incident) {
                 FindAllMaydayUnitsForIncident(incident);
               }
-              DataStore_Parse.incident = incident;
+
+              DataStore_Parse.incidentObjectId = incidentObjectId;
               return incident;
             },
             DefaultParseErrorLogger);
@@ -555,7 +556,7 @@ angular.module('ParseAdapter', ['DataServices'])
       var IncidentParseObj = Parse.Object.extend('Incident');
       var incidentObject = new IncidentParseObj();
       ConvertParseObject(incidentObject, INCIDENT_DEF);
-      DataStore_Parse.incident = incidentObject;
+      //DataStore_Parse.incident = incidentObject;
       return incidentObject;
     }
   })
@@ -601,66 +602,6 @@ angular.module('ParseAdapter', ['DataServices'])
         DefaultParseErrorLogger);
     }
   })
-
-
-  .factory('GetUpdatedIncidentOrFalse',
-  function (LoadIncident_Parse, DefaultParseErrorLogger) {
-    return function (incident_orig) {
-      incident_orig.fetch({
-        success: function (incident_) {
-          if (incident_.get('txid') != incident_orig.txid) {
-            LoadIncident_Parse(incident_orig.id).then(function (incident__) {
-                return incident__;
-              },
-              DefaultParseErrorLogger);
-          } else {
-            return false;
-          }
-        },
-        error: function (obj, error) {
-          console.log('Failed to create new object, with error code: ' + error.message);
-        }
-      });
-    }
-  })
-  //.factory('UpdateSectorsAsNeeded_Parse', function (DiffUpdatedTimes_Parse) {
-  //  return function (incident) {
-  //    for (var i = 0; i < incident.sectors.length; i++) {
-  //      var sector = incident.sectors[i];
-  //      var querySectors = new Parse.Query(Parse.Object.extend('Sector'));
-  //      querySectors.equalTo("objectId", sector.id);
-  //      querySectors.first({
-  //        success: DiffUpdatedTimes_Parse(sector),
-  //        error: function (error) {
-  //          console.log('Failed to UpdateSectors, with error code: ' + error.message);
-  //        }
-  //      });
-  //    }
-  //  }
-  //})
-  //.factory('DiffUpdatedTimes_Parse', function (ConvertParseObject, UpdateSector_Parse) {
-  //  return function (sector) {
-  //    return function (sectorNew) {
-  //      if (sector.updatedAt.getTime() != sectorNew.updatedAt.getTime()) {
-  //        sector.fetch({
-  //          success: UpdateSector_Parse(sector),
-  //          error: function (error) {
-  //            console.log('Failed to updateSector, with error code: ' + error.message);
-  //          }
-  //        });
-  //      }
-  //    };
-  //  }
-  //})
-  //.factory('UpdateSector_Parse',
-  //function (ConvertParseObject, FetchTypeForSector_Parse, FetchAcctTypeForSector_Parse) {
-  //  return function ( sector) {
-  //    return function () {
-  //      FetchTypeForSector_Parse(sector);
-  //      FetchAcctTypeForSector_Parse(sector);
-  //    };
-  //  }
-  //})
 
 
   .factory('LoadActionTypes_Parse', function (ParseQuery, ConvertParseObject) {
@@ -903,15 +844,15 @@ angular.module('ParseAdapter', ['DataServices'])
     }
   })
 
-  .factory('StartIncidentUpdateTimer_Parse', function ($interval, DataStore_Parse, GetUpdatedIncidentOrFalse) {
+  .factory('StartIncidentUpdateTimer_Parse', function ($interval, DataStore_Parse, DefaultParseErrorLogger, LoadIncident_Parse) {
     return function () {
       function updateIncidentData() {
-        if(DataStore_Parse.incident) {
-          var incidentOrFalse = GetUpdatedIncidentOrFalse(DataStore_Parse.incident);
-          if(incidentOrFalse) {
-            DataStore_Parse.ShallowCopyIncidentToIncident(incidentOrFalse, DataStore_Parse.incident);
-          }
-        }
+        LoadIncident_Parse(DataStore_Parse.incidentObjectId).then(
+            function(new_incident) {
+              DataStore_Parse.DeepCopyIncident(new_incident);
+            },
+            DefaultParseErrorLogger
+        );
       }
 
       $interval(updateIncidentData, 3000);
@@ -920,12 +861,12 @@ angular.module('ParseAdapter', ['DataServices'])
 
   .factory('SetCallbacks_Parse', function (DataStore_Parse) {
     return function (
-        UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer, ShallowCopyIncidentToIncident
+        UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer, DeepCopyIncident
     ) {
       DataStore_Parse.UpdateObjectivesPercent = UpdateObjectivesPercent;
       DataStore_Parse.UpdateOsrPercent = UpdateOsrPercent;
       DataStore_Parse.UpdateUnitTimer = UpdateUnitTimer;
-      DataStore_Parse.ShallowCopyIncidentToIncident = ShallowCopyIncidentToIncident;
+      DataStore_Parse.DeepCopyIncident = DeepCopyIncident;
 
     }
   })

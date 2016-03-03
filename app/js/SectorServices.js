@@ -170,41 +170,41 @@ angular.module('SectorServices', ['DataServices'])
     }
   })
 
-  .factory('UpdateSectorWithSector', function () {
-    return function (src_sector, dest_sector) {
-      dest_sector.sectorType = src_sector.sectorType;
-      dest_sector.direction = src_sector.direction;
-      dest_sector.number = src_sector.number;
-      dest_sector.orderIndex = src_sector.orderIndex;
-      dest_sector.acctUnit = src_sector.acctUnit;
-      dest_sector.acctUnitOpt = src_sector.acctUnitOpt;
-      dest_sector.bnchClsUnablePrim = src_sector.bnchClsUnablePrim;
-      dest_sector.bnchClsUnableSec = src_sector.bnchClsUnableSec;
-      dest_sector.bnchCls1 = src_sector.bnchCls1;
-      dest_sector.bnchCls2 = src_sector.bnchCls2;
-      dest_sector.bnchCls3 = src_sector.bnchCls3;
-      dest_sector.bnchCls4 = src_sector.bnchCls4;
-      dest_sector.bnchVnt1 = src_sector.bnchVnt1;
-      dest_sector.bnchVnt2 = src_sector.bnchVnt2;
-      dest_sector.bnchVnt3 = src_sector.bnchVnt3;
-      dest_sector.bnchIrc1 = src_sector.bnchIrc1;
-      dest_sector.bnchIrc2 = src_sector.bnchIrc2;
-      dest_sector.bnchIrc3 = src_sector.bnchIrc3;
-      dest_sector.bnchIrc4 = src_sector.bnchIrc4;
-      dest_sector.bnchSaf1 = src_sector.bnchSaf1;
-      dest_sector.bnchSaf2 = src_sector.bnchSaf2;
-      dest_sector.bnchTrt1 = src_sector.bnchTrt1;
-      dest_sector.bnchTrt2 = src_sector.bnchTrt2;
-      dest_sector.bnchTrt3 = src_sector.bnchTrt3;
-      dest_sector.bnchLzo1 = src_sector.bnchLzo1;
-      dest_sector.bnchLzo2 = src_sector.bnchLzo2;
-      dest_sector.bnchLzo3 = src_sector.bnchLzo3;
-      dest_sector.bnchTri1 = src_sector.bnchTri1;
-      dest_sector.bnchTri2 = src_sector.bnchTri2;
-      dest_sector.bnchTri3 = src_sector.bnchTri3;
-      dest_sector.initialized = src_sector.initialized;
-      dest_sector.channel_letter = src_sector.channel_letter;
-      dest_sector.channel_number = src_sector.channel_number;
+  .factory('DeepCopySectorToSector', function () {
+    return function (src_sector, dst_sector) {
+      dst_sector.sectorType = src_sector.sectorType;
+      dst_sector.direction = src_sector.direction;
+      dst_sector.number = src_sector.number;
+      dst_sector.orderIndex = src_sector.orderIndex;
+      dst_sector.acctUnit = src_sector.acctUnit;
+      dst_sector.acctUnitOpt = src_sector.acctUnitOpt;
+      dst_sector.bnchClsUnablePrim = src_sector.bnchClsUnablePrim;
+      dst_sector.bnchClsUnableSec = src_sector.bnchClsUnableSec;
+      dst_sector.bnchCls1 = src_sector.bnchCls1;
+      dst_sector.bnchCls2 = src_sector.bnchCls2;
+      dst_sector.bnchCls3 = src_sector.bnchCls3;
+      dst_sector.bnchCls4 = src_sector.bnchCls4;
+      dst_sector.bnchVnt1 = src_sector.bnchVnt1;
+      dst_sector.bnchVnt2 = src_sector.bnchVnt2;
+      dst_sector.bnchVnt3 = src_sector.bnchVnt3;
+      dst_sector.bnchIrc1 = src_sector.bnchIrc1;
+      dst_sector.bnchIrc2 = src_sector.bnchIrc2;
+      dst_sector.bnchIrc3 = src_sector.bnchIrc3;
+      dst_sector.bnchIrc4 = src_sector.bnchIrc4;
+      dst_sector.bnchSaf1 = src_sector.bnchSaf1;
+      dst_sector.bnchSaf2 = src_sector.bnchSaf2;
+      dst_sector.bnchTrt1 = src_sector.bnchTrt1;
+      dst_sector.bnchTrt2 = src_sector.bnchTrt2;
+      dst_sector.bnchTrt3 = src_sector.bnchTrt3;
+      dst_sector.bnchLzo1 = src_sector.bnchLzo1;
+      dst_sector.bnchLzo2 = src_sector.bnchLzo2;
+      dst_sector.bnchLzo3 = src_sector.bnchLzo3;
+      dst_sector.bnchTri1 = src_sector.bnchTri1;
+      dst_sector.bnchTri2 = src_sector.bnchTri2;
+      dst_sector.bnchTri3 = src_sector.bnchTri3;
+      dst_sector.initialized = src_sector.initialized;
+      dst_sector.channel_letter = src_sector.channel_letter;
+      dst_sector.channel_number = src_sector.channel_number;
     }
   })
 ;

@@ -38,6 +38,21 @@ Array.prototype.removeAll = function () {
     return this;
 }
 
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+Array.prototype.sortBy = function (property) {
+    return this.sort(dynamicSort(property));
+}
+
 /*
  * 'this' must be an array of tbar objects such that this.name is
  * the name of the sector.

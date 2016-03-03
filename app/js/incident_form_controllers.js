@@ -8,8 +8,7 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
   'UnitServices'])
 
   .run(function ($q, DataStore, LoadIncident,
-                 StartIncidentTimer, StartUnitTimerTimer, UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer,
-                 ShallowCopyIncidentToIncident) {
+                 StartIncidentTimer, StartUnitTimerTimer, UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer, DeepCopyIncident) {
     if (!DataStore.init()) {
       var urlLink = "login.html";
       //window.location.href = urlLink;
@@ -24,9 +23,8 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
 
     var incidentObjectId = getHttpRequestByName('i');
     if (incidentObjectId) {
-      DataStore.adapter.SetCallbacks(UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer, ShallowCopyIncidentToIncident);
+      DataStore.adapter.SetCallbacks(UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer, DeepCopyIncident);
       LoadIncident(incidentObjectId).then(function (incident) {
-        //console.log("LoadA afterwards incident:", incident);
         DataStore.loadSuccess = true;
         DataStore.waitingToLoad = false;
         DataStore.incident = incident;

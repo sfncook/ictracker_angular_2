@@ -42,5 +42,11 @@ angular.module('UnitServices', ['DataServices'])
     }
   })
 
+    .factory('DeepCopyUnitToUnit', function () {
+      return function (src_unit, dst_unit) {
+
+      }
+    })
+
 ;
 
