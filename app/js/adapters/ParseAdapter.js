@@ -623,44 +623,44 @@ angular.module('ParseAdapter', ['DataServices'])
       });
     }
   })
-  .factory('UpdateSectorsAsNeeded_Parse', function (DiffUpdatedTimes_Parse) {
-    return function (incident) {
-      for (var i = 0; i < incident.sectors.length; i++) {
-        var sector = incident.sectors[i];
-        var querySectors = new Parse.Query(Parse.Object.extend('Sector'));
-        querySectors.equalTo("objectId", sector.id);
-        querySectors.first({
-          success: DiffUpdatedTimes_Parse(sector),
-          error: function (error) {
-            console.log('Failed to UpdateSectors, with error code: ' + error.message);
-          }
-        });
-      }
-    }
-  })
-  .factory('DiffUpdatedTimes_Parse', function (ConvertParseObject, UpdateSector_Parse) {
-    return function (sector) {
-      return function (sectorNew) {
-        if (sector.updatedAt.getTime() != sectorNew.updatedAt.getTime()) {
-          sector.fetch({
-            success: UpdateSector_Parse(sector),
-            error: function (error) {
-              console.log('Failed to updateSector, with error code: ' + error.message);
-            }
-          });
-        }
-      };
-    }
-  })
-  .factory('UpdateSector_Parse',
-  function (ConvertParseObject, FetchTypeForSector_Parse, FetchAcctTypeForSector_Parse) {
-    return function ( sector) {
-      return function () {
-        FetchTypeForSector_Parse(sector);
-        FetchAcctTypeForSector_Parse(sector);
-      };
-    }
-  })
+  //.factory('UpdateSectorsAsNeeded_Parse', function (DiffUpdatedTimes_Parse) {
+  //  return function (incident) {
+  //    for (var i = 0; i < incident.sectors.length; i++) {
+  //      var sector = incident.sectors[i];
+  //      var querySectors = new Parse.Query(Parse.Object.extend('Sector'));
+  //      querySectors.equalTo("objectId", sector.id);
+  //      querySectors.first({
+  //        success: DiffUpdatedTimes_Parse(sector),
+  //        error: function (error) {
+  //          console.log('Failed to UpdateSectors, with error code: ' + error.message);
+  //        }
+  //      });
+  //    }
+  //  }
+  //})
+  //.factory('DiffUpdatedTimes_Parse', function (ConvertParseObject, UpdateSector_Parse) {
+  //  return function (sector) {
+  //    return function (sectorNew) {
+  //      if (sector.updatedAt.getTime() != sectorNew.updatedAt.getTime()) {
+  //        sector.fetch({
+  //          success: UpdateSector_Parse(sector),
+  //          error: function (error) {
+  //            console.log('Failed to updateSector, with error code: ' + error.message);
+  //          }
+  //        });
+  //      }
+  //    };
+  //  }
+  //})
+  //.factory('UpdateSector_Parse',
+  //function (ConvertParseObject, FetchTypeForSector_Parse, FetchAcctTypeForSector_Parse) {
+  //  return function ( sector) {
+  //    return function () {
+  //      FetchTypeForSector_Parse(sector);
+  //      FetchAcctTypeForSector_Parse(sector);
+  //    };
+  //  }
+  //})
 
 
   .factory('LoadActionTypes_Parse', function (ParseQuery, ConvertParseObject) {
@@ -907,9 +907,9 @@ angular.module('ParseAdapter', ['DataServices'])
     return function () {
       function updateIncidentData() {
         if(DataStore_Parse.incident) {
-          var resp = GetUpdatedIncidentOrFalse(DataStore_Parse.incident);
-          if(resp) {
-            UpdateIncidentWithIncident(resp, DataStore_Parse.incident);
+          var incidentOrFalse = GetUpdatedIncidentOrFalse(DataStore_Parse.incident);
+          if(incidentOrFalse) {
+            DataStore_Parse.ShallowCopyIncidentToIncident(incidentOrFalse, DataStore_Parse.incident);
           }
         }
       }
@@ -919,11 +919,13 @@ angular.module('ParseAdapter', ['DataServices'])
   })
 
   .factory('SetCallbacks_Parse', function (DataStore_Parse) {
-    return function (UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer, UpdateIncidentWithIncident) {
+    return function (
+        UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer, ShallowCopyIncidentToIncident
+    ) {
       DataStore_Parse.UpdateObjectivesPercent = UpdateObjectivesPercent;
       DataStore_Parse.UpdateOsrPercent = UpdateOsrPercent;
       DataStore_Parse.UpdateUnitTimer = UpdateUnitTimer;
-      DataStore_Parse.UpdateIncidentWithIncident = UpdateIncidentWithIncident;
+      DataStore_Parse.ShallowCopyIncidentToIncident = ShallowCopyIncidentToIncident;
 
     }
   })
