@@ -170,7 +170,7 @@ angular.module('SectorServices', ['DataServices'])
     }
   })
 
-  .factory('DeepCopySectorToSector', function () {
+  .factory('DeepCopySectorToSector', function (DeepCopyUnitToUnit) {
     return function (src_sector, dst_sector) {
       dst_sector.sectorType = src_sector.sectorType;
       dst_sector.direction = src_sector.direction;
@@ -205,6 +205,13 @@ angular.module('SectorServices', ['DataServices'])
       dst_sector.initialized = src_sector.initialized;
       dst_sector.channel_letter = src_sector.channel_letter;
       dst_sector.channel_number = src_sector.channel_number;
+      var units_src = src_sector.units;
+      var units_dst = dst_sector.units;
+      for(var i=0; i<units_src.length; i++) {
+        var unit_src = units_src[i];
+        var unit_dst = units_dst[i];
+        DeepCopyUnitToUnit(unit_src, unit_dst);
+      }
     }
   })
 ;

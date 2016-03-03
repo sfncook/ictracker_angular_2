@@ -44,7 +44,15 @@ angular.module('UnitServices', ['DataServices'])
 
     .factory('DeepCopyUnitToUnit', function () {
       return function (src_unit, dst_unit) {
-
+        //['actions', '', '', '', '', '', '', '', ''];
+        dst_unit.manyPeople = src_unit.manyPeople;
+        dst_unit.manyPar = src_unit.manyPar;
+        dst_unit.par = src_unit.par;
+        dst_unit.psi = src_unit.psi;
+        dst_unit.type = src_unit.type;
+        dst_unit.timer_start = src_unit.timer_start;
+        dst_unit.timer_running = src_unit.timer_running;
+        //actions
       }
     })
 

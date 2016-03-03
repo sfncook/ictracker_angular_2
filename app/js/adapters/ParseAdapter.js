@@ -847,12 +847,14 @@ angular.module('ParseAdapter', ['DataServices'])
   .factory('StartIncidentUpdateTimer_Parse', function ($interval, DataStore_Parse, DefaultParseErrorLogger, LoadIncident_Parse) {
     return function () {
       function updateIncidentData() {
-        LoadIncident_Parse(DataStore_Parse.incidentObjectId).then(
-            function(new_incident) {
-              DataStore_Parse.DeepCopyIncident(new_incident);
-            },
-            DefaultParseErrorLogger
-        );
+        if(DataStore_Parse.incidentObjectId){
+          LoadIncident_Parse(DataStore_Parse.incidentObjectId).then(
+              function(new_incident) {
+                DataStore_Parse.DeepCopyIncident(new_incident);
+              },
+              DefaultParseErrorLogger
+          );
+        }
       }
 
       $interval(updateIncidentData, 3000);
