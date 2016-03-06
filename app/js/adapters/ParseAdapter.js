@@ -645,7 +645,6 @@ angular.module('ParseAdapter', ['DataServices'])
   })
   .factory('CreateNewSectorType_Parse', function (ConvertParseObject) {
     return function () {
-      //'name', '', '', '', '', '', '', '', '', '', '', '', '', ''
       var SectorTypeParseObj = Parse.Object.extend('SectorType');
       var sectorTypeObject = new SectorTypeParseObj();
       ConvertParseObject(sectorTypeObject, SECTOR_TYPE_DEF);
@@ -690,15 +689,27 @@ angular.module('ParseAdapter', ['DataServices'])
     }
   })
 
-  .factory('SaveIncident_Parse', function (DefaultErrorLogger) {
+  .factory('SaveIncident_Parse', function (DefaultErrorLogger, DataStore_Parse) {
     return function (incident) {
-      return incident.save(null, DefaultErrorLogger);
+      DataStore_Parse.saveInProgress = true;
+      return incident.save(null, DefaultErrorLogger).then(
+          function(obj){
+            DataStore_Parse.saveInProgress = false;
+            return obj;
+          }
+      );
     }
   })
 
   .factory('SaveSector_Parse', function (DefaultErrorLogger) {
-    return function (sector) {
-      return sector.save(null, DefaultErrorLogger);
+    return function (sector, DataStore_Parse) {
+      DataStore_Parse.saveInProgress = true;
+      return sector.save(null, DefaultErrorLogger).then(
+          function(obj){
+            DataStore_Parse.saveInProgress = false;
+            return obj;
+          }
+      );
     }
   })
   .factory('CreateNewSector_Parse', function (ConvertParseObject) {
@@ -838,22 +849,30 @@ angular.module('ParseAdapter', ['DataServices'])
       return unit.destroy(null, DefaultErrorLogger);
     }
   })
-  .factory('SaveUnit_Parse', function (DefaultErrorLogger) {
+  .factory('SaveUnit_Parse', function (DefaultErrorLogger, DataStore_Parse) {
     return function (unit) {
-      return unit.save(null, DefaultErrorLogger);
+      DataStore_Parse.saveInProgress = true;
+      return unit.save(null, DefaultErrorLogger).then(
+          function(obj){
+            DataStore_Parse.saveInProgress = false;
+            return obj;
+          }
+      );
     }
   })
 
   .factory('StartIncidentUpdateTimer_Parse', function ($interval, DataStore_Parse, DefaultParseErrorLogger, LoadIncident_Parse) {
     return function () {
       function updateIncidentData() {
-        if(DataStore_Parse.incidentObjectId){
-          LoadIncident_Parse(DataStore_Parse.incidentObjectId).then(
-              function(new_incident) {
-                DataStore_Parse.DeepCopyIncident(new_incident);
-              },
-              DefaultParseErrorLogger
-          );
+        if(!DataStore_Parse.saveInProgress) {
+          if(DataStore_Parse.incidentObjectId){
+            LoadIncident_Parse(DataStore_Parse.incidentObjectId).then(
+                function(new_incident) {
+                  DataStore_Parse.DeepCopyIncident(new_incident);
+                },
+                DefaultParseErrorLogger
+            );
+          }
         }
       }
 
