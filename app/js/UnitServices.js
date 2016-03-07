@@ -12,7 +12,6 @@ angular.module('UnitServices', ['DataServices'])
 
   .factory('UpdateUnitTimer', function (SaveUnit) {
     return function (unit) {
-      console.log("UpdateUnitTimer unit:",unit);
       if(!unit.timer_start) {
         unit.timer_start = new Date();
         SaveUnit(unit);
