@@ -7,7 +7,7 @@ var UNIT_TYPE_DEF = ['name', 'type', 'city'];
 var UNIT_DEF = ['actions', 'manyPeople', 'manyPar', 'par', 'psi', 'sector', 'type', 'timer_start', 'timer_running'];
 var ACTION_TYPE_DEF = ['name', 'category', 'incidentType', 'isWarning'];
 var UPGRADE_DEF = ['incident', 'isWorkingFire', 'is1stAlarm', 'is2ndAlarm', 'is3rdAlarm', 'is4thAlarm', 'isBalanceTo', 'isEnRoute'];
-var MAYDAY_DEF = ['incident', 'unit', 'sector', 'number', 'isOnHoseline', 'isUnInjured', 'isLost', 'isTrapped', 'isOutOfAir', 'isRegulatorIssue', 'isLowAir', 'isPackIssue', 'nameFFighter', 'psi', 'channel', 'rank', 'startDate'];
+var MAYDAY_DEF = ['incident', 'unit', 'sector', 'number', 'isOnHoseline', 'isUnInjured', 'isLost', 'isTrapped', 'isOutOfAir', 'isRegulatorIssue', 'isLowAir', 'isPackIssue', 'nameFFighter', 'psi', 'rank', 'startDate', 'channel_letter', 'channel_number'];
 //var REPORT_ACTION_DEF = ['incident', 'sector', 'text'];
 var IAP_DEF = ['fireControl', 'firefighterSafety', 'incident', 'isActionEffect', 'isArrangement', 'isBuilding', 'isFire', 'isLifeHazard', 'isOccupancy', 'isResources', 'isSpecial', 'isSprinkler', 'isVent', 'propertyPeople', 'evacuationLocation', 'showEvacutionLocation', 'rescue'];
 var OSR_DEF = ['incident', 'isAddress', 'isOccupancy', 'isConstruction', 'isAssumeCommand', 'isLocation', 'isStrategy', 'isAttackLine', 'isWaterSupply', 'isIRIC', 'isBasement', 'isMobile', 'isDefensive', 'accountability', 'accountabilityLocation', 'unit', 'dispatchAddress', 'sizeOfBuilding', 'numberOfFloors', 'typeOfBuilding', 'subFloors', 'constructionType', 'roofType', 'conditions'];
@@ -877,7 +877,7 @@ angular.module('ParseAdapter', ['DataServices'])
         }
       }
 
-      $interval(updateIncidentData, 3000);
+      //$interval(updateIncidentData, 3000);
     }
   })
 

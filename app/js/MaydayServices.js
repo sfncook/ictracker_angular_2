@@ -34,6 +34,10 @@ angular.module('MaydayServices', ['DataServices'])
             }
         }
 
+        $scope.openChannelDlg = function (channelObj, forSector, forMayday, forIncident) {
+            DataStore.openChannelDlg(channelObj, forSector, forMayday, forIncident);
+        }
+
         $scope.openPsiDialog = function () {
             DataStore.showPsiDlg($scope.setPsiSelectedMayday);
         }
@@ -47,7 +51,7 @@ angular.module('MaydayServices', ['DataServices'])
         }
         document.addEventListener('click', function (event) {
             if($scope.dataStore.choosing_unit_for_new_mayday) {
-                if(!$(event.target).hasClass("unit_tbar_btn")) {
+                if(!$(event.target).hasClass("btn_to_choose_mayday")) {
                     //console.log("MaydayDlg document.addEventListener - Cancelling choosing_unit_for_new_mayday");
                     $scope.dataStore.choosing_unit_for_new_mayday = false;
                 }

@@ -122,8 +122,8 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
 
     $scope.dataStore = DataStore;
 
-    $scope.openChannelDlg = function (sector) {
-      DataStore.openChannelDlg(sector);
+    $scope.openChannelDlg = function (sector, forSector, forMayday, forIncident) {
+      DataStore.openChannelDlg(sector, forSector, forMayday, forIncident);
     }
 
     $scope.showParDlg = function (sector) {
@@ -155,6 +155,7 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
     }
 
     $scope.clickTbarUnit = function (sector, unit) {
+      console.log("clickTbarUnit choosing_unit_for_new_mayday:",$scope.dataStore.choosing_unit_for_new_mayday);
       if ($scope.dataStore.choosing_unit_for_new_mayday) {
         AddNewMayday(sector, unit);
         $scope.dataStore.choosing_unit_for_new_mayday = false;
@@ -261,24 +262,34 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
   })
 
   .controller('ChannelDlg', function ($scope, DataStore, SaveSector) {
-    $scope.selectedSector = {};
+    $scope.channelObj = {};
+    $scope.forSector = false;
+    $scope.forMayday = false;
+    $scope.forIncident = false;
 
     $scope.channel_letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
     $scope.channel_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
-    DataStore.openChannelDlg = function (sector) {
-      $scope.selectedSector = sector;
+    DataStore.openChannelDlg = function (channelObj, forSector, forMayday, forIncident) {
+      $scope.channelObj = channelObj;
+      $scope.forSector = forSector;
+      $scope.forMayday = forMayday;
+      $scope.forIncident = forIncident;
       $("#channel-dlg").dialog("open");
     }
 
     $scope.setChannelLetter = function (channel_letter) {
-      $scope.selectedSector.channel_letter = channel_letter;
-      SaveSector($scope.selectedSector);
+      $scope.channelObj.channel_letter = channel_letter;
+      if($scope.forSector){
+        SaveSector($scope.channelObj);
+      }
     }
 
     $scope.setChannelNumber = function (channel_number) {
-      $scope.selectedSector.channel_number = channel_number;
-      SaveSector($scope.selectedSector);
+      $scope.channelObj.channel_number = channel_number;
+      if($scope.forSector) {
+        SaveSector($scope.channelObj);
+      }
     }
 
   })

@@ -58,7 +58,7 @@
       <div class="top_mayday_header_container" ng-controller="MaydayDlg" ng-show="dataStore.maydays.length>0">
         <button class="mayday_btn_animate mayday_btn button_top button" ng-repeat="mayday in dataStore.maydays"
                 ng-click="openMaydayDlgForMayday(mayday)">
-          Mayday - {{mayday.nameFFighter}} - {{mayday.sector.sectorType.name}} - {{mayday.unit.type.name}} - {{mayday.timerText}}
+            {{mayday.nameFFighter}} - {{mayday.channel_letter}} {{mayday.channel_number}} - {{mayday.sector.sectorType.name}} - {{mayday.unit.type.name}} - {{mayday.timerText}}
         </button>
       </div>
 
@@ -145,31 +145,31 @@
                 <div ng-repeat="unit in sector.units"
                      class="unit_row"
                      ng-drag="true" ng-drag-data="{'unit':unit, 'src_sector':sector}">
-                  <button class="unit_row_left_column"
+                  <button class="unit_row_left_column btn_to_choose_mayday"
                           ng-class="{mayday_choice_animate: dataStore.choosing_unit_for_new_mayday, unit_btn_hasmayday_animate: unit.hasMayday}"
                           ng-click="clickTbarUnit(sector, unit)">
-                    <div class="unit_tbar_btn unit_btn"
+                    <div class="unit_tbar_btn unit_btn btn_to_choose_mayday"
                          ng-class="{btn_smtext: unit.type.name.length>5, btn_medtext: unit.type.name.length>4}"
                          ng-show="!dataStore.choseMoveUnit">
                       {{unit.type.name}}
                     </div>
                     <div class="clear_float"></div>
 
-                    <div class="unit_options_row_container" ng-show="!dataStore.choseMoveUnit">
-                      <div class="personnel_tbar_btn personnel_btn"
+                    <div class="unit_options_row_container btn_to_choose_mayday" ng-show="!dataStore.choseMoveUnit">
+                      <div class="personnel_tbar_btn personnel_btn btn_to_choose_mayday"
                            ng-class="{has_par:unit.par==unit.manyPar&&unit.par!=0, personnel_not_set:unit.par==0, personnel_set:unit.par>0}">
                         {{unit.par|getUnitPar}}
                       </div>
-                      <div class="psi_tbar_btn psi_btn"
+                      <div class="psi_tbar_btn psi_btn btn_to_choose_mayday"
                            ng-class="{psi_red:unit.psi<1500, psi_yellow:unit.psi<3000&&unit.psi>=1500, psi_green:unit.psi>=3000}"
                            ng-if="sector.sectorType.hasPsiBtn">{{unit.psi}}
                       </div>
                       <div class="clear_float"></div>
 
-                      <div class="unit_timer_bar_border"
+                      <div class="unit_timer_bar_border btn_to_choose_mayday"
                            ng-class="{unit_timer_bar_border_discontinued:!unit.timer_running}"
                            ng-show="sector.sectorType.hasClock">
-                        <div class="unit_timer_bar_fill"
+                        <div class="unit_timer_bar_fill btn_to_choose_mayday"
                              ng-style="{'width':unit.timer_perc+'%'}"
                              ng-class="{hidden_div:!unit.timer_running, unit_timer_good:unit.timer_perc>=66, unit_timer_warn:unit.timer_perc>=33 && unit.timer_perc<66, unit_timer_crit:unit.timer_perc>=10 && unit.timer_perc<33, unit_timer_done:unit.timer_perc<10}"
                             ></div>
@@ -206,7 +206,7 @@
                     <button class="add_unit_btn" ng-click="showUnitsDlg(sector)">+Unit</button>
                   </div>
                   <div style="display: table-cell; text-align: center;">
-                    <button class="add_channel_btn" ng-click="openChannelDlg(sector)">
+                    <button class="add_channel_btn" ng-click="openChannelDlg(sector, true, false, false)">
                       <img ng-show="sector.channel_letter || sector.channel_number" class="add_channel_icon" src="img/radio.jpg"/>
                       <img ng-hide="sector.channel_letter || sector.channel_number" class="add_channel_icon" src="img/radio_blue.jpg"/>
                       <span>{{sector.channel_letter}} {{sector.channel_number}}</span>
@@ -348,7 +348,7 @@
             class="channel_letter_btn"
             ng-repeat="channel_letter in channel_letters"
             ng-click="setChannelLetter(channel_letter)"
-            ng-class="{channel_selected:selectedSector.channel_letter==channel_letter}"
+            ng-class="{channel_selected:channelObj.channel_letter==channel_letter}"
             >
           {{channel_letter}}
         </button>
@@ -359,7 +359,7 @@
             class="channel_number_btn"
             ng-repeat="channel_number in channel_numbers"
             ng-click="setChannelNumber(channel_number)"
-            ng-class="{channel_selected:selectedSector.channel_number==channel_number}"
+            ng-class="{channel_selected:channelObj.channel_number==channel_number}"
             >
           {{channel_number}}
         </button>
@@ -1201,7 +1201,7 @@
     <div class="mayday_timer">{{dataStore.selectedMayday.timerText}}</div>
     <div class="clear_float"></div>
 
-    <select id="mayday_channel_select"
+    <!--<select id="mayday_channel_select"
             class="mayday_select_half mayday_channel_select mayday_select"
             ng-model="dataStore.selectedMayday.channel">
       <option>Channel 1</option>
@@ -1220,7 +1220,12 @@
       <option>Channel 14</option>
       <option>Channel 15</option>
       <option>Channel 16</option>
-    </select>
+    </select>-->
+    <button class="add_channel_btn" ng-click="openChannelDlg(dataStore.selectedMayday, false, true, false)">
+      <img ng-show="dataStore.selectedMayday.channel_letter || dataStore.selectedMayday.channel_number" class="add_channel_icon" src="img/radio.jpg"/>
+      <img ng-hide="dataStore.selectedMayday.channel_letter || dataStore.selectedMayday.channel_number" class="add_channel_icon" src="img/radio_blue.jpg"/>
+      <span>{{dataStore.selectedMayday.channel_letter}} {{dataStore.selectedMayday.channel_number}}</span>
+    </button>
 
 
     <select id="mayday_rank_select" class="mayday_select_half mayday_rank_select mayday_select" ng-model="dataStore.selectedMayday.rank">
