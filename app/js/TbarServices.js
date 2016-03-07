@@ -82,7 +82,7 @@ angular.module('TbarServices', ['DataServices', 'SectorServices'])
     }
   })
 
-  .factory('ToggleUnitTypeForSector', function (DataStore, ReportFunctions) {
+  .factory('ToggleUnitTypeForSector', function (DataStore, ReportFunctions, UpdateUnitTimer) {
     return function (sector, unitType) {
       if (sector.units) {
         // search for unitType already in sector
@@ -100,6 +100,7 @@ angular.module('TbarServices', ['DataServices', 'SectorServices'])
       }
       var newUnit = DataStore.adapter.CreateNewUnit(sector, unitType);
       sector.units.push(newUnit);
+      UpdateUnitTimer(newUnit);
       ReportFunctions.addEvent_unit_to_sector(sector, newUnit);
       return true;
     }

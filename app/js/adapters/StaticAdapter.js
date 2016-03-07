@@ -248,6 +248,7 @@ angular.module('StaticAdapter', ['DataServices'])
       newUnit.type = unitType;
       newUnit.sector = sector;
       newUnit.timer_start = new Date();
+      newUnit.timer_running = true;
       newUnit.save = function (unit) {
         console.log("unit.save(): unit:", unit);
         var promise = $q.when(unit);

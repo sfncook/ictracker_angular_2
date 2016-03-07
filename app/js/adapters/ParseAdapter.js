@@ -327,7 +327,7 @@ angular.module('ParseAdapter', ['DataServices'])
             ConvertParseObject(unit, UNIT_DEF);
             unit.allowClone = true;
             sector.units.push(unit);
-            DataStore_Parse.UpdateUnitTimer(unit);
+            //DataStore_Parse.UpdateUnitTimer(unit);
             promises.push(FetchTypeForUnit_Parse(unit));
             promises.push(FetchActionsForUnit_Parse(unit));
           }
@@ -840,6 +840,7 @@ angular.module('ParseAdapter', ['DataServices'])
       newUnit.type = unitType;
       newUnit.sector = sector;
       newUnit.timer_start = new Date();
+      newUnit.timer_running = true;
       newUnit.save(null, DefaultErrorLogger);
       return newUnit;
     }
