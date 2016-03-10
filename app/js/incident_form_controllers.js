@@ -155,7 +155,6 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList',
     }
 
     $scope.clickTbarUnit = function (sector, unit) {
-      console.log("clickTbarUnit choosing_unit_for_new_mayday:",$scope.dataStore.choosing_unit_for_new_mayday);
       if ($scope.dataStore.choosing_unit_for_new_mayday) {
         AddNewMayday(sector, unit);
         $scope.dataStore.choosing_unit_for_new_mayday = false;

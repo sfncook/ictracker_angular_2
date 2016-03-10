@@ -145,31 +145,31 @@
                 <div ng-repeat="unit in sector.units"
                      class="unit_row"
                      ng-drag="true" ng-drag-data="{'unit':unit, 'src_sector':sector}">
-                  <button class="unit_row_left_column btn_to_choose_mayday"
+                  <button class="unit_row_left_column"
                           ng-class="{mayday_choice_animate: dataStore.choosing_unit_for_new_mayday, unit_btn_hasmayday_animate: unit.hasMayday}"
                           ng-click="clickTbarUnit(sector, unit)">
-                    <div class="unit_tbar_btn unit_btn btn_to_choose_mayday"
+                    <div class="unit_tbar_btn unit_btn"
                          ng-class="{btn_smtext: unit.type.name.length>5, btn_medtext: unit.type.name.length>4}"
                          ng-show="!dataStore.choseMoveUnit">
                       {{unit.type.name}}
                     </div>
                     <div class="clear_float"></div>
 
-                    <div class="unit_options_row_container btn_to_choose_mayday" ng-show="!dataStore.choseMoveUnit">
-                      <div class="personnel_tbar_btn personnel_btn btn_to_choose_mayday"
+                    <div class="unit_options_row_container" ng-show="!dataStore.choseMoveUnit">
+                      <div class="personnel_tbar_btn personnel_btn"
                            ng-class="{has_par:unit.par==unit.manyPar&&unit.par!=0, personnel_not_set:unit.par==0, personnel_set:unit.par>0}">
                         {{unit.par|getUnitPar}}
                       </div>
-                      <div class="psi_tbar_btn psi_btn btn_to_choose_mayday"
+                      <div class="psi_tbar_btn psi_btn"
                            ng-class="{psi_red:unit.psi<1500, psi_yellow:unit.psi<3000&&unit.psi>=1500, psi_green:unit.psi>=3000}"
                            ng-if="sector.sectorType.hasPsiBtn">{{unit.psi}}
                       </div>
                       <div class="clear_float"></div>
 
-                      <div class="unit_timer_bar_border btn_to_choose_mayday"
+                      <div class="unit_timer_bar_border"
                            ng-class="{unit_timer_bar_border_discontinued:!unit.timer_running}"
                            ng-show="sector.sectorType.hasClock">
-                        <div class="unit_timer_bar_fill btn_to_choose_mayday"
+                        <div class="unit_timer_bar_fill"
                              ng-style="{'width':unit.timer_perc+'%'}"
                              ng-class="{hidden_div:!unit.timer_running, unit_timer_good:unit.timer_perc>=66, unit_timer_warn:unit.timer_perc>=33 && unit.timer_perc<66, unit_timer_crit:unit.timer_perc>=10 && unit.timer_perc<33, unit_timer_done:unit.timer_perc<10}"
                             ></div>
