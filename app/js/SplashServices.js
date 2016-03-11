@@ -1,35 +1,22 @@
 'use strict';
 
-angular.module("SplashController", ['DataServices', 'IncidentServices', 'DepartmentServices', 'TbarServices', 'AdaptersList'])
+angular.module("SplashController", ['DataServices', 'IncidentServices', 'DepartmentServices', 'TbarServices', 'AdaptersList', 'ModelsList', 'js-data'])
   .run(function (DataStore) {
     DataStore.init();
-
-    //if(!IsLoggedIn()){
-    //    console.log("Not logged in");
-    //ResetSavedDepartment();
-    //var urlLink = "login.html";
-    //window.location.href = urlLink;
-    //}
   })
 
   .controller('SplashCtrl', function ($q, $scope, $interval,
                                       LoadAllIncidents, Incidents, LoadIncidentTypes, IncidentTypes,
                                       LoadSectorTypes,
                                       ResetSavedDepartment,
-                                      SaveIncident, DataStore, LoadDefaultTbars, SaveSector) {
+                                      SaveIncident, DataStore, LoadDefaultTbars, SaveSector,
+                                      IncidentType) {
     $scope.dataStore = DataStore;
-
-    //if(!IsLoggedIn()) {
-    //    console.log("Not logged in. Redirecting to login.html");
-    //    ResetSavedDepartment();
-    //    var urlLink = "login.html";
-    //    window.location.href = urlLink;
-    //}
 
     LoadIncidentTypes().then(function (incidentTypes) {
       $scope.incidentTypes = incidentTypes;
     });
-
+    
     LoadAllIncidents().then(function (incidents) {
       $scope.incident_list = incidents;
       function hideLoadingSplash() {

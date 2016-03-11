@@ -1,6 +1,6 @@
 angular.module('StaticAdapter', ['DataServices'])
 
-  .run(function (DataStore, StaticAdapter) {
+  .run(function (DataStore, StaticAdapter, DS) {
     DataStore.registered_adapters.push(StaticAdapter);
   })
 
@@ -24,6 +24,9 @@ angular.module('StaticAdapter', ['DataServices'])
     return {
       adapter_id_str: 'static',
       init: function () {
+        // Reset localStorage
+        localStorage.clear();
+
         return true;
       },
       LoadIncidentTypes: LoadIncidentTypes_Static,
@@ -46,17 +49,13 @@ angular.module('StaticAdapter', ['DataServices'])
     };
   })
 
-  .factory('LoadIncidentTypes_Static', function ($q) {
+  .factory('LoadIncidentTypes_Static', function ($q, IncidentType) {
     return function () {
-      //var promise = $q.when(INC_TYPES);
-      var promise = $q.all(INC_TYPES).then(
-        function (INC_TYPES) {
-          return INC_TYPES;
-        },
-        function (obj, error) {
-          //TODO: Error msg goes here
-        });
-      return promise;
+      var promises = [];
+      for(var i=0; i<INC_TYPES.length; i++) {
+        promises.push(IncidentType.create(INC_TYPES[i]));
+      }
+      return $q.all(promises);
     }
   })
 
