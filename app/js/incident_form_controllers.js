@@ -27,7 +27,6 @@ angular.module("ictApp", ['ngDraggable', 'AdaptersList', 'ModelsList',
       LoadIncident(incidentObjectId).then(function (incident) {
         DataStore.loadSuccess = true;
         DataStore.waitingToLoad = false;
-        console.log("incident:",incident);
         DataStore.incident = incident;
         DataStore.maydays = incident.maydays;
         UpdateObjectivesPercent(incident);
