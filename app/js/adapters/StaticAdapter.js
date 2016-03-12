@@ -370,18 +370,18 @@ var INCIDENTS = [
     },
     "maydays": [],
     "sectors": [
-      {"col": 3, "id": "rwjawwLK6o", "row": 0, "sectorType": {"name": "Sector 1"}, "units": []},
-      {"col": 3, "id": "XH3meqm1L9", "row": 0, "sectorType": {"name": "Sector 2"}, "units": []},
-      {"col": 3, "id": "r29PW2kZwX", "row": 2, "sectorType": {"name": "Sector 3"}, "units": []},
-      {"col": 2, "id": "3Jh3oHnTTJ", "row": 0, "sectorType": {"name": "Sector 4"}, "units": []},
-      {"col": 2, "id": "f7YzFHsKzC", "row": 1, "sectorType": {"name": "Sector 5"}, "units": []},
-      {"col": 1, "id": "0H5sKys9x1", "row": 0, "sectorType": {"name": "Sector 6"}, "units": []},
-      {"col": 2, "id": "tzqwpCLfY2", "row": 2, "sectorType": {"name": "Sector 7"}, "units": []},
-      {"col": 0, "id": "sITyWAb5ex", "row": 0, "sectorType": {"name": "Sector 8"}, "units": []},
-      {"col": 0, "id": "F0HEuGoQNF", "row": 1, "sectorType": {"name": "Sector 9"}, "units": []},
-      {"col": 0, "id": "2mAQPFlG0w", "row": 0, "sectorType": {"name": "Alpha Sector"}, "units": []},
-      {"col": 1, "id": "2l1uDY4sV7", "row": 0, "sectorType": {"name": "Bravo Sector"}, "units": []},
-      {"col": 1, "id": "2l1uDY4sV7", "row": 2, "sectorType": {"name": "Charlie Sector"}, "units": []}
+      {"col": 3, "id": "rwjawwLK6o", "row": 0, "initialized": true, "orderIndex": 0, "sectorType": {"name": "Sector 1"}, "units": []},
+      {"col": 3, "id": "XH3meqm1L9", "row": 0, "initialized": true, "orderIndex": 1, "sectorType": {"name": "Sector 2"}, "units": []},
+      {"col": 3, "id": "r29PW2kZwX", "row": 2, "initialized": true, "orderIndex": 2, "sectorType": {"name": "Sector 3"}, "units": []},
+      {"col": 2, "id": "3Jh3oHnTTJ", "row": 0, "initialized": true, "orderIndex": 3, "sectorType": {"name": "Sector 4"}, "units": []},
+      {"col": 2, "id": "f7YzFHsKzC", "row": 1, "initialized": true, "orderIndex": 4, "sectorType": {"name": "Sector 5"}, "units": []},
+      {"col": 1, "id": "0H5sKys9x1", "row": 0, "initialized": true, "orderIndex": 5, "sectorType": {"name": "Sector 6"}, "units": []},
+      {"col": 2, "id": "tzqwpCLfY2", "row": 2, "initialized": true, "orderIndex": 6, "sectorType": {"name": "Sector 7"}, "units": []},
+      {"col": 0, "id": "sITyWAb5ex", "row": 0, "initialized": true, "orderIndex": 7, "sectorType": {"name": "Sector 8"}, "units": []},
+      {"col": 0, "id": "F0HEuGoQNF", "row": 1, "initialized": true, "orderIndex": 8, "sectorType": {"name": "Sector 9"}, "units": []},
+      {"col": 0, "id": "2mAQPFlG0w", "row": 0, "initialized": true, "orderIndex": 9, "sectorType": {"name": "Alpha Sector"}, "units": []},
+      {"col": 1, "id": "2l1uDY4sV7", "row": 0, "initialized": true, "orderIndex": 10, "sectorType": {"name": "Bravo Sector"}, "units": []},
+      {"col": 1, "id": "2l1uDY4sV7", "row": 2, "initialized": true, "orderIndex": 11, "sectorType": {"name": "Charlie Sector"}, "units": []}
     ]
 
   },
