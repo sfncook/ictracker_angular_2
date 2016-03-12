@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module("ictApp", ['ngDraggable', 'AdaptersList',
+angular.module("ictApp", ['ngDraggable', 'AdaptersList', 'ModelsList',
   'DataServices', 'TbarServices', 'ActionServices', 'UnitServices',
   'IncidentServices', 'ReportServices', 'IapServices', 'BranchServices',
   'TimerServices', 'MaydayServices', 'UpgradeServices',
   'ObjectivesServices', 'OSRServices', 'ActionServices', 'SectorServices',
-  'UnitServices'])
+  'UnitServices', 'js-data'])
 
   .run(function ($q, DataStore, LoadIncident,
                  StartIncidentTimer, StartUnitTimerTimer, UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer, DeepCopyIncident) {

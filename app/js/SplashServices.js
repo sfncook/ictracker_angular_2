@@ -9,14 +9,13 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'Departm
                                       LoadAllIncidents, Incidents, LoadIncidentTypes, IncidentTypes,
                                       LoadSectorTypes,
                                       ResetSavedDepartment,
-                                      SaveIncident, DataStore, LoadDefaultTbars, SaveSector,
-                                      IncidentType) {
+                                      SaveIncident, DataStore, LoadDefaultTbars, SaveSector) {
     $scope.dataStore = DataStore;
 
     LoadIncidentTypes().then(function (incidentTypes) {
       $scope.incidentTypes = incidentTypes;
     });
-    
+
     LoadAllIncidents().then(function (incidents) {
       $scope.incident_list = incidents;
       function hideLoadingSplash() {

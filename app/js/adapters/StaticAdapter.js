@@ -1,6 +1,6 @@
 angular.module('StaticAdapter', ['DataServices'])
 
-  .run(function (DataStore, StaticAdapter, DS) {
+  .run(function (DataStore, StaticAdapter) {
     DataStore.registered_adapters.push(StaticAdapter);
   })
 
@@ -20,7 +20,9 @@ angular.module('StaticAdapter', ['DataServices'])
                                       SaveMayday_Static,
                                       DeleteMayday_Static,
                                       CreateNewUnit_Static,
-                                      DeleteUnit_Static) {
+                                      DeleteUnit_Static,
+                                      SaveUnit_Static,
+                                      SetCallbacks_Static) {
     return {
       adapter_id_str: 'static',
       init: function () {
@@ -45,7 +47,9 @@ angular.module('StaticAdapter', ['DataServices'])
       SaveMayday: SaveMayday_Static,
       DeleteMayday: DeleteMayday_Static,
       CreateNewUnit: CreateNewUnit_Static,
-      DeleteUnit: DeleteUnit_Static
+      DeleteUnit: DeleteUnit_Static,
+      SaveUnit: SaveUnit_Static,
+      SetCallbacks: SetCallbacks_Static
     };
   })
 
@@ -261,6 +265,21 @@ angular.module('StaticAdapter', ['DataServices'])
       console.log("DeleteUnit_Static - Do nothing.  Always returns TRUE.");
       var promise = $q.when(true);
       return promise;
+    }
+  })
+  .factory('SaveUnit_Static', function ($q) {
+    return function (unit) {
+      console.log("SaveUnit_Static - Do nothing.  Always returns TRUE.");
+      var promise = $q.when(true);
+      return promise;
+    }
+  })
+
+  .factory('SetCallbacks_Static', function () {
+    return function (
+      UpdateObjectivesPercent, UpdateOsrPercent, UpdateUnitTimer, DeepCopyIncident
+    ) {
+      // Do nothing
     }
   })
 ;
