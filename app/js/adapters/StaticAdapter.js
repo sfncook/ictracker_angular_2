@@ -63,10 +63,13 @@ angular.module('StaticAdapter', ['DataServices'])
     }
   })
 
-  .factory('LoadAllIncidents_Static', function ($q) {
+  .factory('LoadAllIncidents_Static', function ($q, Incident) {
     return function () {
-      var promise = $q.when(INCIDENTS);
-      return promise;
+      var promises = [];
+      for(var i=0; i<INCIDENTS.length; i++) {
+        promises.push(Incident.create(INCIDENTS[i]));
+      }
+      return $q.all(promises);
     }
   })
 
