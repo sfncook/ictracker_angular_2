@@ -127,10 +127,13 @@ angular.module('StaticAdapter', ['DataServices'])
     }
   })
 
-  .factory('LoadUnitTypes_Static', function ($q) {
+  .factory('LoadUnitTypes_Static', function ($q, UnitType) {
     return function () {
-      var promise = $q.when(UNIT_TYPES);
-      return promise;
+      var promises = [];
+      for(var i=0; i<UNIT_TYPES.length; i++) {
+        promises.push(UnitType.create(UNIT_TYPES[i]));
+      }
+      return $q.all(promises);
     }
   })
 
