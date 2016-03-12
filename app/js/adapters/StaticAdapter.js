@@ -117,19 +117,13 @@ angular.module('StaticAdapter', ['DataServices'])
     }
   })
 
-  .factory('LoadSectorTypes_Static', function ($q) {
+  .factory('LoadSectorTypes_Static', function ($q, SectorType) {
     return function () {
-      //var promise = $q.when(SECTOR_TYPES);
-      //return promise;
-      //var promise = $q.when(INC_TYPES);
-      var promise = $q.when(SECTOR_TYPES).then(
-        function (SECTOR_TYPES_) {
-          return SECTOR_TYPES_;
-        },
-        function (obj, error) {
-          //TODO: Error msg goes here
-        });
-      return promise;
+      var promises = [];
+      for(var i=0; i<SECTOR_TYPES.length; i++) {
+        promises.push(SectorType.create(SECTOR_TYPES[i]));
+      }
+      return $q.all(promises);
     }
   })
 

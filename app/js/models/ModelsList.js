@@ -1,7 +1,8 @@
 angular.module('ModelsList', [
   'ActionType',
   'IncidentType',
-  'Incident'
+  'Incident',
+  'SectorType'
   // Add all adapters to this list otherwise it with not get loaded.
 ])
 
