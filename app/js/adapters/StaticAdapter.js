@@ -101,13 +101,19 @@ angular.module('StaticAdapter', ['DataServices'])
     }
   })
 
-  .factory('LoadActionTypes_Static', function ($q) {
-    return function (ActionTypes) {
+  .factory('LoadActionTypes_Static', function ($q, ActionType) {
+    return function (actionTypes_dst) {
+      var promises = [];
       for(var i=0; i<ACTION_TYPES.length; i++) {
-        ActionTypes.push(ACTION_TYPES[i]);
+        promises.push(ActionType.create(ACTION_TYPES[i]));
       }
-      var promise = $q.when(ACTION_TYPES);
-      return promise;
+      return $q.all(promises).then(
+        function(actionTypes_new) {
+          for(var i=0; i<actionTypes_new.length; i++) {
+            actionTypes_dst.push(actionTypes_new[i]);
+          }
+        }
+      );
     }
   })
 
