@@ -626,8 +626,8 @@ angular.module('ParseAdapter', ['DataServices'])
     }
   })
 
-  .factory('LoadSectorTypes_Parse', function (SectorTypes, ParseQuery, ConvertParseObject) {
-    return function () {
+  .factory('LoadSectorTypes_Parse', function (ParseQuery, ConvertParseObject) {
+    return function (SectorTypes) {
       var querySectorTypes = new Parse.Query(Parse.Object.extend('SectorType'));
       return querySectorTypes.find({
         success: function (sectorTypes) {

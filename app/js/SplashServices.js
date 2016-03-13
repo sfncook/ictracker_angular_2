@@ -7,7 +7,6 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'Departm
 
   .controller('SplashCtrl', function ($q, $scope, $interval,
                                       LoadAllIncidents, Incidents, LoadIncidentTypes, IncidentTypes,
-                                      LoadSectorTypes,
                                       ResetSavedDepartment,
                                       SaveIncident, DataStore, LoadDefaultTbars, SaveSector) {
     $scope.dataStore = DataStore;
@@ -25,8 +24,6 @@ angular.module("SplashController", ['DataServices', 'IncidentServices', 'Departm
 
       $interval(hideLoadingSplash, 1000);
     });
-
-    LoadSectorTypes();
 
     $scope.incidentObj = DataStore.adapter.CreateNewIncident();
 

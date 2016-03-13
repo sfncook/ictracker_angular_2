@@ -26,9 +26,6 @@ angular.module('StaticAdapter', ['DataServices'])
     return {
       adapter_id_str: 'static',
       init: function () {
-        // Reset localStorage
-        localStorage.clear();
-
         return true;
       },
       LoadIncidentTypes: LoadIncidentTypes_Static,
@@ -118,12 +115,22 @@ angular.module('StaticAdapter', ['DataServices'])
   })
 
   .factory('LoadSectorTypes_Static', function ($q, SectorType) {
-    return function () {
-      var promises = [];
-      for(var i=0; i<SECTOR_TYPES.length; i++) {
-        promises.push(SectorType.create(SECTOR_TYPES[i]));
-      }
-      return $q.all(promises);
+    return function (sectorTypes_dst) {
+      return SectorType.destroyAll().then(
+        function() {
+          var promises = [];
+          for(var i=0; i<SECTOR_TYPES.length; i++) {
+            promises.push(SectorType.create(SECTOR_TYPES[i]));
+          }
+          return $q.all(promises).then(
+            function(sectorTypes_new) {
+              for(var i=0; i<sectorTypes_new.length; i++) {
+                sectorTypes_dst.push(sectorTypes_new[i]);
+              }
+            }
+          );
+        }
+      );
     }
   })
 

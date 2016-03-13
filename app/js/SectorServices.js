@@ -76,19 +76,17 @@ angular.module('SectorServices', ['DataServices'])
 
   .factory('LoadSectorTypes', function (DataStore, SectorTypes) {
     return function () {
-      return DataStore.adapter.LoadSectorTypes().then(function (sectorTypes) {
-        SectorTypes.removeAll();
-        for (var i = 0; i < sectorTypes.length; i++) {
-          var sectorType = sectorTypes[i];
-          var nameRefor = sectorType.name.replace(" ", "_").toUpperCase();
+      return DataStore.adapter.LoadSectorTypes(SectorTypes).then(function () {
+        for (var i = 0; i < SectorTypes.length; i++) {
+          var sectorType = SectorTypes[i];
+          var nameRefor = SectorTypes[i].name.replace(" ", "_").toUpperCase();
           SectorTypes[nameRefor] = sectorType;
-          if (sectorType.name == "Sector Name") {
-            SectorTypes.DEFAULT_SECTOR_TYPE = sectorType;
+          if (SectorTypes[i].name == "Sector Name") {
+            SectorTypes[i].DEFAULT_SECTOR_TYPE = sectorType;
           }
-          if (sectorType.name == "Sector ####") {
-            SectorTypes.SECTOR_NUM = sectorType;
+          if (SectorTypes[i].name == "Sector ####") {
+            SectorTypes[i].SECTOR_NUM = sectorType;
           }
-          SectorTypes.push(sectorType);
         }//for
         return SectorTypes;
       });

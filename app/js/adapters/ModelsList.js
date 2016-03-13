@@ -1,28 +1,57 @@
 angular.module('ModelsList', [])
 
-  .factory('store', function () {
-    var store = new JSData.DS();
-    store.registerAdapter('localstorage', new DSLocalStorageAdapter(), { default: true });
-    return store;
+  .factory('JsDataStore', function () {
+    var JsDataStore = new JSData.DS();
+    JsDataStore.registerAdapter('localstorage', new DSLocalStorageAdapter(), { default: true });
+    return JsDataStore;
   })
 
-  .factory('ActionType', function (store) {
-    return store.defineResource('actiontype');
+  .factory('ActionType', function (JsDataStore) {
+    return JsDataStore.defineResource('actiontype');
   })
 
-  .factory('Incident', function (store) {
-    return store.defineResource('incident');
+  .factory('IncidentType', function (JsDataStore) {
+    return JsDataStore.defineResource('incidenttype');
   })
 
-  .factory('IncidentType', function (store) {
-    return store.defineResource('incidenttype');
+  .factory('SectorType', function (JsDataStore) {
+    return JsDataStore.defineResource('sectortype');
   })
 
-  .factory('SectorType', function (store) {
-    return store.defineResource('sectortype');
+  .factory('UnitType', function (JsDataStore) {
+    return JsDataStore.defineResource('unittype');
   })
 
-  .factory('UnitType', function (store) {
-    return store.defineResource('unittype');
+  .factory('Incident', function (JsDataStore) {
+    return JsDataStore.defineResource({
+      name: 'incident'
+    });
   })
+
+  .factory('Sector', function (JsDataStore) {
+    return JsDataStore.defineResource({
+      name: 'sector',
+      relations: {
+        hasOne: {
+          sectortype: {
+            localField: 'sectorType'
+          }
+        }
+      }
+    });
+  })
+
+  //.factory('Unit', function (JsDataStore) {
+  //  return JsDataStore.defineResource({
+  //    name: 'unit',
+  //    relations: {
+  //      hasMany: {
+  //        actiontype: {
+  //          localField: 'actions'
+  //        }
+  //      }
+  //    }
+  //  });
+  //})
+
 ;
