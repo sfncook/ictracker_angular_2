@@ -634,8 +634,9 @@ angular.module('ParseAdapter', ['DataServices'])
           for (var i = 0; i < sectorTypes.length; i++) {
             var sectorType = sectorTypes[i];
             ConvertParseObject(sectorType, SECTOR_TYPE_DEF);
+            SectorTypes.push(sectorType);
           }//for
-          return sectorType;
+          return SectorTypes;
         },
         error: function (error) {
           console.log('Failed to LoadSectorTypes, with error code: ' + error.message);

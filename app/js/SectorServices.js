@@ -25,7 +25,7 @@ angular.module('SectorServices', ['DataServices'])
           SectorTypes.IRIC, SectorTypes.SECTOR_7, SectorTypes.EAST_SECTOR, SectorTypes.LOBBY, CreateBlankSectorType(),
           SectorTypes.RIC, SectorTypes.SECTOR_8, SectorTypes.SOUTH_SECTOR, SectorTypes.RESOURCE, CreateBlankSectorType(),
           SectorTypes.RESCUE, SectorTypes.SECTOR_9, SectorTypes.WEST_SECTOR, SectorTypes.ACCOUNTABILITY, CreateBlankSectorType(),
-          SectorTypes.SAFETY, SectorTypes.SECTOR_NUM
+          SectorTypes.SAFETY
 
         ];
 
