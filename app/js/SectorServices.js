@@ -30,6 +30,9 @@ angular.module('SectorServices', ['DataServices'])
         ];
 
         $scope.OrderedSectorTypes = orderedSectorTypes;
+      },
+      function(errorObj1, errorObj2, errorObj3) {
+        console.log("errorObj1:",errorObj1,", errorObj2:",errorObj2,", errorObj3:",errorObj3);
       }
     );
 

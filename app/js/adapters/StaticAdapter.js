@@ -26,6 +26,7 @@ angular.module('StaticAdapter', ['DataServices'])
     return {
       adapter_id_str: 'static',
       init: function () {
+        localStorage.clear();
         return true;
       },
       LoadIncidentTypes: LoadIncidentTypes_Static,
@@ -70,15 +71,11 @@ angular.module('StaticAdapter', ['DataServices'])
     }
   })
 
-  .factory('LoadIncident_Static', function ($q) {
+  .factory('LoadIncident_Static', function ($q, JsDataStore, SectorType) {
     return function () {
       console.log("NOTE: You are using the Static Adapter so the inc_id config parameter is ignored.  The same incident data is always returned.");
       var incident = INCIDENTS[0];
-      var sectors = incident.sectors;
-      for (var i = 0; i < sectors.length; i++) {
-        var sector = sectors[i];
-        sector.sectorType = SECTOR_TYPES.findObjByName(sector.sectorType.name);
-      }
+
       incident.save = function () {
         console.log("incident.save(): incident:", incident);
         var promise = $q.when(incident);
@@ -93,8 +90,15 @@ angular.module('StaticAdapter', ['DataServices'])
         }
       };
 
-      var promise = $q.when(incident);
-      return promise;
+      //var promises = [];
+      //for (var i = 0; i < incident.sectors.length; i++) {
+      //  var sector = incident.sectors[i];
+      //  promises.push(SectorType.loadRelations(sector.id, ['sectorType']));
+      //  //sector.sectorType = SECTOR_TYPES.findObjByName(sector.sectorType.name);
+      //}
+      //
+      //return JsDataStore.utils.Promise.all(promises);
+      return JsDataStore.find("sectortype", "1");
     }
   })
 
@@ -374,18 +378,18 @@ var INCIDENTS = [
     },
     "maydays": [],
     "sectors": [
-      {"col": 3, "id": "rwjawwLK6o", "row": 0, "initialized": true, "orderIndex": 0, "sectorType": {"name": "Sector 1"}, "units": []},
-      {"col": 3, "id": "XH3meqm1L9", "row": 0, "initialized": true, "orderIndex": 1, "sectorType": {"name": "Sector 2"}, "units": []},
-      {"col": 3, "id": "r29PW2kZwX", "row": 2, "initialized": true, "orderIndex": 2, "sectorType": {"name": "Sector 3"}, "units": []},
-      {"col": 2, "id": "3Jh3oHnTTJ", "row": 0, "initialized": true, "orderIndex": 3, "sectorType": {"name": "Sector 4"}, "units": []},
-      {"col": 2, "id": "f7YzFHsKzC", "row": 1, "initialized": true, "orderIndex": 4, "sectorType": {"name": "Sector 5"}, "units": []},
-      {"col": 1, "id": "0H5sKys9x1", "row": 0, "initialized": true, "orderIndex": 5, "sectorType": {"name": "Sector 6"}, "units": []},
-      {"col": 2, "id": "tzqwpCLfY2", "row": 2, "initialized": true, "orderIndex": 6, "sectorType": {"name": "Sector 7"}, "units": []},
-      {"col": 0, "id": "sITyWAb5ex", "row": 0, "initialized": true, "orderIndex": 7, "sectorType": {"name": "Sector 8"}, "units": []},
-      {"col": 0, "id": "F0HEuGoQNF", "row": 1, "initialized": true, "orderIndex": 8, "sectorType": {"name": "Sector 9"}, "units": []},
-      {"col": 0, "id": "2mAQPFlG0w", "row": 0, "initialized": true, "orderIndex": 9, "sectorType": {"name": "Alpha Sector"}, "units": []},
-      {"col": 1, "id": "2l1uDY4sV7", "row": 0, "initialized": true, "orderIndex": 10, "sectorType": {"name": "Bravo Sector"}, "units": []},
-      {"col": 1, "id": "2l1uDY4sV7", "row": 2, "initialized": true, "orderIndex": 11, "sectorType": {"name": "Charlie Sector"}, "units": []}
+      {"col": 3, "id": 1,  "row": 0, "initialized": true, "orderIndex": 0,  "sectorTypeId": 14, "units": []},
+      {"col": 3, "id": 2,  "row": 0, "initialized": true, "orderIndex": 1,  "sectorTypeId": 15, "units": []},
+      {"col": 3, "id": 3,  "row": 2, "initialized": true, "orderIndex": 2,  "sectorTypeId": 16, "units": []},
+      {"col": 2, "id": 4,  "row": 0, "initialized": true, "orderIndex": 3,  "sectorTypeId": 17, "units": []},
+      {"col": 2, "id": 5,  "row": 1, "initialized": true, "orderIndex": 4,  "sectorTypeId": 18, "units": []},
+      {"col": 1, "id": 6,  "row": 0, "initialized": true, "orderIndex": 5,  "sectorTypeId": 19, "units": []},
+      {"col": 2, "id": 7,  "row": 2, "initialized": true, "orderIndex": 6,  "sectorTypeId": 20, "units": []},
+      {"col": 0, "id": 8,  "row": 0, "initialized": true, "orderIndex": 7,  "sectorTypeId": 21, "units": []},
+      {"col": 0, "id": 9,  "row": 1, "initialized": true, "orderIndex": 8,  "sectorTypeId": 22, "units": []},
+      {"col": 0, "id": 10, "row": 0, "initialized": true, "orderIndex": 9,  "sectorTypeId": 24, "units": []},
+      {"col": 1, "id": 11, "row": 0, "initialized": true, "orderIndex": 10, "sectorTypeId": 25, "units": []},
+      {"col": 1, "id": 12, "row": 2, "initialized": true, "orderIndex": 11, "sectorTypeId": 26, "units": []}
     ]
 
   },
@@ -461,6 +465,7 @@ var ACTION_TYPES = [
 
 var SECTOR_TYPES = [
   {
+    "id": 1,
     "name": "Interior",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -477,6 +482,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 2,
     "name": "Ventilation",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -493,6 +499,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 3,
     "name": "Roof",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -509,6 +516,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 4,
     "name": "On Deck",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -525,6 +533,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 5,
     "name": "Staging",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -541,6 +550,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 6,
     "name": "IRIC",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -557,6 +567,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 7,
     "name": "RIC",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -573,6 +584,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 8,
     "name": "RESCUE",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -589,6 +601,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 9,
     "name": "Safety",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -605,6 +618,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 10,
     "name": "Delta Sector",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -621,6 +635,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 11,
     "name": "Overhaul",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -637,6 +652,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 12,
     "name": "Medical",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -653,6 +669,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 13,
     "name": "Salvage",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -669,6 +686,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 14,
     "name": "Sector 1",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -685,6 +703,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 15,
     "name": "Sector 2",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -701,6 +720,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 16,
     "name": "Sector 3",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -717,6 +737,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 17,
     "name": "Sector 4",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -733,6 +754,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 18,
     "name": "Sector 5",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -749,6 +771,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 19,
     "name": "Sector 6",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -765,6 +788,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 20,
     "name": "Sector 7",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -781,6 +805,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 21,
     "name": "Sector 8",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -797,6 +822,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 22,
     "name": "Sector 9",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -813,6 +839,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 23,
     "name": "Sector ####",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -829,6 +856,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 24,
     "name": "Alpha Sector",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -845,6 +873,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 25,
     "name": "Bravo Sector",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -861,6 +890,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 26,
     "name": "Charlie Sector",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -877,6 +907,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 27,
     "name": "Delta Sector",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -893,6 +924,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 28,
     "name": "North Sector",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -909,6 +941,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 29,
     "name": "East Sector",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -925,6 +958,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 30,
     "name": "South Sector",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -941,6 +975,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 31,
     "name": "West Sector",
     "hasClock": true,
     "hasAcctBtn": true,
@@ -957,6 +992,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 32,
     "name": "Salvage",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -973,6 +1009,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 33,
     "name": "Overhaul",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -989,6 +1026,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 34,
     "name": "Evacuation",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -1005,6 +1043,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 35,
     "name": "Customer Service",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -1021,6 +1060,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 36,
     "name": "ReHab",
     "hasClock": false,
     "hasAcctBtn": false,
@@ -1037,6 +1077,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 37,
     "name": "Lobby",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -1053,6 +1094,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 38,
     "name": "Resource",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -1069,6 +1111,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 39,
     "name": "Accountability",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -1085,6 +1128,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 40,
     "name": "Triage",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -1101,6 +1145,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": true
   },
   {
+    "id": 41,
     "name": "Extrication",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -1117,6 +1162,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 42,
     "name": "Treatment",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -1133,6 +1179,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 43,
     "name": "Transportation",
     "hasClock": false,
     "hasAcctBtn": true,
@@ -1149,6 +1196,7 @@ var SECTOR_TYPES = [
     "hasTriageBnch": false
   },
   {
+    "id": 44,
     "name": "Lz",
     "hasClock": false,
     "hasAcctBtn": true,

@@ -34,6 +34,7 @@ angular.module('ModelsList', [])
       relations: {
         hasOne: {
           sectortype: {
+            localKey: 'sectorTypeId',
             localField: 'sectorType'
           }
         }
