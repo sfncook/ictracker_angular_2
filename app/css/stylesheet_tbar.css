@@ -1,30 +1,27 @@
 tbar {
-    border: 1px solid gray;
     margin: 10px;
-    height: 290px;
-    width: 280px;
+    height: 250px;
+    width: 290px;
     display: inline-block;
     vertical-align: top;
     padding: 0;
-    border-radius: 3px;
+    border-radius: 30px;
     z-index: 0;
-    background: white;
-}
-.tbar_uninitialized {
-    border:1px solid rgba(173, 216, 230, 0.34);
-}
-.tbar_guts_uninitialized {
-    text-align:center;
-    width: 100%;
-    height:100%;
-    cursor:pointer;
-    padding-top: 90px;
-    color: white;
-    font-size: 2.5rem;
-    background: rgb(213, 216, 253);
 }
 .tbar_guts_initialized {
-
+    border-radius: 3px;
+    background: #EEE;
+}
+.tbar_guts_uninitialized {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    padding-top: 90px;
+    color: #606060;
+    font-size: 2.5rem;
+    background: #303030;
+    border-radius: 20px;
 }
 
 .tbar_container {
@@ -151,7 +148,7 @@ tbar {
     width: 90px;
 }
 .needs_acct_unit {
-    background: rgb(213, 216, 253);
+    background: #404040;
 }
 .has_acct_unit {
     background: rgba(255, 255, 0, 0.47);
@@ -313,7 +310,7 @@ tbar {
     margin-left: 0;
 }
 .tbar_unit_info_btn:hover {
-    background:#9ad1ff;
+    background:#202020;
     cursor: pointer;
 }
 .tbar_unit_info_btn:active {
@@ -331,7 +328,7 @@ tbar {
     margin-left: 2px;
 }
 .personnel_not_set {
-    background: rgb(213, 216, 253);
+    background: #404040;
     border: 1px solid darkgray;
     color: white;
     font-weight: bold;
@@ -350,7 +347,7 @@ tbar {
 .has_actions {
 }
 .no_actions {
-    background:rgb(213, 216, 253);
+    background:#404040;
 }
 
 .unit_timer_bar_border {

@@ -2,17 +2,17 @@
  **** HEADER ITEMS ****
  */
 .main_menu_container {
-    background: #9ad1ff;
+    background: #202020;
     position: fixed;
     right: 0;
     top: 0;
     height: 100%;
     z-index: 50;
     padding: 4px;
-    border-left: 3px double #999;
 }
 .main_menu_container_width {
     width:110px;
+    background-color: #181818;
 }
 .main_menu_container > .button {
     background: white;
