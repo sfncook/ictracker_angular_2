@@ -63,25 +63,6 @@
       </div>
 
       <div class="top_header_container" ng-controller="HeaderContainer2">
-        <button class="mode_btn mode_header_btn button_top"
-                ng-class="{offensive_btn:(dataStore.incident.strategy=='OFFENSIVE'), defensive_btn:(dataStore.incident.strategy=='DEFENSIVE')}"
-                ng-click="showStrategyDlg()">{{(dataStore.incident.strategy==undefined || dataStore.incident.strategy=='') ? '+ Strategy' :
-          dataStore.incident.strategy}}
-        </button>
-
-        <div class="db_status_container">
-          <div class="db_dirty_msg button_top db_status" ng-show="dataStore.dirtyData">Waiting</div>
-          <div class="db_status_msg button_top db_status" ng-show="dataStore.waitingToLoad">Loading Incident</div>
-          <div id="db_status_msg_success"
-               class="button_top db_status"
-               ng-show="!dataStore.waitingToLoad && dataStore.loadSuccess"
-               ng-class="{fadeout:!dataStore.waitingToLoad && dataStore.loadSuccess}">Load Succeeded
-          </div>
-          <div id="db_status_msg_failed" class="button_top db_status" ng-show="!dataStore.waitingToLoad && !dataStore.loadSuccess">Load
-            Failed
-          </div>
-        </div>
-
         <div class="mayday_header_btn_container">
           <button class="new_mayday_btn button_top button" ng-click="click_new_mayday()" ng-controller="MaydayDlg">+ MAYDAY</button>
         </div>
@@ -230,6 +211,12 @@
               <div class="header_item" ng-class="{time_lg:!dataStore.hourRollOverDone}">
                 {{dataStore.timer_text}}
               </div>
+              <button
+                class="single_row_header_item header_item"
+                ng-class="{offensive_btn:(dataStore.incident.strategy=='OFFENSIVE'), defensive_btn:(dataStore.incident.strategy=='DEFENSIVE')}"
+                ng-click="showStrategyDlg()">{{(dataStore.incident.strategy==undefined || dataStore.incident.strategy=='') ? '+ Strategy' :
+              dataStore.incident.strategy}}
+            </button>
               <button
                   class="single_row_header_item header_item"
                   ng-class="{move_unit_btn_is_moving:dataStore.choseMoveUnit}"
