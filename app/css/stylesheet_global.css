@@ -158,6 +158,8 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     width: 80px;
     margin:5px;
     font-size: 0.85rem;
+    background: #aaa;
+    color: white;
 }
 
 .unit_type_btn {
@@ -166,6 +168,8 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     font-size:0.8rem !important;
     margin:5px;
     padding: 0px;
+    background: #aaa;
+    color: white;
 }
 
 .unit_dlg_btn {
@@ -381,6 +385,8 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     padding: 0;
     margin: 4px;
     float: left;
+    background: #aaa;
+    color: white;
 }
 
 .unit_dlg_units_container {
@@ -396,7 +402,7 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     width: 846px;
     min-height: 60px;
     margin: 2px;
-    border: 3px double #666;
+    border: 1px solid #aaa;
 }
 #title_dispatched_units_div {
     color: #999;
@@ -904,10 +910,14 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
 .channel_letter_btn {
     width:50px;
     margin:4px;
+    background: #aaa;
+    color: white;
 }
 .channel_number_btn {
     width:50px;
     margin:4px;
+    background: #aaa;
+    color: white;
 }
 .channel_letter_col {
     display:table-cell;
@@ -940,6 +950,8 @@ div#upgrade_btn_sub_label{ font-size: 12px; }
     padding: 0;
     margin: 4px;
     float: left;
+    background: #aaa;
+    color: white;
 }
 .units_dlg_acct_options_selected {
     background:yellow;

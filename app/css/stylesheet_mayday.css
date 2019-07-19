@@ -392,16 +392,16 @@
     padding: 0px 10px;
     margin-left: auto;
     margin-right: auto;
-    background: #FF9696;
-    color: white;
+    background: #5a2d2d;
+    color: #888;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     border-top: none;
-    border-right: 2px solid red;
+    /* border-right: 2px solid red;
     border-bottom: 2px solid red;
-    border-left: 2px solid red;
+    border-left: 2px solid red; */
 }
 
 .mayday_btn {

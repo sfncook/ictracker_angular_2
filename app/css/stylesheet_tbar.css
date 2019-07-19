@@ -49,7 +49,7 @@ tbar {
     background-color: lightgreen;
 }
 .benchmark_black {
-    background-color: black;
+    background-color: white;
 }
 .benchmark_red {
     background-color: red;
@@ -77,7 +77,7 @@ tbar {
 }
 
 .scroll-pane {
-    height: 232px;
+    height: 195px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -98,18 +98,22 @@ tbar {
     border-right: none;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
+    background: #aaa;
 }
 .unit_row_right_column {
     float: left;
     width: 204px;
     min-height: 63px;
     background: rgba(238, 238, 238, 0.39);
+    margin-left: 5px;
 }
 .unit_btn {
     width: 57px;
     border-radius: 10px;
     font-size: 1.0rem;
     text-align: center;
+    background: #aaa;
+    color: white;
 }
 .unit_tbar_btn {
     float: left;
@@ -148,10 +152,11 @@ tbar {
     width: 90px;
 }
 .needs_acct_unit {
-    background: #404040;
+    background: #aaa;
+    color: white;
 }
 .has_acct_unit {
-    background: rgba(255, 255, 0, 0.47);
+    background: lightgreen;
 }
 .add_acct_unit_label {
     color: white;
@@ -183,6 +188,8 @@ tbar {
     font-size: 1.0rem;
     float:left;
     margin:2px;
+    background: #aaa;
+    color: white;
 }
 .bnch-btn {
     width:57px;
@@ -190,6 +197,8 @@ tbar {
     font-size: 0.6rem;
     float:right;
     margin-right: 4px;
+    background: #aaa;
+    color: white;
 }
 
 .personnel_btn {
@@ -290,6 +299,8 @@ tbar {
     margin: 4px;
     font-size: 0.65rem !important;
     font-weight: bold;
+    background: #aaa;
+    color: white;
 
 }
 .action_tbar_btn {
@@ -332,6 +343,8 @@ tbar {
     border: 1px solid darkgray;
     color: white;
     font-weight: bold;
+    background: #aaa;
+    color: white;
 }
 .personnel_set {
     background: lightgreen;
@@ -347,7 +360,7 @@ tbar {
 .has_actions {
 }
 .no_actions {
-    background:#404040;
+    background:#aaa;
 }
 
 .unit_timer_bar_border {
@@ -400,7 +413,8 @@ tbar {
     color: white;
     margin: 2px 4px;
     padding: 0;
-    background: rgba(0, 0, 255, 0.13);
+    background: #aaa;
+    color: white;
 }
 
 .unit_options_row_container {
@@ -440,6 +454,8 @@ tbar {
     width: 65px;
     margin: 3px;
     padding: 0 5px;
+    background: #aaa;
+    color: white;
 }
 .add_channel_icon {
     width: 15px;
