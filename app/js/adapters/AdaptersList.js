@@ -1,5 +1,5 @@
 angular.module('AdaptersList', [
-  'ParseAdapter',
+  // 'ParseAdapter',
   'StaticAdapter'
   // Add all adapters to this list otherwise it with not get loaded.
 ])

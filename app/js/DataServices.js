@@ -13,7 +13,8 @@ angular.module('DataServices', [])
       choosing_unit_for_new_mayday: false,
 
       init: function () {
-        var adapter_id_str = getHttpRequestByName('adapter');
+        // var adapter_id_str = getHttpRequestByName('adapter');
+        var adapter_id_str = 'static';
 
         if (adapter_id_str == "") {
           // Check for misspelling of work adapter

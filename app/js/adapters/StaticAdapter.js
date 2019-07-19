@@ -20,7 +20,9 @@ angular.module('StaticAdapter', ['DataServices'])
                                       SaveMayday_Static,
                                       DeleteMayday_Static,
                                       CreateNewUnit_Static,
-                                      DeleteUnit_Static) {
+                                      DeleteUnit_Static,
+                                      SaveUnit_Static,
+                                      SetCallbacks_Static) {
     return {
       adapter_id_str: 'static',
       init: function () {
@@ -42,7 +44,9 @@ angular.module('StaticAdapter', ['DataServices'])
       SaveMayday: SaveMayday_Static,
       DeleteMayday: DeleteMayday_Static,
       CreateNewUnit: CreateNewUnit_Static,
-      DeleteUnit: DeleteUnit_Static
+      DeleteUnit: DeleteUnit_Static,
+      SaveUnit: SaveUnit_Static,
+      SetCallbacks: SetCallbacks_Static
     };
   })
 
@@ -262,6 +266,17 @@ angular.module('StaticAdapter', ['DataServices'])
       console.log("DeleteUnit_Static - Do nothing.  Always returns TRUE.");
       var promise = $q.when(true);
       return promise;
+    }
+  })
+  .factory('SaveUnit_Static', function () {
+    return function (unit) {
+      return new Promise();
+    }
+  })
+  .factory('SetCallbacks_Static', function () {
+    return function (
+    ) {
+
     }
   })
 ;
